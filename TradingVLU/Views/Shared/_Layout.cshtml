@@ -1,42 +1,200 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
+
+    <title>Free Movies Store Website Template | Home :: w3layouts</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    @Styles.Render("~/style/css")
+    @Scripts.Render("~/script/js")
+    <script type="text/javascript">
+        $(window).load(function () {
+            $('#slider').nivoSlider();
+        });
+    </script>
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+    <div cl ass="header">
+        <div class="headertop_desc">
+            <div class="wrap">
+                <div class="nav_list">
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="contact.html">Sitemap</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="account_desc">
+                    <ul>
+                        <li><a href="contact.html">Register</a></li>
+                        <li><a href="contact.html">Login</a></li>
+                        <li><a href="preview.html">Delivery</a></li>
+                        <li><a href="#">Checkout</a></li>
+                        <li><a href="#">My Account</a></li>
+                    </ul>
+                </div>
+                <div class="clear"></div>
             </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                </ul>
+        </div>
+        <div class="wrap">
+            <div class="header_top">
+                <div class="logo">
+                    <a href="index.html"><img src="Content/images/logo.png" alt="" /></a>
+                </div>
+                <div class="header_top_right">
+                    <div class="cart">
+                        <p>
+                            <span>Cart</span><div id="dd" class="wrapper-dropdown-2">
+                                (empty)
+                                <ul class="dropdown">
+                                    <li>you have no items in your Shopping cart</li>
+                                </ul>
+                            </div>
+                        </p>
+                    </div>
+                    <div class="search_box">
+                        <form>
+                            <input type="text" value="Search" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search';}"><input type="submit" value="">
+                        </form>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                <script type="text/javascript">
+                    function DropDown(el) {
+                        this.dd = el;
+                        this.initEvents();
+                    }
+                    DropDown.prototype = {
+                        initEvents: function () {
+                            var obj = this;
+
+                            obj.dd.on('click', function (event) {
+                                $(this).toggleClass('active');
+                                event.stopPropagation();
+                            });
+                        }
+                    }
+
+                    $(function () {
+
+                        var dd = new DropDown($('#dd'));
+
+                        $(document).click(function () {
+                            // all dropdowns
+                            $('.wrapper-dropdown-2').removeClass('active');
+                        });
+
+                    });</script>
+                <div class="clear"></div>
+            </div>
+            <div class="header_bottom">
+                <div class="header_bottom_left">
+                    <div class="categories">
+                        <ul>
+                            <h3>Categories</h3>
+                            <li><a href="#">All</a></li>
+                            <li><a href="#">Hindi</a></li>
+                            <li><a href="#">Telugu</a></li>
+                            <li><a href="#">English</a></li>
+                            <li><a href="#">Tamil</a></li>
+                            <li><a href="#">Malayalam</a></li>
+                            <li><a href="#">Kannada</a></li>
+                            <li><a href="#">Bengali</a></li>
+                            <li><a href="#">Assami</a></li>
+                            <li><a href="#">Kids</a></li>
+                            <li><a href="#">Animation</a></li>
+                            <li><a href="#">Games</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="header_bottom_right">
+                    <!------ Slider ------------>
+                    <div class="slider">
+                        <div class="slider-wrapper theme-default">
+                            <div id="slider" class="nivoSlider">
+                                <img src="Content/images/1.jpg" data-thumb="Content/images/1.jpg" alt="" />
+                                <img src="Content/images/2.jpg" data-thumb="Content/images/2.jpg" alt="" />
+                                <img src="Content/images/3.jpg" data-thumb="Content/images/3.jpg" alt="" />
+                                <img src="Content/images/4.jpg" data-thumb="Content/images/4.jpg" alt="" />
+                                <img src="Content/images/5.jpg" data-thumb="Content/images/5.jpg" alt="" />
+                            </div>
+                        </div>
+                    </div>
+                    <!------End Slider ------------>
+                </div>
+                <div class="clear"></div>
             </div>
         </div>
     </div>
+    <!------------End Header ------------>
     <div class="container body-content">
         @RenderBody()
         <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
+        <div class="footer">
+            <div class="wrap">
+                <div class="section group">
+                    <div class="col_1_of_4 span_1_of_4">
+                        <h4>Information</h4>
+                        <ul>
+                            <li><a href="#">About Us</a></li>
+                            <li><a href="#">Customer Service</a></li>
+                            <li><a href="#">Advanced Search</a></li>
+                            <li><a href="#">Orders and Returns</a></li>
+                            <li><a href="contact.html">Contact Us</a></li>
+                        </ul>
+                    </div>
+                    <div class="col_1_of_4 span_1_of_4">
+                        <h4>Why buy from us</h4>
+                        <ul>
+                            <li><a href="#">About Us</a></li>
+                            <li><a href="#">Customer Service</a></li>
+                            <li><a href="#">Privacy Policy</a></li>
+                            <li><a href="contact.html">Site Map</a></li>
+                            <li><a href="#">Search Terms</a></li>
+                        </ul>
+                    </div>
+                    <div class="col_1_of_4 span_1_of_4">
+                        <h4>My account</h4>
+                        <ul>
+                            <li><a href="contact.html">Sign In</a></li>
+                            <li><a href="index.html">View Cart</a></li>
+                            <li><a href="#">My Wishlist</a></li>
+                            <li><a href="#">Track My Order</a></li>
+                            <li><a href="contact.html">Help</a></li>
+                        </ul>
+                    </div>
+                    <div class="col_1_of_4 span_1_of_4">
+                        <h4>Contact</h4>
+                        <ul>
+                            <li><span>+91-123-456789</span></li>
+                            <li><span>+00-123-000000</span></li>
+                        </ul>
+                        <div class="social-icons">
+                            <h4>Follow Us</h4>
+                            <ul>
+                                <li><a href="#" target="_blank"><img src="Content/images/facebook.png" alt="" /></a></li>
+                                <li><a href="#" target="_blank"><img src="Content/images/twitter.png" alt="" /></a></li>
+                                <li><a href="#" target="_blank"><img src="Content/images/skype.png" alt="" /> </a></li>
+                                <li><a href="#" target="_blank"> <img src="Content/images/linkedin.png" alt="" /></a></li>
+                                <div class="clear"></div>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="copy_right">
+                    <p>Company Name © All rights Reseverd | Design by  <a href="http://w3layouts.com">W3Layouts</a> </p>
+                </div>
+            </div>
+        </div>
     </div>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $().UItoTop({ easingType: 'easeOutQuart' });
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
+        });
+    </script>
+    <a href="#" id="toTop"><span id="toTopHover"> </span></a>
     @RenderSection("scripts", required: false)
 </body>
 </html>

@@ -161,6 +161,37 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\images\1.jpg" />
+    <Content Include="Content\images\2.jpg" />
+    <Content Include="Content\images\3.jpg" />
+    <Content Include="Content\images\4.jpg" />
+    <Content Include="Content\images\5.jpg" />
+    <Content Include="Content\images\arrows.png" />
+    <Content Include="Content\images\arrow_up.png" />
+    <Content Include="Content\images\avatar_movie.jpg" />
+    <Content Include="Content\images\beauty_and_the_beast.jpg" />
+    <Content Include="Content\images\black-swan.jpg" />
+    <Content Include="Content\images\btn-bg.png" />
+    <Content Include="Content\images\compare.png" />
+    <Content Include="Content\images\Coraline.jpg" />
+    <Content Include="Content\images\drop_arrow.png" />
+    <Content Include="Content\images\Eclipse.jpg" />
+    <Content Include="Content\images\end-game.jpg" />
+    <Content Include="Content\images\facebook.png" />
+    <Content Include="Content\images\linkedin.png" />
+    <Content Include="Content\images\logo.png" />
+    <Content Include="Content\images\New-Moon-The-Score-cover-twilight.jpg" />
+    <Content Include="Content\images\preview.jpg" />
+    <Content Include="Content\images\Priest.jpg" />
+    <Content Include="Content\images\search.png" />
+    <Content Include="Content\images\skype.png" />
+    <Content Include="Content\images\Sorority_Wars.jpg" />
+    <Content Include="Content\images\strip-bg.gif" />
+    <Content Include="Content\images\twitter.png" />
+    <Content Include="Content\images\Unstoppable.jpg" />
+    <Content Include="Content\images\wishlist.png" />
+    <Content Include="Content\style\slider.css" />
+    <Content Include="Content\style\style.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -170,6 +201,8 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\font\Amble-Regular-webfont.ttf" />
+    <Content Include="Content\images\Thumbs.db" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -179,6 +212,10 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\newjs\easing.js" />
+    <Content Include="Scripts\newjs\jquery-1.9.0.min.js" />
+    <Content Include="Scripts\newjs\jquery.nivo.slider.js" />
+    <Content Include="Scripts\newjs\move-top.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Web.config" />
@@ -227,7 +264,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>50166</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
