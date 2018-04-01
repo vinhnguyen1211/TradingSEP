@@ -6,15 +6,15 @@ using System.Web.Mvc;
 
 namespace TradingVLU.Controllers
 {
-    public class HomeController : Controller
+    [RoutePrefix("items")]
+    [Route("{action=index}")]
+    public class ItemController : Controller
     {
-        [Route]
         public ActionResult index()
         {
             return View();
         }
 
-        [Route("about")]
         public ActionResult about()
         {
             ViewBag.Message = "Your application description page.";
@@ -22,7 +22,6 @@ namespace TradingVLU.Controllers
             return View();
         }
 
-        [Route("contact")]
         public ActionResult contact()
         {
             ViewBag.Message = "Your contact page.";
@@ -30,10 +29,8 @@ namespace TradingVLU.Controllers
             return View();
         }
 
-        public ActionResult items()
+        public ActionResult list()
         {
-            ViewBag.Message = "Your contact page.";
-
             return View();
         }
     }
