@@ -236,8 +236,7 @@
     <Content Include="Views\Shared\_Layout_Categories_Slider.cshtml" />
     <Content Include="Views\Item\index.cshtml" />
     <Content Include="Views\Item\list.cshtml" />
-    <Content Include="Views\Item\about.cshtml" />
-    <Content Include="Views\Item\contact.cshtml" />
+    <Content Include="Views\Item\detail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

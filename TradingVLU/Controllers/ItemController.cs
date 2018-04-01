@@ -15,17 +15,8 @@ namespace TradingVLU.Controllers
             return View();
         }
 
-        public ActionResult about()
+        public ActionResult detail()
         {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
             return View();
         }
 
