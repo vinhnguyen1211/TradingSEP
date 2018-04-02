@@ -154,7 +154,7 @@ body {
 }
 .cart p span{
 	font-size:1.5em;
-	color:#FC7D01;
+	color:#21aff2;
 	text-transform:uppercase;
 	vertical-align:middle;
 }
@@ -177,7 +177,7 @@ body {
     margin-top:0px;
     border-width: 6px 6px 0 6px;
     border-style: solid;
-    border-color:#FC7D01 transparent;
+    border-color:#21aff2 transparent;
 }
 .wrapper-dropdown-2 .dropdown {
     position: absolute;
@@ -235,7 +235,7 @@ body {
 	font-size:1.2em;
 	color:#FFF;
 	padding:10px;
-	background:#FC7D01;
+	background:#21aff2;
 	text-transform:uppercase;
 	font-family: 'ambleregular';	
 }
@@ -257,7 +257,7 @@ body {
 	border:none;
 }
 .categories li a:hover{
-	color:#FC7D01;
+	color:#21aff2;
 }
 .header_bottom_right{
 	float:left;
@@ -283,7 +283,7 @@ body {
 .heading h3 {
 	font-family: 'ambleregular';
 	font-size:1.2em;
-	color:#FC7D01;
+	color:#21aff2;
 	text-transform: uppercase;
 }
 /**** Grid 1_0f_5 ****/
@@ -344,7 +344,7 @@ body {
 	display: block;
 	padding:8px 10px;
 	font-family: 'ambleregular';
-	background:#FC7D01;
+	background:#21aff2;
 	color: #FFF;
 	text-decoration: none;
 	outline: 0;
@@ -425,7 +425,7 @@ body {
 	display:block;
 }
 .span_1_of_4  li a:hover, .span_1_of_4  li span:hover {
-	color:#FC7D01;
+	color:#21aff2;
 }
 /*** Social Icons ***/
 .social-icons {
@@ -459,7 +459,7 @@ body {
 	color: #747474;
 }
 .copy_right p a {
-	color:#FC7D01;
+	color:#21aff2;
 	font-family: 'ambleregular';
 	text-decoration: underline;
 }
@@ -511,7 +511,7 @@ body {
 	font-family: 'ambleregular';
 }
 .back-links p a:hover, .back-links p a.active {
-	color:#FC7D01;
+	color:#21aff2;
 }
 .image {
 	clear: both;
@@ -574,7 +574,7 @@ body {
 .span_3_of_2  h2 {
 	font-family: 'ambleregular';
 	font-size: 1.2em;
-	color:#FC7D01;
+	color:#21aff2;
 	font-weight: normal;
 	margin-top: 0px;
 	text-transform: uppercase;
@@ -595,7 +595,7 @@ body {
 .price p span {
 	font-size:2em;
 	font-family: 'ambleregular';
-	color:#FC7D01;
+	color:#21aff2;
 }
 .available {
 	padding: 10px 0;
@@ -651,7 +651,7 @@ body {
 	text-decoration: underline;
 }
 .wish-list li a:hover {
-	color:#FC7D01;
+	color:#21aff2;
 }
 .wish-list li.wish{
 	background:url(../images/wishlist.png) no-repeat 0;
@@ -679,7 +679,7 @@ body {
 	display: block;
 	padding:8px 10px;
 	font-family: 'ambleregular';
-	background:#FC7D01;
+	background:#21aff2;
 	color: #FFF;
 	text-decoration: none;
 	outline: 0;
@@ -698,7 +698,7 @@ body {
 	background: url(../images/strip-bg.gif) repeat-x #F6F6F6;
 	font-family: 'ambleregular';
 	font-size:1.2em;
-	color:#FC7D01;
+	color:#21aff2;
 	text-transform: uppercase;
 }
 .special_movies{
@@ -739,7 +739,7 @@ body {
 	display:inline-block;
 	padding:6px 10px;
 	font-family: 'ambleregular';
-	background:#FC7D01;
+	background:#21aff2;
 	color: #FFF;
 	text-decoration: none;
 	outline: 0;
@@ -827,7 +827,7 @@ body {
 	font-size:1em;
 	padding:10px 25px;
 	font-family: 'ambleregular';
-	background:#FC7D01;
+	background:#21aff2;
 	text-transform:uppercase;
 	color: #FFF;
 	border:none;
