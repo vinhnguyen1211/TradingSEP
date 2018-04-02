@@ -16,6 +16,8 @@ namespace TradingVLU
             bundles.Add(new ScriptBundle("~/style/css").Include(
                         "~/Content/style/style.css",
                         "~/Content/style/slider.css"));
+            bundles.Add(new ScriptBundle("~/style/cssBootstrap").Include(
+                        "~/Content/style/bootstrap.min.css"));
 
             //bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
             //            "~/Scripts/jquery-{version}.js"));

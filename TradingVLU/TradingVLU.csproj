@@ -154,6 +154,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ItemController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -191,6 +192,8 @@
     <Content Include="Content\images\twitter.png" />
     <Content Include="Content\images\Unstoppable.jpg" />
     <Content Include="Content\images\wishlist.png" />
+    <Content Include="Content\style\bootstrap.min.css" />
+    <Content Include="Content\style\register.css" />
     <Content Include="Content\style\slider.css" />
     <Content Include="Content\style\style.css" />
     <Content Include="favicon.ico" />
@@ -237,6 +240,8 @@
     <Content Include="Views\Item\index.cshtml" />
     <Content Include="Views\Item\list.cshtml" />
     <Content Include="Views\Item\detail.cshtml" />
+    <Content Include="Views\User\Index.cshtml" />
+    <Content Include="Views\User\register.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
