@@ -1,10 +1,10 @@
-﻿<head>
+﻿
     @Styles.Render("~/style/cssBootstrap")
     <!-- Website CSS style -->
     <link rel="stylesheet" type="text/css" href="~/Content/style/register.css">
     <!-- Website Font style -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
-</head>
+
 
 @{
     ViewBag.Title = "register";
@@ -20,7 +20,6 @@
         </div>
         <div class="main-login main-center">
             <form class="form-horizontal" method="post" action="#">
-
                 <div class="form-group">
                     <label for="name" class="cols-sm-2 control-label">Your Name</label>
                     <div class="cols-sm-10">
@@ -70,7 +69,7 @@
                     <button type="button" class="btn btn-primary btn-lg btn-block login-button">Register</button>
                 </div>
                 <div class="login-register">
-                    <a href="@Url.Action("login", "User")">Login</a>
+                    <a href="@Url.Action("login", "User")" style="font-size: 1.5em">Login</a>
                 </div>
             </form>
         </div>

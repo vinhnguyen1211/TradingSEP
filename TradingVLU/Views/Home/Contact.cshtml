@@ -1,17 +1,61 @@
 ﻿@{
     ViewBag.Title = "Contact";
 }
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
-
-<address>
-    One Microsoft Way<br />
-    Redmond, WA 98052-6399<br />
-    <abbr title="Phone">P:</abbr>
-    425.555.0100
-</address>
-
-<address>
-    <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
-    <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
-</address>
+<div class="main">
+    <div class="wrap">
+        <div class="content">
+            <div class="content_top">
+                <div class="back-links">
+                    <p><a href="index.html">Home</a> &gt;&gt;&gt;&gt; <a href="#" class="active">Contact</a></p>
+                </div>
+                <div class="clear"></div>
+            </div>
+            <div class="section group">
+                <div class="col span_2_of_3">
+                    <div class="contact-form">
+                        <h2>Contact Us</h2>
+                        <form method="post" action="contact-post.html">
+                            <div>
+                                <span><label>Name</label></span>
+                                <span><input name="userName" type="text" class="textbox"></span>
+                            </div>
+                            <div>
+                                <span><label>E-mail</label></span>
+                                <span><input name="userEmail" type="text" class="textbox"></span>
+                            </div>
+                            <div>
+                                <span><label>Company Name</label></span>
+                                <span><input name="userPhone" type="text" class="textbox"></span>
+                            </div>
+                            <div>
+                                <span><label>Subject</label></span>
+                                <span><textarea name="userMsg"> </textarea></span>
+                            </div>
+                            <div>
+                                <span><input type="submit" value="Submit" class="mybutton"></span>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="col span_1_of_3">
+                    <div class="contact_info">
+                        <h2>Find Us Here</h2>
+                        <div class="map">
+                            <iframe width="100%" height="175" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.co.in/maps?f=q&amp;source=s_q&amp;hl=en&amp;geocode=&amp;q=Lighthouse+Point,+FL,+United+States&amp;aq=4&amp;oq=light&amp;sll=26.275636,-80.087265&amp;sspn=0.04941,0.104628&amp;ie=UTF8&amp;hq=&amp;hnear=Lighthouse+Point,+Broward,+Florida,+United+States&amp;t=m&amp;z=14&amp;ll=26.275636,-80.087265&amp;output=embed"></iframe><br><small><a href="https://maps.google.co.in/maps?f=q&amp;source=embed&amp;hl=en&amp;geocode=&amp;q=Lighthouse+Point,+FL,+United+States&amp;aq=4&amp;oq=light&amp;sll=26.275636,-80.087265&amp;sspn=0.04941,0.104628&amp;ie=UTF8&amp;hq=&amp;hnear=Lighthouse+Point,+Broward,+Florida,+United+States&amp;t=m&amp;z=14&amp;ll=26.275636,-80.087265" style="color:#888;text-align:left;font-size:0.85em">View Larger Map</a></small>
+                        </div>
+                    </div>
+                    <div class="company_address">
+                        <h2>Information :</h2>
+                        <p>500 Lorem Ipsum Dolor Sit,</p>
+                        <p>22-56-2-9 Sit Amet, Lorem,</p>
+                        <p>USA</p>
+                        <p>Phone:(00) 222 666 444</p>
+                        <p>Fax: (000) 000 00 00 0</p>
+                        <p>Email: <span><a href="#">info(at)mycompany.com</a></span></p>
+                        <p>Follow on: <span><a href="#">Facebook</a></span>, <span><a href="#">Twitter</a></span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
