@@ -20,5 +20,11 @@ namespace TradingVLU.Controllers
         {
             return View();
         }
+
+        public ActionResult login()
+        {
+            return View();
+        }
+
     }
 }
