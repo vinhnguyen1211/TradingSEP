@@ -16,7 +16,8 @@ namespace TradingVLU.Controllers
         {
             return View();
         }
-        
+
+        [HttpGet]
         public ActionResult register()
         {
             using(vlutrading3545Entities db = new vlutrading3545Entities())
@@ -34,6 +35,13 @@ namespace TradingVLU.Controllers
 
                 ViewBag.question = item;
             }
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Register()
+        {
+            
             return View();
         }
 
