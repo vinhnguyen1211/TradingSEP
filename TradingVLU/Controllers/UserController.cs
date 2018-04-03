@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Security.Cryptography;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using TradingVLU.Models;
@@ -39,10 +42,74 @@ namespace TradingVLU.Controllers
         }
 
         [HttpPost]
-        public ActionResult Register()
+        [ValidateAntiForgeryToken]
+        public ActionResult register(USERMetadata newUser)
         {
-            
-            return View();
+            using (vlutrading3545Entities db = new vlutrading3545Entities())
+            {
+                var ques = db.security_question.ToList();
+                List<SelectListItem> item = new List<SelectListItem>();
+                foreach (var i in ques)
+                {
+                    item.Add(new SelectListItem
+                    {
+                        Text = i.question,
+                        Value = i.id.ToString()
+                    });
+                }
+
+                ViewBag.question = item;
+
+                if (ModelState.IsValid)
+                {
+                    if (db.users.Any(x => x.email == newUser.email))
+                    {
+                        ModelState.AddModelError("Email", "Email already exist");
+                        return View(newUser);
+                    }
+                    else if (db.users.Any(x => x.username == newUser.username))
+                    {
+                        ModelState.AddModelError("Username", "Username already exist");
+                        return View(newUser);
+                    }
+                    else
+                    {
+                        user usr = new user
+                        {
+                            username = newUser.username,
+                            password = hashPwd(newUser.password),
+                            email = newUser.email,
+                            name = newUser.name,
+                            role = 1,
+                            id_security_question = newUser.id_security_question,
+                            answer_security_question = newUser.answer_security_question,
+                            is_active = 1,
+                            create_by = newUser.username,
+                            create_date = DateTime.Now,
+                            update_by = newUser.username,
+                            update_date = DateTime.Now
+                        };
+                        try
+                        {
+                            db.users.Add(usr);
+                            db.SaveChanges();
+                        }
+                        catch (Exception e)
+                        {
+                            ViewBag.DuplicateMessage = "Error occurred while register. Contact Admin for details";
+                            return View();
+                            throw;
+                        }
+                        ViewBag.SuccessMessage = "Successful Register";
+                        ModelState.Clear();
+                        return View();
+                    }
+                }
+                else
+                {
+                    return View();
+                }
+            }
         }
 
         public ActionResult login()
@@ -50,5 +117,25 @@ namespace TradingVLU.Controllers
             return View();
         }
 
+        [NonAction]
+        private string hashPwd(string pwd)
+        {
+            MD5 md5 = new MD5CryptoServiceProvider();
+
+            //compute hash from the bytes of text
+            md5.ComputeHash(ASCIIEncoding.ASCII.GetBytes(pwd));
+
+            //get hash result after compute it
+            byte[] result = md5.Hash;
+
+            StringBuilder strBuilder = new StringBuilder();
+            for (int i = 0; i < result.Length; i++)
+            {
+                //change it into 2 hexadecimal digits
+                //for each byte
+                strBuilder.Append(result[i].ToString("x2"));
+            }
+            return strBuilder.ToString();
+        }
     }
 }

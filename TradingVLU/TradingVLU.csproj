@@ -166,6 +166,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Metadata.cs" />
     <Compile Include="Models\item.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -296,8 +297,8 @@
     <Content Include="Views\Item\list.cshtml" />
     <Content Include="Views\Item\detail.cshtml" />
     <Content Include="Views\User\Index.cshtml" />
-    <Content Include="Views\User\register.cshtml" />
     <Content Include="Views\User\login.cshtml" />
+    <Content Include="Views\User\register.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
