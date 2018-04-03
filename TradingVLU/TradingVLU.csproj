@@ -232,6 +232,7 @@
     <Content Include="Content\images\Unstoppable.jpg" />
     <Content Include="Content\images\wishlist.png" />
     <Content Include="Content\style\bootstrap.min.css" />
+    <Content Include="Content\style\login.css" />
     <Content Include="Content\style\register.css" />
     <Content Include="Content\style\slider.css" />
     <Content Include="Content\style\style.css" />

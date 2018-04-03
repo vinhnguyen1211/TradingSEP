@@ -11,14 +11,25 @@
     <script src="~/Scripts/jquery-1.10.2.min.js"></script>
     @Styles.Render("~/style/css")
     @Scripts.Render("~/script/js")
+
     <script type="text/javascript">
         $(window).load(function () {
             $('#slider').nivoSlider();
         });
     </script>
+
+    <link rel="stylesheet" type="text/css" href="~/Content/style/login.css">
+
+    <!-- Website Font style -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+
+    <!-- Latest compiled and minified CSS -->
+    @*<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">*@
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 </head>
 <body>
-    <div cl ass="header">
+    <div class="header">
         <div class="headertop_desc">
             <div class="wrap">
                 <div class="nav_list">
@@ -34,7 +45,45 @@
                         <li><a href="@Url.Action("login", "User")">Login</a></li>
                         <li><a href="#">Delivery</a></li>
                         <li><a href="#">Checkout</a></li>
-                        <li><a href="#">My Account</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <span class="glyphicon glyphicon-user"></span>
+                                <strong>Account</strong>
+                                <span class="glyphicon glyphicon-chevron-down"></span>
+                            </a>
+                            <ul class="dropdown-menu pull-right">
+                                <li>
+                                    <div class="navbar-login">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <p class="text-center">
+                                                    <span class="glyphicon glyphicon-user icon-size"></span>
+                                                </p>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <p class="text-left"><strong>Nombre Apellido</strong></p>
+                                                <p class="text-left small">correoElectronico@email.com</p>
+                                                <p class="text-left">
+                                                    <a href="#" class="btn btn-primary btn-block">Actualizar Datos</a>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <div class="navbar-login navbar-login-session">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <p>
+                                                    <a href="#" class="btn btn-danger btn-block">Cerrar Sesion</a>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
                     </ul>
                 </div>
                 <div class="clear"></div>
@@ -95,10 +144,7 @@
         </div>
     </div>
     <!------------End Header ------------>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-    </div>
+    @RenderBody()
     <div class="footer">
         <div class="wrap">
             <div class="section group">
