@@ -127,7 +127,16 @@ namespace TradingVLU.Controllers
                 if(db.users.Any(x => x.username == userLogin.username))
                 {
                     var user = db.users.FirstOrDefault(x => x.username == userLogin.username);
-                    Session["userLogged"] = user;
+                    if(user.password == hashPwd(userLogin.password))
+                    {
+                        Session["userLogged"] = user;
+                        ViewBag.SuccessMessage = "Successful Logged";
+                    }
+                    else
+                    {
+                        ViewBag.DuplicateMessage = "Login failed!";
+                    }
+                    
                 }
                 else
                 {
@@ -136,6 +145,13 @@ namespace TradingVLU.Controllers
             }
 
             return View();
+        }
+
+        [HttpGet]
+        public ActionResult logout()
+        {
+            Session["userLogged"] = null;
+            return Redirect(Request.UrlReferrer.ToString());
         }
 
         [NonAction]

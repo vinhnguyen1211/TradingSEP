@@ -1,5 +1,6 @@
-﻿@{ 
-   
+﻿@{
+    var @userLogged = this.Session["userLogged"] as TradingVLU.Models.user;
+    
 }
 <!DOCTYPE html>
 <html>
@@ -105,28 +106,47 @@
                                 <div class="header-btns-icon">
                                     <i class="fa fa-user-o"></i>
                                 </div>
-                                <strong class="text-uppercase">My Account <i class="fa fa-caret-down"></i></strong>
-                            </div>
-                            <a href="@Url.Action("login","User")" class="text-uppercase">Login</a> / <a href="@Url.Action("register","User")" class="text-uppercase">Join</a>
-                            <ul class="custom-menu">
-                                @{ 
-                                    if(this.Session["userLogged"] != null)
+                                @{
+                                    if (@userLogged != null)
                                     {
-                                        var userLogged = this.Session["userLogged"] as TradingVLU.Models.user;
-                                        <li><a href="#"><i class="fa fa-user-o"></i> @Html.Raw(userLogged.email)</a></li>
+                                        
+                                        <strong style="font-size: 1.1em;">@Html.Raw(userLogged.name) <i class="fa fa-caret-down"></i></strong>
+                                    }
+                                    else
+                                    {
+                                        <strong class="text-uppercase"> My Account <text>&nbsp;&nbsp;&nbsp;</text><i class="fa fa-caret-down"> </i></strong>
+                                    }
+                                }
+                                
+                            </div>
+                            @{ 
+                                if(userLogged == null)
+                                {
+                                    <a href="@Url.Action("login","User")" class="text-uppercase">Login</a> @Html.Raw("/") <a href="@Url.Action("register","User")" class="text-uppercase">Register</a>
+                                }
+                                else
+                                {
+                                    <a href="@Url.Action("logout","User")"><i class="fa fa-sign-out"></i> Logout</a>
+                                }
+                            }
+                            <ul class="custom-menu">
+                                @{
+                                    if (@userLogged != null)
+                                    {
+                                        
+                                        <li><a href="#"><i class="fa fa-user-o"></i> @Html.Raw(userLogged.name)</a></li>
                                     }
                                     else
                                     {
                                         <li><a href="#"><i class="fa fa-user-o"></i> My Account</a></li>
                                     }
-
-                                    
                                 }
                                 <li><a href="#"><i class="fa fa-heart-o"></i> My Wishlist</a></li>
                                 <li><a href="#"><i class="fa fa-exchange"></i> Compare</a></li>
                                 <li><a href="#"><i class="fa fa-check"></i> Checkout</a></li>
                                 <li><a href="#"><i class="fa fa-unlock-alt"></i> Login</a></li>
                                 <li><a href="#"><i class="fa fa-user-plus"></i> Create An Account</a></li>
+                                <li><a href="@Url.Action("logout","User")"><i class="fa fa-sign-out"></i> Logout</a></li>
                             </ul>
                         </li>
                         <!-- /Account -->
