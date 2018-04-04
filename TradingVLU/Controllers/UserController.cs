@@ -112,8 +112,29 @@ namespace TradingVLU.Controllers
             }
         }
 
+        [HttpGet]
         public ActionResult login()
         {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult login(USERMetadata userLogin)
+        {
+            using(vlutrading3545Entities db = new vlutrading3545Entities())
+            {
+                if(db.users.Any(x => x.username == userLogin.username))
+                {
+                    var user = db.users.FirstOrDefault(x => x.username == userLogin.username);
+                    Session["userLogged"] = user;
+                }
+                else
+                {
+                    ViewBag.DuplicateMessage = "Login failed!";
+                }
+            }
+
             return View();
         }
 

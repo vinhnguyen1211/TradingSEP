@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@{ 
+   
+}
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
@@ -75,7 +78,7 @@
                 <div class="pull-left">
                     <!-- Logo -->
                     <div class="header-logo">
-                        <a class="logo" href="#">
+                        <a class="logo" href="@Url.Action("index","Home")">
                             <img src="~/Content/img/logo.png" alt="">
                         </a>
                     </div>
@@ -106,7 +109,19 @@
                             </div>
                             <a href="@Url.Action("login","User")" class="text-uppercase">Login</a> / <a href="@Url.Action("register","User")" class="text-uppercase">Join</a>
                             <ul class="custom-menu">
-                                <li><a href="#"><i class="fa fa-user-o"></i> My Account</a></li>
+                                @{ 
+                                    if(this.Session["userLogged"] != null)
+                                    {
+                                        var userLogged = this.Session["userLogged"] as TradingVLU.Models.user;
+                                        <li><a href="#"><i class="fa fa-user-o"></i> @Html.Raw(userLogged.email)</a></li>
+                                    }
+                                    else
+                                    {
+                                        <li><a href="#"><i class="fa fa-user-o"></i> My Account</a></li>
+                                    }
+
+                                    
+                                }
                                 <li><a href="#"><i class="fa fa-heart-o"></i> My Wishlist</a></li>
                                 <li><a href="#"><i class="fa fa-exchange"></i> Compare</a></li>
                                 <li><a href="#"><i class="fa fa-check"></i> Checkout</a></li>
