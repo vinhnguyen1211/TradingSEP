@@ -200,46 +200,56 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\bootstrap.css" />
-    <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\images\1.jpg" />
-    <Content Include="Content\images\2.jpg" />
-    <Content Include="Content\images\3.jpg" />
-    <Content Include="Content\images\4.jpg" />
-    <Content Include="Content\images\5.jpg" />
-    <Content Include="Content\images\arrows.png" />
-    <Content Include="Content\images\arrow_up.png" />
-    <Content Include="Content\images\avatar_movie.jpg" />
-    <Content Include="Content\images\beauty_and_the_beast.jpg" />
-    <Content Include="Content\images\black-swan.jpg" />
-    <Content Include="Content\images\btn-bg.png" />
-    <Content Include="Content\images\compare.png" />
-    <Content Include="Content\images\Coraline.jpg" />
-    <Content Include="Content\images\drop_arrow.png" />
-    <Content Include="Content\images\Eclipse.jpg" />
-    <Content Include="Content\images\end-game.jpg" />
-    <Content Include="Content\images\facebook.png" />
-    <Content Include="Content\images\linkedin.png" />
-    <Content Include="Content\images\logo.png" />
-    <Content Include="Content\images\New-Moon-The-Score-cover-twilight.jpg" />
-    <Content Include="Content\images\preview.jpg" />
-    <Content Include="Content\images\Priest.jpg" />
-    <Content Include="Content\images\search.png" />
-    <Content Include="Content\images\skype.png" />
-    <Content Include="Content\images\Sorority_Wars.jpg" />
-    <Content Include="Content\images\strip-bg.gif" />
-    <Content Include="Content\images\twitter.png" />
-    <Content Include="Content\images\Unstoppable.jpg" />
-    <Content Include="Content\images\wishlist.png" />
-    <Content Include="Content\style\bootstrap.min.css" />
-    <Content Include="Content\style\login.css" />
-    <Content Include="Content\style\register.css" />
-    <Content Include="Content\style\slider.css" />
-    <Content Include="Content\style\style.css" />
+    <Content Include="Content\css\bootstrap.min.css" />
+    <Content Include="Content\css\font-awesome.min.css" />
+    <Content Include="Content\css\nouislider.min.css" />
+    <Content Include="Content\css\register.css" />
+    <Content Include="Content\css\slick-theme.css" />
+    <Content Include="Content\css\slick.css" />
+    <Content Include="Content\css\style.css" />
+    <Content Include="Content\fonts\fontawesome-webfont.svg" />
+    <Content Include="Content\fonts\slick.svg" />
+    <Content Include="Content\img\banner01.jpg" />
+    <Content Include="Content\img\banner02.jpg" />
+    <Content Include="Content\img\banner03.jpg" />
+    <Content Include="Content\img\banner04.jpg" />
+    <Content Include="Content\img\banner05.jpg" />
+    <Content Include="Content\img\banner06.jpg" />
+    <Content Include="Content\img\banner07.jpg" />
+    <Content Include="Content\img\banner08.jpg" />
+    <Content Include="Content\img\banner09.jpg" />
+    <Content Include="Content\img\banner10.jpg" />
+    <Content Include="Content\img\banner11.jpg" />
+    <Content Include="Content\img\banner12.jpg" />
+    <Content Include="Content\img\banner13.jpg" />
+    <Content Include="Content\img\banner14.jpg" />
+    <Content Include="Content\img\banner15.jpg" />
+    <Content Include="Content\img\logo.png" />
+    <Content Include="Content\img\main-product01.jpg" />
+    <Content Include="Content\img\main-product02.jpg" />
+    <Content Include="Content\img\main-product03.jpg" />
+    <Content Include="Content\img\main-product04.jpg" />
+    <Content Include="Content\img\product01.jpg" />
+    <Content Include="Content\img\product02.jpg" />
+    <Content Include="Content\img\product03.jpg" />
+    <Content Include="Content\img\product04.jpg" />
+    <Content Include="Content\img\product05.jpg" />
+    <Content Include="Content\img\product06.jpg" />
+    <Content Include="Content\img\product07.jpg" />
+    <Content Include="Content\img\product08.jpg" />
+    <Content Include="Content\img\thumb-product01.jpg" />
+    <Content Include="Content\img\thumb-product02.jpg" />
+    <Content Include="Content\img\thumb-product03.jpg" />
+    <Content Include="Content\img\thumb-product04.jpg" />
+    <Content Include="Content\js\bootstrap.min.js" />
+    <Content Include="Content\js\jquery.min.js" />
+    <Content Include="Content\js\jquery.zoom.min.js" />
+    <Content Include="Content\js\main.js" />
+    <Content Include="Content\js\nouislider.min.js" />
+    <Content Include="Content\js\slick.min.js" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Content\Site.css" />
     <Content Include="Models\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Model1.Context.cs</LastGenOutput>
@@ -255,8 +265,6 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\font\Amble-Regular-webfont.ttf" />
-    <Content Include="Content\images\Thumbs.db" />
     <EntityDeploy Include="Models\Model1.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Model1.Designer.cs</LastGenOutput>
@@ -264,6 +272,14 @@
     <Content Include="Models\Model1.edmx.diagram">
       <DependentUpon>Model1.edmx</DependentUpon>
     </Content>
+    <Content Include="Content\fonts\fontawesome-webfont.eot" />
+    <Content Include="Content\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Content\fonts\fontawesome-webfont.woff" />
+    <Content Include="Content\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Content\fonts\FontAwesome.otf" />
+    <Content Include="Content\fonts\slick.eot" />
+    <Content Include="Content\fonts\slick.ttf" />
+    <Content Include="Content\fonts\slick.woff" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -293,7 +309,7 @@
     <Content Include="Views\Home\about.cshtml" />
     <Content Include="Views\Home\contact.cshtml" />
     <Content Include="Views\Home\index.cshtml" />
-    <Content Include="Views\Shared\_Layout_Categories_Slider.cshtml" />
+    <Content Include="Views\Shared\_Layout_Navigation_Slider.cshtml" />
     <Content Include="Views\Item\index.cshtml" />
     <Content Include="Views\Item\list.cshtml" />
     <Content Include="Views\Item\detail.cshtml" />
