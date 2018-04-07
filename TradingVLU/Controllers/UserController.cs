@@ -115,6 +115,10 @@ namespace TradingVLU.Controllers
         [HttpGet]
         public ActionResult login()
         {
+            if(Session["userLogged"] != null)
+            {
+
+            }
             return View();
         }
 
@@ -131,6 +135,7 @@ namespace TradingVLU.Controllers
                     {
                         Session["userLogged"] = user;
                         ViewBag.SuccessMessage = "Successful Logged";
+                        
                     }
                     else
                     {
