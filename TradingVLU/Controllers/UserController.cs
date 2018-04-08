@@ -10,7 +10,7 @@ using TradingVLU.Models;
 
 namespace TradingVLU.Controllers
 {
-    [RoutePrefix("users")]
+    [RoutePrefix("user")]
     [Route("{action=index}")]
     public class UserController : Controller
     {
@@ -148,6 +148,10 @@ namespace TradingVLU.Controllers
                     ViewBag.DuplicateMessage = "Login failed!";
                 }
             }
+            if(Session["userLogged"] != null)
+            {
+
+            }
 
             return View();
         }
@@ -157,6 +161,12 @@ namespace TradingVLU.Controllers
         {
             Session["userLogged"] = null;
             return Redirect(Request.UrlReferrer.ToString());
+        }
+
+        [Route("~/user/settings")]
+        public ActionResult account_settings()
+        {
+            return View();
         }
 
         [NonAction]

@@ -316,6 +316,7 @@
     <Content Include="Views\User\Index.cshtml" />
     <Content Include="Views\User\register.cshtml" />
     <Content Include="Views\User\login.cshtml" />
+    <Content Include="Views\User\account_settings.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
