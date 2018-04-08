@@ -15,6 +15,8 @@
         <AssociationConnector Association="vlutrading3545Model.FK_user_roleId" ManuallyRouted="false" />
         <AssociationConnector Association="vlutrading3545Model.FK_user_security_questionId" ManuallyRouted="false" />
         <AssociationConnector Association="vlutrading3545Model.FK_user_personal_information_userId" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="vlutrading3545Model.item_images" Width="1.5" PointX="7.5" PointY="1.875" />
+        <AssociationConnector Association="vlutrading3545Model.FK_item_images_itemId" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

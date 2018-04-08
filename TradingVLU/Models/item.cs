@@ -14,6 +14,12 @@ namespace TradingVLU.Models
     
     public partial class item
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public item()
+        {
+            this.item_images = new HashSet<item_images>();
+        }
+    
         public int id { get; set; }
         public string item_name { get; set; }
         public string description { get; set; }
@@ -29,5 +35,7 @@ namespace TradingVLU.Models
     
         public virtual user user { get; set; }
         public virtual user user1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<item_images> item_images { get; set; }
     }
 }

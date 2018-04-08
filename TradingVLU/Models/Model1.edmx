@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="vlutrading3545Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="vlutrading3545Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="item">
           <Key>
             <PropertyRef Name="id" />
@@ -17,6 +17,19 @@
           <Property Name="seller_id" Type="int" Nullable="false" />
           <Property Name="buyer_id" Type="int" />
           <Property Name="images" Type="varchar" MaxLength="200" />
+          <Property Name="create_by" Type="varchar" MaxLength="20" />
+          <Property Name="create_date" Type="datetime" />
+          <Property Name="update_by" Type="varchar" MaxLength="20" />
+          <Property Name="update_date" Type="datetime" />
+        </EntityType>
+        <EntityType Name="item_images">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="item_id" Type="int" Nullable="false" />
+          <Property Name="filename" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="path" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="create_by" Type="varchar" MaxLength="20" />
           <Property Name="create_date" Type="datetime" />
           <Property Name="update_by" Type="varchar" MaxLength="20" />
@@ -72,6 +85,18 @@
           <Property Name="update_by" Type="varchar" MaxLength="20" />
           <Property Name="update_date" Type="datetime" />
         </EntityType>
+        <Association Name="FK_item_images_itemId">
+          <End Role="item" Type="Self.item" Multiplicity="1" />
+          <End Role="item_images" Type="Self.item_images" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="item">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="item_images">
+              <PropertyRef Name="item_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_item_userBuyerId">
           <End Role="user" Type="Self.user" Multiplicity="0..1" />
           <End Role="item" Type="Self.item" Multiplicity="*" />
@@ -134,10 +159,15 @@
         </Association>
         <EntityContainer Name="vlutrading3545ModelStoreContainer">
           <EntitySet Name="item" EntityType="Self.item" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="item_images" EntityType="Self.item_images" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="role" EntityType="Self.role" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="security_question" EntityType="Self.security_question" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="user" EntityType="Self.user" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="user_personal_information" EntityType="Self.user_personal_information" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_item_images_itemId" Association="Self.FK_item_images_itemId">
+            <End Role="item" EntitySet="item" />
+            <End Role="item_images" EntitySet="item_images" />
+          </AssociationSet>
           <AssociationSet Name="FK_item_userBuyerId" Association="Self.FK_item_userBuyerId">
             <End Role="user" EntitySet="user" />
             <End Role="item" EntitySet="item" />
@@ -159,8 +189,7 @@
             <End Role="user" EntitySet="user" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="vlutrading3545Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -182,6 +211,7 @@
           <Property Name="update_date" Type="DateTime" Precision="3" />
           <NavigationProperty Name="user" Relationship="Self.FK_item_userBuyerId" FromRole="item" ToRole="user" />
           <NavigationProperty Name="user1" Relationship="Self.FK_item_userSellerId" FromRole="item" ToRole="user" />
+          <NavigationProperty Name="item_images" Relationship="vlutrading3545Model.FK_item_images_itemId" FromRole="item" ToRole="item_images" />
         </EntityType>
         <EntityType Name="role">
           <Key>
@@ -327,7 +357,38 @@
             <End Role="user" EntitySet="users" />
             <End Role="user_personal_information" EntitySet="user_personal_information" />
           </AssociationSet>
+          <EntitySet Name="item_images" EntityType="vlutrading3545Model.item_images" />
+          <AssociationSet Name="FK_item_images_itemId" Association="vlutrading3545Model.FK_item_images_itemId">
+            <End Role="item" EntitySet="items" />
+            <End Role="item_images" EntitySet="item_images" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="item_images">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="item_id" Type="Int32" Nullable="false" />
+          <Property Name="filename" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="path" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="create_by" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="create_date" Type="DateTime" Precision="3" />
+          <Property Name="update_by" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="update_date" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="item" Relationship="vlutrading3545Model.FK_item_images_itemId" FromRole="item_images" ToRole="item" />
+        </EntityType>
+        <Association Name="FK_item_images_itemId">
+          <End Type="vlutrading3545Model.item" Role="item" Multiplicity="1" />
+          <End Type="vlutrading3545Model.item_images" Role="item_images" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="item">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="item_images">
+              <PropertyRef Name="item_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -403,6 +464,20 @@
                 <ScalarProperty Name="address" ColumnName="address" />
                 <ScalarProperty Name="update_by" ColumnName="update_by" />
                 <ScalarProperty Name="update_date" ColumnName="update_date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="item_images">
+            <EntityTypeMapping TypeName="vlutrading3545Model.item_images">
+              <MappingFragment StoreEntitySet="item_images">
+                <ScalarProperty Name="update_date" ColumnName="update_date" />
+                <ScalarProperty Name="update_by" ColumnName="update_by" />
+                <ScalarProperty Name="create_date" ColumnName="create_date" />
+                <ScalarProperty Name="create_by" ColumnName="create_by" />
+                <ScalarProperty Name="path" ColumnName="path" />
+                <ScalarProperty Name="filename" ColumnName="filename" />
+                <ScalarProperty Name="item_id" ColumnName="item_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
