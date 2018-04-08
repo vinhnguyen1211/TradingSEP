@@ -3,19 +3,16 @@
     ViewBag.Title = "Account Manager";
 }
 
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <!------ Include the above in your HEAD tag ---------->
 <div class="container">
 
     <div class="row">
         <div class="col-md-3">
             <ul class="nav nav-pills nav-stacked admin-menu">
-                <li class="active"><a href="" data-target-id="profile"><i class="glyphicon glyphicon-user"></i> Profile</a></li>
-                <li><a href="" data-target-id="change-password"><i class="glyphicon glyphicon-lock"></i> Change Password</a></li>
-                <li><a href="" data-target-id="settings"><i class="glyphicon glyphicon-cog"></i> Settings</a></li>
-                <li><a href="" data-target-id="logout"><i class="glyphicon glyphicon-log-out"></i> Logout</a></li>
+                <li class="active"><a href="" data-target-id="profile"><i class="fa fa-user-o"></i> Profile</a></li>
+                <li><a href="" data-target-id="change-password"><i class="fa fa-lock"></i> Change Password</a></li>
+                <li><a href="" data-target-id="settings"><i class="fa fa-cog"></i> Settings</a></li>
+                <li><a href="" data-target-id="logout"><i class="fa fa-sign-out"></i> Logout</a></li>
             </ul>
         </div>
         <div class="col-md-9  admin-content" id="profile">
@@ -132,20 +129,25 @@
     </div>
 </div>
 
-<script>
-    $(document).ready(function () {
-        var navItems = $('.admin-menu li > a');
-        var navListItems = $('.admin-menu li');
-        var allWells = $('.admin-content');
-        var allWellsExceptFirst = $('.admin-content:not(:first)');
-        allWellsExceptFirst.hide();
-        navItems.click(function (e) {
-            e.preventDefault();
-            navListItems.removeClass('active');
-            $(this).closest('li').addClass('active');
-            allWells.hide();
-            var target = $(this).attr('data-target-id');
-            $('#' + target).show();
+@section _script_bottom{
+    <script>
+        $(document).ready(function () {
+            var navItems = $('.admin-menu li > a');
+            var navListItems = $('.admin-menu li');
+            var allWells = $('.admin-content');
+            var allWellsExceptFirst = $('.admin-content:not(:first)');
+            allWellsExceptFirst.hide();
+            navItems.click(function (e) {
+                e.preventDefault();
+                navListItems.removeClass('active');
+                $(this).closest('li').addClass('active');
+                allWells.hide();
+                var target = $(this).attr('data-target-id');
+                $('#' + target).show();
+            });
         });
-    });
-</script>
+    </script>
+}
+    
+
+        

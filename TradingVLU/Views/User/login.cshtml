@@ -2,9 +2,9 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "Register";
     var @userLogged = this.Session["userLogged"] as TradingVLU.Models.user;
-    bool logged = userLogged != null ? true: false;
+    bool logged = userLogged != null ? true : false;
 
-    
+
 }
 
 @section _layout_navigation_slider{
@@ -29,33 +29,33 @@
                     <div class="form-horizontal">
                         @if (!logged)
                         {
-                        <div class="form-group">
-                            <label class="cols-sm-2 control-label">Username</label>
-                            <div class="cols-sm-10">
-                                <div class="input-group">
-                                    <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-                                    <input class="form-control text-box single-line" name="username" placeholder="Enter your Username" type="text">
+                            <div class="form-group">
+                                <label class="cols-sm-2 control-label">Username</label>
+                                <div class="cols-sm-10">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                                        <input class="form-control text-box single-line" name="username" placeholder="Enter your Username" type="text">
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="cols-sm-2 control-label">Password</label>
-                            <div class="cols-sm-10">
-                                <div class="input-group">
-                                    <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-                                    <input class="form-control text-box single-line" name="password" placeholder="Enter your Password" type="password">
+                            <div class="form-group">
+                                <label class="cols-sm-2 control-label">Password</label>
+                                <div class="cols-sm-10">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                                        <input class="form-control text-box single-line" name="password" placeholder="Enter your Password" type="password">
+                                    </div>
                                 </div>
                             </div>
-                        </div>
 
 
-                        <div class="form-group ">
-                            <button type="submit" class="btn btn-primary btn-lg btn-block login-button">Login</button>
-                        </div>
+                            <div class="form-group ">
+                                <button type="submit" class="btn btn-primary btn-lg btn-block login-button">Login</button>
+                            </div>
 
-                        <div class="login-register">
-                            <a href="@Url.Action("register", "User")" style="font-size: 1.5em">Register</a>
-                        </div>
+                            <div class="login-register">
+                                <a href="@Url.Action("register", "User")" style="font-size: 1.5em">Register</a>
+                            </div>
                         }
                         <div class="form-group" style="font-size:1.5em;">
                             <div>
@@ -76,8 +76,8 @@
     </div>
 </div>
 
-@section _script_register{
-<script>
+@section _script_bottom{
+    <script>
         $(document).ready(function () {
             // Handler for .ready() called.
             $('html, body').animate({
@@ -93,5 +93,5 @@
                 window.location.replace("/");
             }
         }, 3000);
-</script>
+    </script>
 }

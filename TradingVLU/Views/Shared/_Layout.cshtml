@@ -135,18 +135,21 @@
                                     {
 
                                         <li><a href="#"><i class="fa fa-user-o"></i> @Html.Raw(userLogged.name)</a></li>
+                                        <li><a href="#"><i class="fa fa-heart-o"></i> My Wishlist</a></li>
+                                        <li><a href="#"><i class="fa fa-exchange"></i> Compare</a></li>
+                                        <li><a href="#"><i class="fa fa-check"></i> Checkout</a></li>
+                                        <li><a href="@Url.Action("account_settings","User")"><i class="fa fa-cog"></i> Settings</a></li>
+                                        <li><a href="@Url.Action("logout","User")"><i class="fa fa-sign-out"></i> Logout</a></li>
                                     }
                                     else
                                     {
                                         <li><a href="#"><i class="fa fa-user-o"></i> My Account</a></li>
+                                        <li><a href="@Url.Action("login","User")"><i class="fa fa-unlock-alt"></i> Login</a></li>
+                                        <li><a href="@Url.Action("register","User")"><i class="fa fa-user-plus"></i> Create An Account</a></li>
                                     }
                                 }
-                                <li><a href="#"><i class="fa fa-heart-o"></i> My Wishlist</a></li>
-                                <li><a href="#"><i class="fa fa-exchange"></i> Compare</a></li>
-                                <li><a href="#"><i class="fa fa-check"></i> Checkout</a></li>
-                                <li><a href="#"><i class="fa fa-unlock-alt"></i> Login</a></li>
-                                <li><a href="#"><i class="fa fa-user-plus"></i> Create An Account</a></li>
-                                <li><a href="@Url.Action("logout","User")"><i class="fa fa-sign-out"></i> Logout</a></li>
+                                
+                                
                             </ul>
                         </li>
                         <!-- /Account -->
@@ -314,6 +317,6 @@
     <script src="~/Content/js/jquery.zoom.min.js"></script>
     <script src="~/Content/js/main.js"></script>
 
-    @RenderSection("_script_register", required: false)
+    @RenderSection("_script_bottom", required: false)
 </body>
 </html>
