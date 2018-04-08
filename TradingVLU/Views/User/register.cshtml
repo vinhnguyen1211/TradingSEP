@@ -129,3 +129,13 @@
     </div>
 </div>
 
+@section _script_register{
+    <script>
+        $(document).ready(function () {
+            // Handler for .ready() called.
+            $('html, body').animate({
+                scrollTop: $('.register_index').offset().top
+            }, 'slow');
+        });
+    </script>
+}

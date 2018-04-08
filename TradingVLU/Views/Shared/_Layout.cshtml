@@ -109,7 +109,7 @@
                                 @{
                                     if (@userLogged != null)
                                     {
-                                        
+
                                         <strong style="font-size: 1.1em;">@Html.Raw(userLogged.name) <i class="fa fa-caret-down"></i></strong>
                                     }
                                     else
@@ -117,10 +117,10 @@
                                         <strong class="text-uppercase"> My Account <text>&nbsp;&nbsp;&nbsp;</text><i class="fa fa-caret-down"> </i></strong>
                                     }
                                 }
-                                
+
                             </div>
-                            @{ 
-                                if(userLogged == null)
+                            @{
+                                if (userLogged == null)
                                 {
                                     <a href="@Url.Action("login","User")" class="text-uppercase">Login</a> @Html.Raw("/") <a href="@Url.Action("register","User")" class="text-uppercase">Register</a>
                                 }
@@ -133,7 +133,7 @@
                                 @{
                                     if (@userLogged != null)
                                     {
-                                        
+
                                         <li><a href="#"><i class="fa fa-user-o"></i> @Html.Raw(userLogged.name)</a></li>
                                     }
                                     else
@@ -313,5 +313,7 @@
     <script src="~/Content/js/nouislider.min.js"></script>
     <script src="~/Content/js/jquery.zoom.min.js"></script>
     <script src="~/Content/js/main.js"></script>
+
+    @RenderSection("_script_register", required: false)
 </body>
 </html>

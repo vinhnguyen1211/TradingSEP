@@ -23,7 +23,11 @@ namespace TradingVLU.Controllers
         [HttpGet]
         public ActionResult register()
         {
-            using(vlutrading3545Entities db = new vlutrading3545Entities())
+            if (Session["userLogged"] != null)
+            {
+                return RedirectToAction("account_settings", "User");
+            }
+            using (vlutrading3545Entities db = new vlutrading3545Entities())
             {
                 var ques = db.security_question.ToList();
                 List<SelectListItem> item = new List<SelectListItem>();
@@ -117,7 +121,7 @@ namespace TradingVLU.Controllers
         {
             if(Session["userLogged"] != null)
             {
-
+                return RedirectToAction("account_settings", "User");
             }
             return View();
         }
@@ -135,7 +139,7 @@ namespace TradingVLU.Controllers
                     {
                         Session["userLogged"] = user;
                         ViewBag.SuccessMessage = "Successful Logged";
-                        
+                        ViewBag.LoggedStatus = true;
                     }
                     else
                     {
@@ -166,6 +170,9 @@ namespace TradingVLU.Controllers
         [Route("~/user/settings")]
         public ActionResult account_settings()
         {
+            if(Session["userLogged"] == null) {
+                return RedirectToAction("login", "User");
+            }
             return View();
         }
 
