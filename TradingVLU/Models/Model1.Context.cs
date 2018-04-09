@@ -31,5 +31,6 @@ namespace TradingVLU.Models
         public virtual DbSet<user> users { get; set; }
         public virtual DbSet<user_personal_information> user_personal_information { get; set; }
         public virtual DbSet<item_images> item_images { get; set; }
+        public virtual DbSet<item_status> item_status { get; set; }
     }
 }

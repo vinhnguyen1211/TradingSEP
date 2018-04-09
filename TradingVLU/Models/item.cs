@@ -37,5 +37,6 @@ namespace TradingVLU.Models
         public virtual user user1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<item_images> item_images { get; set; }
+        public virtual item_status item_status { get; set; }
     }
 }

@@ -16,11 +16,11 @@
           <Property Name="status" Type="int" />
           <Property Name="seller_id" Type="int" Nullable="false" />
           <Property Name="buyer_id" Type="int" />
-          <Property Name="images" Type="varchar" MaxLength="200" />
           <Property Name="create_by" Type="varchar" MaxLength="20" />
           <Property Name="create_date" Type="datetime" />
           <Property Name="update_by" Type="varchar" MaxLength="20" />
           <Property Name="update_date" Type="datetime" />
+          <Property Name="images" Type="varchar(max)" />
         </EntityType>
         <EntityType Name="item_images">
           <Key>
@@ -30,6 +30,18 @@
           <Property Name="item_id" Type="int" Nullable="false" />
           <Property Name="filename" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="path" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="create_by" Type="varchar" MaxLength="20" />
+          <Property Name="create_date" Type="datetime" />
+          <Property Name="update_by" Type="varchar" MaxLength="20" />
+          <Property Name="update_date" Type="datetime" />
+        </EntityType>
+        <EntityType Name="item_status">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="status" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="description" Type="nvarchar" MaxLength="500" />
           <Property Name="create_by" Type="varchar" MaxLength="20" />
           <Property Name="create_date" Type="datetime" />
           <Property Name="update_by" Type="varchar" MaxLength="20" />
@@ -97,6 +109,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_item_item_status">
+          <End Role="item_status" Type="Self.item_status" Multiplicity="0..1" />
+          <End Role="item" Type="Self.item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="item_status">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="item">
+              <PropertyRef Name="status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_item_userBuyerId">
           <End Role="user" Type="Self.user" Multiplicity="0..1" />
           <End Role="item" Type="Self.item" Multiplicity="*" />
@@ -160,6 +184,7 @@
         <EntityContainer Name="vlutrading3545ModelStoreContainer">
           <EntitySet Name="item" EntityType="Self.item" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="item_images" EntityType="Self.item_images" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="item_status" EntityType="Self.item_status" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="role" EntityType="Self.role" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="security_question" EntityType="Self.security_question" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="user" EntityType="Self.user" Schema="dbo" store:Type="Tables" />
@@ -167,6 +192,10 @@
           <AssociationSet Name="FK_item_images_itemId" Association="Self.FK_item_images_itemId">
             <End Role="item" EntitySet="item" />
             <End Role="item_images" EntitySet="item_images" />
+          </AssociationSet>
+          <AssociationSet Name="FK_item_item_status" Association="Self.FK_item_item_status">
+            <End Role="item_status" EntitySet="item_status" />
+            <End Role="item" EntitySet="item" />
           </AssociationSet>
           <AssociationSet Name="FK_item_userBuyerId" Association="Self.FK_item_userBuyerId">
             <End Role="user" EntitySet="user" />
@@ -204,7 +233,7 @@
           <Property Name="status" Type="Int32" />
           <Property Name="seller_id" Type="Int32" Nullable="false" />
           <Property Name="buyer_id" Type="Int32" />
-          <Property Name="images" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="images" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="create_by" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="create_date" Type="DateTime" Precision="3" />
           <Property Name="update_by" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
@@ -212,6 +241,7 @@
           <NavigationProperty Name="user" Relationship="Self.FK_item_userBuyerId" FromRole="item" ToRole="user" />
           <NavigationProperty Name="user1" Relationship="Self.FK_item_userSellerId" FromRole="item" ToRole="user" />
           <NavigationProperty Name="item_images" Relationship="vlutrading3545Model.FK_item_images_itemId" FromRole="item" ToRole="item_images" />
+          <NavigationProperty Name="item_status" Relationship="vlutrading3545Model.FK_item_item_status" FromRole="item" ToRole="item_status" />
         </EntityType>
         <EntityType Name="role">
           <Key>
@@ -362,6 +392,11 @@
             <End Role="item" EntitySet="items" />
             <End Role="item_images" EntitySet="item_images" />
           </AssociationSet>
+          <EntitySet Name="item_status" EntityType="vlutrading3545Model.item_status" />
+          <AssociationSet Name="FK_item_item_status" Association="vlutrading3545Model.FK_item_item_status">
+            <End Role="item_status" EntitySet="item_status" />
+            <End Role="item" EntitySet="items" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="item_images">
           <Key>
@@ -386,6 +421,31 @@
             </Principal>
             <Dependent Role="item_images">
               <PropertyRef Name="item_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="item_status">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="status" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="create_by" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="create_date" Type="DateTime" Precision="3" />
+          <Property Name="update_by" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="update_date" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="items" Relationship="vlutrading3545Model.FK_item_item_status" FromRole="item_status" ToRole="item" />
+        </EntityType>
+        <Association Name="FK_item_item_status">
+          <End Type="vlutrading3545Model.item_status" Role="item_status" Multiplicity="0..1" />
+          <End Type="vlutrading3545Model.item" Role="item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="item_status">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="item">
+              <PropertyRef Name="status" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -477,6 +537,19 @@
                 <ScalarProperty Name="path" ColumnName="path" />
                 <ScalarProperty Name="filename" ColumnName="filename" />
                 <ScalarProperty Name="item_id" ColumnName="item_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="item_status">
+            <EntityTypeMapping TypeName="vlutrading3545Model.item_status">
+              <MappingFragment StoreEntitySet="item_status">
+                <ScalarProperty Name="update_date" ColumnName="update_date" />
+                <ScalarProperty Name="update_by" ColumnName="update_by" />
+                <ScalarProperty Name="create_date" ColumnName="create_date" />
+                <ScalarProperty Name="create_by" ColumnName="create_by" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="status" ColumnName="status" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
