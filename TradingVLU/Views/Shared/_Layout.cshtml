@@ -86,8 +86,8 @@
                     <!-- /Logo -->
                     <!-- Search -->
                     <div class="header-search">
-                        <form>
-                            <input class="input search-input" type="text" placeholder="Enter your keyword">
+                        <form class="topsearch-form" role="search" action="@Url.Action("Search","Home")" method="post">
+                            <input class="input search-input" type="text" placeholder="Enter your keyword" name="Search">
                             <select class="input search-categories">
                                 <option value="0">All Categories</option>
                                 <option value="1">Category 01</option>
