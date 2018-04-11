@@ -105,7 +105,23 @@ namespace TradingVLU.Controllers
             return View();
         }
 
-        
+        [Route("detail/{id:int:min(1)}")]
+        public ActionResult detail(int id)
+        {
+            using(vlutrading3545Entities db = new vlutrading3545Entities())
+            {
+                var item = db.items.FirstOrDefault(x => x.id == id);
+                var imgList = db.item_images.Where(x => x.item_id == id)
+                                            .Select(x => new { x.filename, imgString = x.base64_string })
+                                            .ToList();
+
+                ViewBag.DetailItem = item;
+                ViewBag.imgList = imgList;
+                
+            }
+            ViewBag.IdItem = id;
+            return View();
+        }
             
             
             

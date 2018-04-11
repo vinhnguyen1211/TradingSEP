@@ -22,6 +22,7 @@ namespace TradingVLU.Models
         public Nullable<System.DateTime> create_date { get; set; }
         public string update_by { get; set; }
         public Nullable<System.DateTime> update_date { get; set; }
+        public string base64_string { get; set; }
     
         public virtual item item { get; set; }
     }

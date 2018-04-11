@@ -34,6 +34,7 @@
           <Property Name="create_date" Type="datetime" />
           <Property Name="update_by" Type="varchar" MaxLength="20" />
           <Property Name="update_date" Type="datetime" />
+          <Property Name="base64_string" Type="varchar(max)" />
         </EntityType>
         <EntityType Name="item_status">
           <Key>
@@ -411,6 +412,7 @@
           <Property Name="update_by" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="update_date" Type="DateTime" Precision="3" />
           <NavigationProperty Name="item" Relationship="vlutrading3545Model.FK_item_images_itemId" FromRole="item_images" ToRole="item" />
+          <Property Name="base64_string" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="FK_item_images_itemId">
           <End Type="vlutrading3545Model.item" Role="item" Multiplicity="1" />
@@ -530,6 +532,7 @@
           <EntitySetMapping Name="item_images">
             <EntityTypeMapping TypeName="vlutrading3545Model.item_images">
               <MappingFragment StoreEntitySet="item_images">
+                <ScalarProperty Name="base64_string" ColumnName="base64_string" />
                 <ScalarProperty Name="update_date" ColumnName="update_date" />
                 <ScalarProperty Name="update_by" ColumnName="update_by" />
                 <ScalarProperty Name="create_date" ColumnName="create_date" />

@@ -438,6 +438,7 @@
     <Content Include="Views\ItemManagement\list.cshtml" />
     <Content Include="Views\ItemManagement\index.cshtml" />
     <Content Include="Views\ItemManagement\add.cshtml" />
+    <Content Include="Views\ItemManagement\detail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
