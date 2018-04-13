@@ -1,8 +1,12 @@
 ﻿@{
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "Account Manager";
+    var q = Json.Encode(ViewBag.user_question);
+    var user_security_answer = Json.Decode(q);
 }
-
+@user_security_answer[0].username <br />
+@Html.Raw(user_security_answer[0].question) <br />
+@user_security_answer[0].answer
 <!------ Include the above in your HEAD tag ---------->
 <div class="container">
 
@@ -147,6 +151,5 @@
         });
     </script>
 }
-    
 
-        
+

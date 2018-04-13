@@ -171,8 +171,28 @@ namespace TradingVLU.Controllers
         public ActionResult account_settings()
         {
             if(Session["userLogged"] == null) {
+                
                 return RedirectToAction("login", "User");
             }
+            var user = Session["userLogged"] as TradingVLU.Models.user;
+
+            using(vlutrading3545Entities db = new vlutrading3545Entities())
+            {
+
+                ViewBag.user_question = db.users.Join(db.security_question, 
+                                            usr => user.id_security_question, 
+                                            ques => ques.id, 
+                                            (usr, ques) => new {
+                                                username = usr.username,
+                                                question = ques.question,
+                                                answer = usr.answer_security_question
+                                            }).ToList();
+
+                //ViewBag.user_question = obj;
+            }
+           
+
+
             return View();
         }
 

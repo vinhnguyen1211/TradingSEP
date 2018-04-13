@@ -3,18 +3,9 @@
     ViewBag.Title = "detail";
     var detailItem = ViewBag.DetailItem as TradingVLU.Models.item;
 
-    var abc = Json.Encode(ViewBag.imgList);
-    var a = Json.Decode(abc);
-
-
-
+    var imgL = Json.Encode(ViewBag.imgList);
+    var imgList = Json.Decode(imgL);
 }
-
-<h2>detail</h2>
-
-
-
-
 
 <!-- BREADCRUMB -->
 <div id="breadcrumb">
@@ -39,7 +30,7 @@
             <div class="product product-details clearfix">
                 <div class="col-md-6">
                     <div id="product-main-view">
-                        @foreach (var obj in a)
+                        @foreach (var obj in imgList)
                         {
                             <div class="product-view">
                                 <img src="data:image/jpeg;base64,@obj.imgString" alt="">
@@ -48,7 +39,7 @@
                         
                     </div>
                     <div id="product-view">
-                        @foreach (var obj in a)
+                        @foreach (var obj in imgList)
                         {
                             <div class="product-view">
                                 <img src="data:image/jpeg;base64,@obj.imgString" alt="">
