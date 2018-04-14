@@ -3,6 +3,7 @@
     ViewBag.Title = "Account Manager";
     var q = Json.Encode(ViewBag.user_question);
     var user_security_answer = Json.Decode(q);
+    var user_detail = ViewBag.user_detail as TradingVLU.Models.user;
 }
 @user_security_answer[0].username <br />
 @Html.Raw(user_security_answer[0].question) <br />
@@ -25,7 +26,7 @@
                     <h3 class="panel-title">Name</h3>
                 </div>
                 <div class="panel-body">
-                    Ashish Patel
+                    @user_detail.name
                 </div>
             </div>
             <div class="panel panel-info" style="margin: 1em;">
@@ -33,7 +34,7 @@
                     <h3 class="panel-title">Email</h3>
                 </div>
                 <div class="panel-body">
-                    ashishpatel0720@gmail.com
+                    @user_detail.email
                 </div>
             </div>
             <div class="panel panel-info" style="margin: 1em;">

@@ -78,6 +78,11 @@ namespace TradingVLU.Controllers
                     }
                     else
                     {
+                        string ip_login = "";
+                        if(Request.UserHostAddress != null)
+                        {
+                            ip_login = Request.UserHostAddress;
+                        }
                         user usr = new user
                         {
                             username = newUser.username,
@@ -88,6 +93,8 @@ namespace TradingVLU.Controllers
                             id_security_question = newUser.id_security_question,
                             answer_security_question = newUser.answer_security_question,
                             is_active = 1,
+                            ip_last_login = ip_login,
+                            last_login = DateTime.Now,
                             create_by = newUser.username,
                             create_date = DateTime.Now,
                             update_by = newUser.username,
@@ -187,8 +194,16 @@ namespace TradingVLU.Controllers
                                                 question = ques.question,
                                                 answer = usr.answer_security_question
                                             }).ToList();
-
-                //ViewBag.user_question = obj;
+                var user_detail = db.users.FirstOrDefault(usr => user.id == usr.id);
+                ViewBag.user_detail = user_detail;
+                string ip_login = "default";
+                if(Request.UserHostAddress != null)
+                {
+                    ip_login = Request.UserHostAddress;
+                }
+                //db.Database.SqlQuery<ObjReturn>("updateLastLoginIpAddress", user_detail.id, ip_login);
+                db.Database.ExecuteSqlCommand("exec updateLastLoginIpAddress @userId, @ip_address", 
+                                    user_detail.id, ip_login);
             }
            
 

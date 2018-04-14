@@ -82,6 +82,7 @@
           <Property Name="answer_security_question" Type="varchar" MaxLength="50" />
           <Property Name="is_active" Type="int" />
           <Property Name="last_login" Type="datetime" />
+          <Property Name="ip_last_login" Type="varchar" MaxLength="20" />
           <Property Name="create_by" Type="varchar" MaxLength="20" />
           <Property Name="create_date" Type="datetime" />
           <Property Name="update_by" Type="varchar" MaxLength="20" />
@@ -289,6 +290,7 @@
           <NavigationProperty Name="role1" Relationship="Self.FK_user_roleId" FromRole="user" ToRole="role" />
           <NavigationProperty Name="security_question" Relationship="Self.FK_user_security_questionId" FromRole="user" ToRole="security_question" />
           <NavigationProperty Name="user_personal_information" Relationship="Self.FK_user_personal_information_userId" FromRole="user" ToRole="user_personal_information" />
+          <Property Name="ip_last_login" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="user_personal_information">
           <Key>
@@ -500,6 +502,7 @@
           <EntitySetMapping Name="users">
             <EntityTypeMapping TypeName="vlutrading3545Model.user">
               <MappingFragment StoreEntitySet="user">
+                <ScalarProperty Name="ip_last_login" ColumnName="ip_last_login" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="username" ColumnName="username" />
                 <ScalarProperty Name="password" ColumnName="password" />
