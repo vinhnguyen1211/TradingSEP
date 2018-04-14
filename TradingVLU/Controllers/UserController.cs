@@ -94,7 +94,7 @@ namespace TradingVLU.Controllers
                             answer_security_question = newUser.answer_security_question,
                             is_active = 1,
                             ip_last_login = ip_login,
-                            last_login = DateTime.Now,
+                            last_login_date = DateTime.Now,
                             create_by = newUser.username,
                             create_date = DateTime.Now,
                             update_by = newUser.username,
@@ -130,6 +130,7 @@ namespace TradingVLU.Controllers
             {
                 return RedirectToAction("account_settings", "User");
             }
+            updateLastLoginTimeAndIp();
             return View();
         }
 
@@ -170,6 +171,7 @@ namespace TradingVLU.Controllers
         [HttpGet]
         public ActionResult logout()
         {
+            updateLastLogoutTimeAndIp();
             Session["userLogged"] = null;
             return Redirect(Request.UrlReferrer.ToString());
         }
@@ -196,19 +198,56 @@ namespace TradingVLU.Controllers
                                             }).ToList();
                 var user_detail = db.users.FirstOrDefault(usr => user.id == usr.id);
                 ViewBag.user_detail = user_detail;
-                string ip_login = "default";
-                if(Request.UserHostAddress != null)
-                {
-                    ip_login = Request.UserHostAddress;
-                }
-                //db.Database.SqlQuery<ObjReturn>("updateLastLoginIpAddress", user_detail.id, ip_login);
-                db.Database.ExecuteSqlCommand("exec updateLastLoginIpAddress @userId, @ip_address", 
-                                    user_detail.id, ip_login);
+                
             }
            
 
 
             return View();
+        }
+
+        [NonAction]
+        private void updateLastLoginTimeAndIp()
+        {
+            var user = Session["userLogged"] as TradingVLU.Models.user;
+            if(user != null)
+            {
+                string ip_login = "default";
+                if (Request.UserHostAddress != null)
+                {
+                    ip_login = Request.UserHostAddress;
+                }
+                //db.Database.SqlQuery<ObjReturn>("updateLastLoginIpAddress", user_detail.id, ip_login);
+                var sql_sp = @"exec updateLastLoginIpAddress {0}, {1}";
+                using (vlutrading3545Entities db = new vlutrading3545Entities())
+                {
+                    db.Database.ExecuteSqlCommand(sql_sp,
+                                user.id, ip_login);
+                }
+            }
+        }
+
+        [NonAction]
+        private void updateLastLogoutTimeAndIp()
+        {
+            var user = Session["userLogged"] as TradingVLU.Models.user;
+            if (user != null)
+            {
+                string ip_logout = "default";
+                if (Request.UserHostAddress != null)
+                {
+                    ip_logout = Request.UserHostAddress;
+                }
+                //db.Database.SqlQuery<ObjReturn>("updateLastLoginIpAddress", user_detail.id, ip_login);
+                var sql_sp = @"exec updateLastLogoutIpAddress {0}, {1}";
+                using (vlutrading3545Entities db = new vlutrading3545Entities())
+                {
+                    db.Database.ExecuteSqlCommand(sql_sp,
+                                user.id, ip_logout);
+                }
+            }
+
+
         }
 
         [NonAction]

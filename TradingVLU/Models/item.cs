@@ -33,10 +33,10 @@ namespace TradingVLU.Models
         public string update_by { get; set; }
         public Nullable<System.DateTime> update_date { get; set; }
     
-        public virtual user user { get; set; }
-        public virtual user user1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<item_images> item_images { get; set; }
         public virtual item_status item_status { get; set; }
+        public virtual user user { get; set; }
+        public virtual user user1 { get; set; }
     }
 }

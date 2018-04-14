@@ -31,12 +31,14 @@ namespace TradingVLU.Models
         public Nullable<int> id_security_question { get; set; }
         public string answer_security_question { get; set; }
         public Nullable<int> is_active { get; set; }
-        public Nullable<System.DateTime> last_login { get; set; }
+        public Nullable<System.DateTime> last_login_date { get; set; }
+        public Nullable<System.DateTime> last_logout_date { get; set; }
+        public string ip_last_login { get; set; }
+        public string ip_last_logout { get; set; }
         public string create_by { get; set; }
         public Nullable<System.DateTime> create_date { get; set; }
         public string update_by { get; set; }
         public Nullable<System.DateTime> update_date { get; set; }
-        public string ip_last_login { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<item> items { get; set; }

@@ -81,8 +81,10 @@
           <Property Name="id_security_question" Type="int" />
           <Property Name="answer_security_question" Type="varchar" MaxLength="50" />
           <Property Name="is_active" Type="int" />
-          <Property Name="last_login" Type="datetime" />
+          <Property Name="last_login_date" Type="datetime" />
+          <Property Name="last_logout_date" Type="datetime" />
           <Property Name="ip_last_login" Type="varchar" MaxLength="20" />
+          <Property Name="ip_last_logout" Type="varchar" MaxLength="20" />
           <Property Name="create_by" Type="varchar" MaxLength="20" />
           <Property Name="create_date" Type="datetime" />
           <Property Name="update_by" Type="varchar" MaxLength="20" />
@@ -240,10 +242,10 @@
           <Property Name="create_date" Type="DateTime" Precision="3" />
           <Property Name="update_by" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="update_date" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="user" Relationship="Self.FK_item_userBuyerId" FromRole="item" ToRole="user" />
-          <NavigationProperty Name="user1" Relationship="Self.FK_item_userSellerId" FromRole="item" ToRole="user" />
           <NavigationProperty Name="item_images" Relationship="vlutrading3545Model.FK_item_images_itemId" FromRole="item" ToRole="item_images" />
           <NavigationProperty Name="item_status" Relationship="vlutrading3545Model.FK_item_item_status" FromRole="item" ToRole="item_status" />
+          <NavigationProperty Name="user" Relationship="vlutrading3545Model.FK_item_userBuyerId" FromRole="item" ToRole="user" />
+          <NavigationProperty Name="user1" Relationship="vlutrading3545Model.FK_item_userSellerId" FromRole="item" ToRole="user" />
         </EntityType>
         <EntityType Name="role">
           <Key>
@@ -256,7 +258,7 @@
           <Property Name="create_date" Type="DateTime" Precision="3" />
           <Property Name="update_by" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="update_date" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="users" Relationship="Self.FK_user_roleId" FromRole="role" ToRole="user" />
+          <NavigationProperty Name="users" Relationship="vlutrading3545Model.FK_user_roleId" FromRole="role" ToRole="user" />
         </EntityType>
         <EntityType Name="security_question">
           <Key>
@@ -265,32 +267,7 @@
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="question" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="is_active" Type="Int32" />
-          <NavigationProperty Name="users" Relationship="Self.FK_user_security_questionId" FromRole="security_question" ToRole="user" />
-        </EntityType>
-        <EntityType Name="user">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="username" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="role" Type="Int32" />
-          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="id_security_question" Type="Int32" />
-          <Property Name="answer_security_question" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="is_active" Type="Int32" />
-          <Property Name="last_login" Type="DateTime" Precision="3" />
-          <Property Name="create_by" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="create_date" Type="DateTime" Precision="3" />
-          <Property Name="update_by" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="update_date" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="items" Relationship="Self.FK_item_userBuyerId" FromRole="user" ToRole="item" />
-          <NavigationProperty Name="items1" Relationship="Self.FK_item_userSellerId" FromRole="user" ToRole="item" />
-          <NavigationProperty Name="role1" Relationship="Self.FK_user_roleId" FromRole="user" ToRole="role" />
-          <NavigationProperty Name="security_question" Relationship="Self.FK_user_security_questionId" FromRole="user" ToRole="security_question" />
-          <NavigationProperty Name="user_personal_information" Relationship="Self.FK_user_personal_information_userId" FromRole="user" ToRole="user_personal_information" />
-          <Property Name="ip_last_login" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="users" Relationship="vlutrading3545Model.FK_user_security_questionId" FromRole="security_question" ToRole="user" />
         </EntityType>
         <EntityType Name="user_personal_information">
           <Key>
@@ -302,94 +279,13 @@
           <Property Name="address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="update_by" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="update_date" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="user" Relationship="Self.FK_user_personal_information_userId" FromRole="user_personal_information" ToRole="user" />
+          <NavigationProperty Name="user" Relationship="vlutrading3545Model.FK_user_personal_information_userId" FromRole="user_personal_information" ToRole="user" />
         </EntityType>
-        <Association Name="FK_item_userBuyerId">
-          <End Role="user" Type="Self.user" Multiplicity="0..1" />
-          <End Role="item" Type="Self.item" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="user">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="item">
-              <PropertyRef Name="buyer_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_item_userSellerId">
-          <End Role="user" Type="Self.user" Multiplicity="1" />
-          <End Role="item" Type="Self.item" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="user">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="item">
-              <PropertyRef Name="seller_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_user_roleId">
-          <End Role="role" Type="Self.role" Multiplicity="0..1" />
-          <End Role="user" Type="Self.user" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="role">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="user">
-              <PropertyRef Name="role" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_user_security_questionId">
-          <End Role="security_question" Type="Self.security_question" Multiplicity="0..1" />
-          <End Role="user" Type="Self.user" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="security_question">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="user">
-              <PropertyRef Name="id_security_question" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_user_personal_information_userId">
-          <End Role="user" Type="Self.user" Multiplicity="1" />
-          <End Role="user_personal_information" Type="Self.user_personal_information" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="user">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="user_personal_information">
-              <PropertyRef Name="id_user" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="vlutrading3545Entities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="items" EntityType="Self.item" />
           <EntitySet Name="roles" EntityType="Self.role" />
           <EntitySet Name="security_question" EntityType="Self.security_question" />
-          <EntitySet Name="users" EntityType="Self.user" />
           <EntitySet Name="user_personal_information" EntityType="Self.user_personal_information" />
-          <AssociationSet Name="FK_item_userBuyerId" Association="Self.FK_item_userBuyerId">
-            <End Role="user" EntitySet="users" />
-            <End Role="item" EntitySet="items" />
-          </AssociationSet>
-          <AssociationSet Name="FK_item_userSellerId" Association="Self.FK_item_userSellerId">
-            <End Role="user" EntitySet="users" />
-            <End Role="item" EntitySet="items" />
-          </AssociationSet>
-          <AssociationSet Name="FK_user_roleId" Association="Self.FK_user_roleId">
-            <End Role="role" EntitySet="roles" />
-            <End Role="user" EntitySet="users" />
-          </AssociationSet>
-          <AssociationSet Name="FK_user_security_questionId" Association="Self.FK_user_security_questionId">
-            <End Role="security_question" EntitySet="security_question" />
-            <End Role="user" EntitySet="users" />
-          </AssociationSet>
-          <AssociationSet Name="FK_user_personal_information_userId" Association="Self.FK_user_personal_information_userId">
-            <End Role="user" EntitySet="users" />
-            <End Role="user_personal_information" EntitySet="user_personal_information" />
-          </AssociationSet>
           <EntitySet Name="item_images" EntityType="vlutrading3545Model.item_images" />
           <AssociationSet Name="FK_item_images_itemId" Association="vlutrading3545Model.FK_item_images_itemId">
             <End Role="item" EntitySet="items" />
@@ -399,6 +295,27 @@
           <AssociationSet Name="FK_item_item_status" Association="vlutrading3545Model.FK_item_item_status">
             <End Role="item_status" EntitySet="item_status" />
             <End Role="item" EntitySet="items" />
+          </AssociationSet>
+          <EntitySet Name="users" EntityType="vlutrading3545Model.user" />
+          <AssociationSet Name="FK_item_userBuyerId" Association="vlutrading3545Model.FK_item_userBuyerId">
+            <End Role="user" EntitySet="users" />
+            <End Role="item" EntitySet="items" />
+          </AssociationSet>
+          <AssociationSet Name="FK_item_userSellerId" Association="vlutrading3545Model.FK_item_userSellerId">
+            <End Role="user" EntitySet="users" />
+            <End Role="item" EntitySet="items" />
+          </AssociationSet>
+          <AssociationSet Name="FK_user_roleId" Association="vlutrading3545Model.FK_user_roleId">
+            <End Role="role" EntitySet="roles" />
+            <End Role="user" EntitySet="users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_user_security_questionId" Association="vlutrading3545Model.FK_user_security_questionId">
+            <End Role="security_question" EntitySet="security_question" />
+            <End Role="user" EntitySet="users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_user_personal_information_userId" Association="vlutrading3545Model.FK_user_personal_information_userId">
+            <End Role="user" EntitySet="users" />
+            <End Role="user_personal_information" EntitySet="user_personal_information" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="item_images">
@@ -453,6 +370,93 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="user">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="username" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="role" Type="Int32" />
+          <Property Name="email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="id_security_question" Type="Int32" />
+          <Property Name="answer_security_question" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="is_active" Type="Int32" />
+          <Property Name="last_login_date" Type="DateTime" Precision="3" />
+          <Property Name="last_logout_date" Type="DateTime" Precision="3" />
+          <Property Name="ip_last_login" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="ip_last_logout" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="create_by" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="create_date" Type="DateTime" Precision="3" />
+          <Property Name="update_by" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="update_date" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="items" Relationship="vlutrading3545Model.FK_item_userBuyerId" FromRole="user" ToRole="item" />
+          <NavigationProperty Name="items1" Relationship="vlutrading3545Model.FK_item_userSellerId" FromRole="user" ToRole="item" />
+          <NavigationProperty Name="role1" Relationship="vlutrading3545Model.FK_user_roleId" FromRole="user" ToRole="role" />
+          <NavigationProperty Name="security_question" Relationship="vlutrading3545Model.FK_user_security_questionId" FromRole="user" ToRole="security_question" />
+          <NavigationProperty Name="user_personal_information" Relationship="vlutrading3545Model.FK_user_personal_information_userId" FromRole="user" ToRole="user_personal_information" />
+        </EntityType>
+        <Association Name="FK_item_userBuyerId">
+          <End Type="vlutrading3545Model.user" Role="user" Multiplicity="0..1" />
+          <End Type="vlutrading3545Model.item" Role="item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="item">
+              <PropertyRef Name="buyer_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_item_userSellerId">
+          <End Type="vlutrading3545Model.user" Role="user" Multiplicity="1" />
+          <End Type="vlutrading3545Model.item" Role="item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="item">
+              <PropertyRef Name="seller_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_user_roleId">
+          <End Type="vlutrading3545Model.role" Role="role" Multiplicity="0..1" />
+          <End Type="vlutrading3545Model.user" Role="user" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="role">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="user">
+              <PropertyRef Name="role" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_user_security_questionId">
+          <End Type="vlutrading3545Model.security_question" Role="security_question" Multiplicity="0..1" />
+          <End Type="vlutrading3545Model.user" Role="user" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="security_question">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="user">
+              <PropertyRef Name="id_security_question" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_user_personal_information_userId">
+          <End Type="vlutrading3545Model.user" Role="user" Multiplicity="1" />
+          <End Type="vlutrading3545Model.user_personal_information" Role="user_personal_information" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="user_personal_information">
+              <PropertyRef Name="id_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -499,27 +503,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="users">
-            <EntityTypeMapping TypeName="vlutrading3545Model.user">
-              <MappingFragment StoreEntitySet="user">
-                <ScalarProperty Name="ip_last_login" ColumnName="ip_last_login" />
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="username" ColumnName="username" />
-                <ScalarProperty Name="password" ColumnName="password" />
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="role" ColumnName="role" />
-                <ScalarProperty Name="email" ColumnName="email" />
-                <ScalarProperty Name="id_security_question" ColumnName="id_security_question" />
-                <ScalarProperty Name="answer_security_question" ColumnName="answer_security_question" />
-                <ScalarProperty Name="is_active" ColumnName="is_active" />
-                <ScalarProperty Name="last_login" ColumnName="last_login" />
-                <ScalarProperty Name="create_by" ColumnName="create_by" />
-                <ScalarProperty Name="create_date" ColumnName="create_date" />
-                <ScalarProperty Name="update_by" ColumnName="update_by" />
-                <ScalarProperty Name="update_date" ColumnName="update_date" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="user_personal_information">
             <EntityTypeMapping TypeName="vlutrading3545Model.user_personal_information">
               <MappingFragment StoreEntitySet="user_personal_information">
@@ -556,6 +539,29 @@
                 <ScalarProperty Name="create_by" ColumnName="create_by" />
                 <ScalarProperty Name="description" ColumnName="description" />
                 <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="users">
+            <EntityTypeMapping TypeName="vlutrading3545Model.user">
+              <MappingFragment StoreEntitySet="user">
+                <ScalarProperty Name="update_date" ColumnName="update_date" />
+                <ScalarProperty Name="update_by" ColumnName="update_by" />
+                <ScalarProperty Name="create_date" ColumnName="create_date" />
+                <ScalarProperty Name="create_by" ColumnName="create_by" />
+                <ScalarProperty Name="ip_last_logout" ColumnName="ip_last_logout" />
+                <ScalarProperty Name="ip_last_login" ColumnName="ip_last_login" />
+                <ScalarProperty Name="last_logout_date" ColumnName="last_logout_date" />
+                <ScalarProperty Name="last_login_date" ColumnName="last_login_date" />
+                <ScalarProperty Name="is_active" ColumnName="is_active" />
+                <ScalarProperty Name="answer_security_question" ColumnName="answer_security_question" />
+                <ScalarProperty Name="id_security_question" ColumnName="id_security_question" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="role" ColumnName="role" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="username" ColumnName="username" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
