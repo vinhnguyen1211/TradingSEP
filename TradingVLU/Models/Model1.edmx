@@ -185,6 +185,45 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="updateLastLogoutIpAddress" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="admin3545">
+          <Parameter Name="userId" Type="int" Mode="In" />
+          <Parameter Name="ip_address" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="updateLastLoginIpAddress" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="admin3545">
+          <Parameter Name="userId" Type="int" Mode="In" />
+          <Parameter Name="ip_address" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="vlutrading3545ModelStoreContainer">
           <EntitySet Name="item" EntityType="Self.item" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="item_images" EntityType="Self.item_images" Schema="dbo" store:Type="Tables" />
@@ -226,77 +265,60 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="vlutrading3545Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="item">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="item_name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="quantity" Type="Int32" />
-          <Property Name="status" Type="Int32" />
-          <Property Name="seller_id" Type="Int32" Nullable="false" />
-          <Property Name="buyer_id" Type="Int32" />
-          <Property Name="images" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="create_by" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="create_date" Type="DateTime" Precision="3" />
-          <Property Name="update_by" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="update_date" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="item_images" Relationship="vlutrading3545Model.FK_item_images_itemId" FromRole="item" ToRole="item_images" />
-          <NavigationProperty Name="item_status" Relationship="vlutrading3545Model.FK_item_item_status" FromRole="item" ToRole="item_status" />
-          <NavigationProperty Name="user" Relationship="vlutrading3545Model.FK_item_userBuyerId" FromRole="item" ToRole="user" />
-          <NavigationProperty Name="user1" Relationship="vlutrading3545Model.FK_item_userSellerId" FromRole="item" ToRole="user" />
-        </EntityType>
-        <EntityType Name="role">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="role_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="create_by" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="create_date" Type="DateTime" Precision="3" />
-          <Property Name="update_by" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="update_date" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="users" Relationship="vlutrading3545Model.FK_user_roleId" FromRole="role" ToRole="user" />
-        </EntityType>
-        <EntityType Name="security_question">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="question" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="is_active" Type="Int32" />
-          <NavigationProperty Name="users" Relationship="vlutrading3545Model.FK_user_security_questionId" FromRole="security_question" ToRole="user" />
-        </EntityType>
-        <EntityType Name="user_personal_information">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" />
-          <Property Name="id_user" Type="Int32" Nullable="false" />
-          <Property Name="phone" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
-          <Property Name="address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="update_by" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="update_date" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="user" Relationship="vlutrading3545Model.FK_user_personal_information_userId" FromRole="user_personal_information" ToRole="user" />
-        </EntityType>
         <EntityContainer Name="vlutrading3545Entities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="items" EntityType="Self.item" />
-          <EntitySet Name="roles" EntityType="Self.role" />
-          <EntitySet Name="security_question" EntityType="Self.security_question" />
-          <EntitySet Name="user_personal_information" EntityType="Self.user_personal_information" />
+          <FunctionImport Name="updateLastLogoutIpAddress">
+            <Parameter Name="userId" Mode="In" Type="Int32" />
+            <Parameter Name="ip_address" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="updateLastLoginIpAddress">
+            <Parameter Name="userId" Mode="In" Type="Int32" />
+            <Parameter Name="ip_address" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_alterdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(vlutrading3545Model.sp_helpdiagramdefinition_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(vlutrading3545Model.sp_helpdiagrams_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_renamediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams" />
+          <EntitySet Name="items" EntityType="vlutrading3545Model.item" />
           <EntitySet Name="item_images" EntityType="vlutrading3545Model.item_images" />
+          <EntitySet Name="item_status" EntityType="vlutrading3545Model.item_status" />
+          <EntitySet Name="roles" EntityType="vlutrading3545Model.role" />
+          <EntitySet Name="security_question" EntityType="vlutrading3545Model.security_question" />
+          <EntitySet Name="users" EntityType="vlutrading3545Model.user" />
+          <EntitySet Name="user_personal_information" EntityType="vlutrading3545Model.user_personal_information" />
           <AssociationSet Name="FK_item_images_itemId" Association="vlutrading3545Model.FK_item_images_itemId">
             <End Role="item" EntitySet="items" />
             <End Role="item_images" EntitySet="item_images" />
           </AssociationSet>
-          <EntitySet Name="item_status" EntityType="vlutrading3545Model.item_status" />
           <AssociationSet Name="FK_item_item_status" Association="vlutrading3545Model.FK_item_item_status">
             <End Role="item_status" EntitySet="item_status" />
             <End Role="item" EntitySet="items" />
           </AssociationSet>
-          <EntitySet Name="users" EntityType="vlutrading3545Model.user" />
           <AssociationSet Name="FK_item_userBuyerId" Association="vlutrading3545Model.FK_item_userBuyerId">
             <End Role="user" EntitySet="users" />
             <End Role="item" EntitySet="items" />
@@ -318,6 +340,38 @@
             <End Role="user_personal_information" EntitySet="user_personal_information" />
           </AssociationSet>
         </EntityContainer>
+        <ComplexType Name="sp_helpdiagramdefinition_Result">
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams_Result">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
+        <EntityType Name="item">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="item_name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="quantity" Type="Int32" />
+          <Property Name="status" Type="Int32" />
+          <Property Name="seller_id" Type="Int32" Nullable="false" />
+          <Property Name="buyer_id" Type="Int32" />
+          <Property Name="create_by" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="create_date" Type="DateTime" Precision="3" />
+          <Property Name="update_by" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="update_date" Type="DateTime" Precision="3" />
+          <Property Name="images" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="item_images" Relationship="vlutrading3545Model.FK_item_images_itemId" FromRole="item" ToRole="item_images" />
+          <NavigationProperty Name="item_status" Relationship="vlutrading3545Model.FK_item_item_status" FromRole="item" ToRole="item_status" />
+          <NavigationProperty Name="user" Relationship="vlutrading3545Model.FK_item_userBuyerId" FromRole="item" ToRole="user" />
+          <NavigationProperty Name="user1" Relationship="vlutrading3545Model.FK_item_userSellerId" FromRole="item" ToRole="user" />
+        </EntityType>
         <EntityType Name="item_images">
           <Key>
             <PropertyRef Name="id" />
@@ -330,21 +384,9 @@
           <Property Name="create_date" Type="DateTime" Precision="3" />
           <Property Name="update_by" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="update_date" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="item" Relationship="vlutrading3545Model.FK_item_images_itemId" FromRole="item_images" ToRole="item" />
           <Property Name="base64_string" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="item" Relationship="vlutrading3545Model.FK_item_images_itemId" FromRole="item_images" ToRole="item" />
         </EntityType>
-        <Association Name="FK_item_images_itemId">
-          <End Type="vlutrading3545Model.item" Role="item" Multiplicity="1" />
-          <End Type="vlutrading3545Model.item_images" Role="item_images" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="item">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="item_images">
-              <PropertyRef Name="item_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="item_status">
           <Key>
             <PropertyRef Name="id" />
@@ -358,18 +400,28 @@
           <Property Name="update_date" Type="DateTime" Precision="3" />
           <NavigationProperty Name="items" Relationship="vlutrading3545Model.FK_item_item_status" FromRole="item_status" ToRole="item" />
         </EntityType>
-        <Association Name="FK_item_item_status">
-          <End Type="vlutrading3545Model.item_status" Role="item_status" Multiplicity="0..1" />
-          <End Type="vlutrading3545Model.item" Role="item" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="item_status">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="item">
-              <PropertyRef Name="status" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
+        <EntityType Name="role">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="role_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="create_by" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="create_date" Type="DateTime" Precision="3" />
+          <Property Name="update_by" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="update_date" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="users" Relationship="vlutrading3545Model.FK_user_roleId" FromRole="role" ToRole="user" />
+        </EntityType>
+        <EntityType Name="security_question">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="question" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="is_active" Type="Int32" />
+          <NavigationProperty Name="users" Relationship="vlutrading3545Model.FK_user_security_questionId" FromRole="security_question" ToRole="user" />
+        </EntityType>
         <EntityType Name="user">
           <Key>
             <PropertyRef Name="id" />
@@ -397,6 +449,42 @@
           <NavigationProperty Name="security_question" Relationship="vlutrading3545Model.FK_user_security_questionId" FromRole="user" ToRole="security_question" />
           <NavigationProperty Name="user_personal_information" Relationship="vlutrading3545Model.FK_user_personal_information_userId" FromRole="user" ToRole="user_personal_information" />
         </EntityType>
+        <EntityType Name="user_personal_information">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="id_user" Type="Int32" Nullable="false" />
+          <Property Name="phone" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="update_by" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="update_date" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="user" Relationship="vlutrading3545Model.FK_user_personal_information_userId" FromRole="user_personal_information" ToRole="user" />
+        </EntityType>
+        <Association Name="FK_item_images_itemId">
+          <End Type="vlutrading3545Model.item" Role="item" Multiplicity="1" />
+          <End Type="vlutrading3545Model.item_images" Role="item_images" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="item">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="item_images">
+              <PropertyRef Name="item_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_item_item_status">
+          <End Type="vlutrading3545Model.item_status" Role="item_status" Multiplicity="0..1" />
+          <End Type="vlutrading3545Model.item" Role="item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="item_status">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="item">
+              <PropertyRef Name="status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_item_userBuyerId">
           <End Type="vlutrading3545Model.user" Role="user" Multiplicity="0..1" />
           <End Type="vlutrading3545Model.item" Role="item" Multiplicity="*" />
@@ -463,55 +551,47 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="vlutrading3545ModelStoreContainer" CdmEntityContainer="vlutrading3545Entities">
+          <FunctionImportMapping FunctionImportName="updateLastLogoutIpAddress" FunctionName="vlutrading3545Model.Store.updateLastLogoutIpAddress" />
+          <FunctionImportMapping FunctionImportName="updateLastLoginIpAddress" FunctionName="vlutrading3545Model.Store.updateLastLoginIpAddress" />
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="vlutrading3545Model.Store.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="vlutrading3545Model.Store.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="vlutrading3545Model.Store.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="vlutrading3545Model.Store.sp_helpdiagramdefinition">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="vlutrading3545Model.sp_helpdiagramdefinition_Result">
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="vlutrading3545Model.Store.sp_helpdiagrams">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="vlutrading3545Model.sp_helpdiagrams_Result">
+                <ScalarProperty Name="Database" ColumnName="Database" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="vlutrading3545Model.Store.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="vlutrading3545Model.Store.sp_upgraddiagrams" />
           <EntitySetMapping Name="items">
             <EntityTypeMapping TypeName="vlutrading3545Model.item">
               <MappingFragment StoreEntitySet="item">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="item_name" ColumnName="item_name" />
-                <ScalarProperty Name="description" ColumnName="description" />
-                <ScalarProperty Name="quantity" ColumnName="quantity" />
-                <ScalarProperty Name="status" ColumnName="status" />
-                <ScalarProperty Name="seller_id" ColumnName="seller_id" />
-                <ScalarProperty Name="buyer_id" ColumnName="buyer_id" />
                 <ScalarProperty Name="images" ColumnName="images" />
-                <ScalarProperty Name="create_by" ColumnName="create_by" />
-                <ScalarProperty Name="create_date" ColumnName="create_date" />
-                <ScalarProperty Name="update_by" ColumnName="update_by" />
                 <ScalarProperty Name="update_date" ColumnName="update_date" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="roles">
-            <EntityTypeMapping TypeName="vlutrading3545Model.role">
-              <MappingFragment StoreEntitySet="role">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="role_name" ColumnName="role_name" />
+                <ScalarProperty Name="update_by" ColumnName="update_by" />
+                <ScalarProperty Name="create_date" ColumnName="create_date" />
+                <ScalarProperty Name="create_by" ColumnName="create_by" />
+                <ScalarProperty Name="buyer_id" ColumnName="buyer_id" />
+                <ScalarProperty Name="seller_id" ColumnName="seller_id" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
                 <ScalarProperty Name="description" ColumnName="description" />
-                <ScalarProperty Name="create_by" ColumnName="create_by" />
-                <ScalarProperty Name="create_date" ColumnName="create_date" />
-                <ScalarProperty Name="update_by" ColumnName="update_by" />
-                <ScalarProperty Name="update_date" ColumnName="update_date" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="security_question">
-            <EntityTypeMapping TypeName="vlutrading3545Model.security_question">
-              <MappingFragment StoreEntitySet="security_question">
+                <ScalarProperty Name="item_name" ColumnName="item_name" />
                 <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="question" ColumnName="question" />
-                <ScalarProperty Name="is_active" ColumnName="is_active" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="user_personal_information">
-            <EntityTypeMapping TypeName="vlutrading3545Model.user_personal_information">
-              <MappingFragment StoreEntitySet="user_personal_information">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="id_user" ColumnName="id_user" />
-                <ScalarProperty Name="phone" ColumnName="phone" />
-                <ScalarProperty Name="address" ColumnName="address" />
-                <ScalarProperty Name="update_by" ColumnName="update_by" />
-                <ScalarProperty Name="update_date" ColumnName="update_date" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -543,6 +623,28 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="roles">
+            <EntityTypeMapping TypeName="vlutrading3545Model.role">
+              <MappingFragment StoreEntitySet="role">
+                <ScalarProperty Name="update_date" ColumnName="update_date" />
+                <ScalarProperty Name="update_by" ColumnName="update_by" />
+                <ScalarProperty Name="create_date" ColumnName="create_date" />
+                <ScalarProperty Name="create_by" ColumnName="create_by" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="role_name" ColumnName="role_name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="security_question">
+            <EntityTypeMapping TypeName="vlutrading3545Model.security_question">
+              <MappingFragment StoreEntitySet="security_question">
+                <ScalarProperty Name="is_active" ColumnName="is_active" />
+                <ScalarProperty Name="question" ColumnName="question" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="users">
             <EntityTypeMapping TypeName="vlutrading3545Model.user">
               <MappingFragment StoreEntitySet="user">
@@ -562,6 +664,18 @@
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="password" ColumnName="password" />
                 <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="user_personal_information">
+            <EntityTypeMapping TypeName="vlutrading3545Model.user_personal_information">
+              <MappingFragment StoreEntitySet="user_personal_information">
+                <ScalarProperty Name="update_date" ColumnName="update_date" />
+                <ScalarProperty Name="update_by" ColumnName="update_by" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="id_user" ColumnName="id_user" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>

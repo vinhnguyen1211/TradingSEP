@@ -130,7 +130,6 @@ namespace TradingVLU.Controllers
             {
                 return RedirectToAction("account_settings", "User");
             }
-            updateLastLoginTimeAndIp();
             return View();
         }
 
@@ -145,9 +144,12 @@ namespace TradingVLU.Controllers
                     var user = db.users.FirstOrDefault(x => x.username == userLogin.username);
                     if(user.password == hashPwd(userLogin.password))
                     {
+                        
                         Session["userLogged"] = user;
+                        updateLastLoginTimeAndIp();
                         ViewBag.SuccessMessage = "Successful Logged";
                         ViewBag.LoggedStatus = true;
+
                     }
                     else
                     {
