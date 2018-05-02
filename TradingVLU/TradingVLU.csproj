@@ -162,9 +162,16 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ItemController.cs" />
+    <Compile Include="Controllers\ItemManagementController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\item_images.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\item_status.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Metadata.cs" />
     <Compile Include="Models\item.cs">
@@ -191,6 +198,12 @@
     <Compile Include="Models\security_question.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\sp_helpdiagramdefinition_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_helpdiagrams_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\user.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -202,6 +215,7 @@
   <ItemGroup>
     <Content Include="Content\css\bootstrap.min.css" />
     <Content Include="Content\css\font-awesome.min.css" />
+    <Content Include="Content\css\new_item.css" />
     <Content Include="Content\css\nouislider.min.css" />
     <Content Include="Content\css\register.css" />
     <Content Include="Content\css\slick-theme.css" />
@@ -247,6 +261,108 @@
     <Content Include="Content\js\main.js" />
     <Content Include="Content\js\nouislider.min.js" />
     <Content Include="Content\js\slick.min.js" />
+    <Content Include="Content\Trumbowyg\dist\langs\ar.min.js" />
+    <Content Include="Content\Trumbowyg\dist\langs\bg.min.js" />
+    <Content Include="Content\Trumbowyg\dist\langs\by.min.js" />
+    <Content Include="Content\Trumbowyg\dist\langs\ca.min.js" />
+    <Content Include="Content\Trumbowyg\dist\langs\cs.min.js" />
+    <Content Include="Content\Trumbowyg\dist\langs\da.min.js" />
+    <Content Include="Content\Trumbowyg\dist\langs\de.min.js" />
+    <Content Include="Content\Trumbowyg\dist\langs\el.min.js" />
+    <Content Include="Content\Trumbowyg\dist\langs\es.min.js" />
+    <Content Include="Content\Trumbowyg\dist\langs\es_ar.min.js" />
+    <Content Include="Content\Trumbowyg\dist\langs\fa.min.js" />
+    <Content Include="Content\Trumbowyg\dist\langs\fi.min.js" />
+    <Content Include="Content\Trumbowyg\dist\langs\fr.min.js" />
+    <Content Include="Content\Trumbowyg\dist\langs\he.min.js" />
+    <Content Include="Content\Trumbowyg\dist\langs\hr.min.js" />
+    <Content Include="Content\Trumbowyg\dist\langs\hu.min.js" />
+    <Content Include="Content\Trumbowyg\dist\langs\id.min.js" />
+    <Content Include="Content\Trumbowyg\dist\langs\it.min.js" />
+    <Content Include="Content\Trumbowyg\dist\langs\ja.min.js" />
+    <Content Include="Content\Trumbowyg\dist\langs\ko.min.js" />
+    <Content Include="Content\Trumbowyg\dist\langs\lt.min.js" />
+    <Content Include="Content\Trumbowyg\dist\langs\mn.min.js" />
+    <Content Include="Content\Trumbowyg\dist\langs\my.min.js" />
+    <Content Include="Content\Trumbowyg\dist\langs\nl.min.js" />
+    <Content Include="Content\Trumbowyg\dist\langs\no_nb.min.js" />
+    <Content Include="Content\Trumbowyg\dist\langs\ph.min.js" />
+    <Content Include="Content\Trumbowyg\dist\langs\pl.min.js" />
+    <Content Include="Content\Trumbowyg\dist\langs\pt.min.js" />
+    <Content Include="Content\Trumbowyg\dist\langs\pt_br.min.js" />
+    <Content Include="Content\Trumbowyg\dist\langs\ro.min.js" />
+    <Content Include="Content\Trumbowyg\dist\langs\rs.min.js" />
+    <Content Include="Content\Trumbowyg\dist\langs\rs_latin.min.js" />
+    <Content Include="Content\Trumbowyg\dist\langs\ru.min.js" />
+    <Content Include="Content\Trumbowyg\dist\langs\sk.min.js" />
+    <Content Include="Content\Trumbowyg\dist\langs\sq.min.js" />
+    <Content Include="Content\Trumbowyg\dist\langs\sv.min.js" />
+    <Content Include="Content\Trumbowyg\dist\langs\tr.min.js" />
+    <Content Include="Content\Trumbowyg\dist\langs\ua.min.js" />
+    <Content Include="Content\Trumbowyg\dist\langs\vi.min.js" />
+    <Content Include="Content\Trumbowyg\dist\langs\zh_cn.min.js" />
+    <Content Include="Content\Trumbowyg\dist\langs\zh_tw.min.js" />
+    <Content Include="Content\Trumbowyg\dist\plugins\allowtagsfrompaste\trumbowyg.allowtagsfrompaste.js" />
+    <Content Include="Content\Trumbowyg\dist\plugins\allowtagsfrompaste\trumbowyg.allowtagsfrompaste.min.js" />
+    <Content Include="Content\Trumbowyg\dist\plugins\base64\trumbowyg.base64.js" />
+    <Content Include="Content\Trumbowyg\dist\plugins\base64\trumbowyg.base64.min.js" />
+    <Content Include="Content\Trumbowyg\dist\plugins\cleanpaste\trumbowyg.cleanpaste.js" />
+    <Content Include="Content\Trumbowyg\dist\plugins\cleanpaste\trumbowyg.cleanpaste.min.js" />
+    <Content Include="Content\Trumbowyg\dist\plugins\colors\trumbowyg.colors.js" />
+    <Content Include="Content\Trumbowyg\dist\plugins\colors\trumbowyg.colors.min.js" />
+    <Content Include="Content\Trumbowyg\dist\plugins\colors\ui\trumbowyg.colors.css" />
+    <Content Include="Content\Trumbowyg\dist\plugins\colors\ui\trumbowyg.colors.min.css" />
+    <Content Include="Content\Trumbowyg\dist\plugins\emoji\trumbowyg.emoji.js" />
+    <Content Include="Content\Trumbowyg\dist\plugins\emoji\trumbowyg.emoji.min.js" />
+    <Content Include="Content\Trumbowyg\dist\plugins\emoji\ui\trumbowyg.emoji.css" />
+    <Content Include="Content\Trumbowyg\dist\plugins\emoji\ui\trumbowyg.emoji.min.css" />
+    <Content Include="Content\Trumbowyg\dist\plugins\fontfamily\trumbowyg.fontfamily.js" />
+    <Content Include="Content\Trumbowyg\dist\plugins\fontfamily\trumbowyg.fontfamily.min.js" />
+    <Content Include="Content\Trumbowyg\dist\plugins\fontsize\trumbowyg.fontsize.js" />
+    <Content Include="Content\Trumbowyg\dist\plugins\fontsize\trumbowyg.fontsize.min.js" />
+    <Content Include="Content\Trumbowyg\dist\plugins\highlight\trumbowyg.highlight.js" />
+    <Content Include="Content\Trumbowyg\dist\plugins\highlight\trumbowyg.highlight.min.js" />
+    <Content Include="Content\Trumbowyg\dist\plugins\highlight\ui\trumbowyg.highlight.css" />
+    <Content Include="Content\Trumbowyg\dist\plugins\highlight\ui\trumbowyg.highlight.min.css" />
+    <Content Include="Content\Trumbowyg\dist\plugins\history\trumbowyg.history.js" />
+    <Content Include="Content\Trumbowyg\dist\plugins\history\trumbowyg.history.min.js" />
+    <Content Include="Content\Trumbowyg\dist\plugins\insertaudio\trumbowyg.insertaudio.js" />
+    <Content Include="Content\Trumbowyg\dist\plugins\insertaudio\trumbowyg.insertaudio.min.js" />
+    <Content Include="Content\Trumbowyg\dist\plugins\lineheight\trumbowyg.lineheight.js" />
+    <Content Include="Content\Trumbowyg\dist\plugins\lineheight\trumbowyg.lineheight.min.js" />
+    <Content Include="Content\Trumbowyg\dist\plugins\mathml\trumbowyg.mathml.js" />
+    <Content Include="Content\Trumbowyg\dist\plugins\mathml\trumbowyg.mathml.min.js" />
+    <Content Include="Content\Trumbowyg\dist\plugins\mathml\ui\trumbowyg.mathml.css" />
+    <Content Include="Content\Trumbowyg\dist\plugins\mathml\ui\trumbowyg.mathml.min.css" />
+    <Content Include="Content\Trumbowyg\dist\plugins\mention\trumbowyg.mention.js" />
+    <Content Include="Content\Trumbowyg\dist\plugins\mention\trumbowyg.mention.min.js" />
+    <Content Include="Content\Trumbowyg\dist\plugins\mention\ui\trumbowyg.mention.css" />
+    <Content Include="Content\Trumbowyg\dist\plugins\mention\ui\trumbowyg.mention.min.css" />
+    <Content Include="Content\Trumbowyg\dist\plugins\noembed\trumbowyg.noembed.js" />
+    <Content Include="Content\Trumbowyg\dist\plugins\noembed\trumbowyg.noembed.min.js" />
+    <Content Include="Content\Trumbowyg\dist\plugins\pasteembed\trumbowyg.pasteembed.js" />
+    <Content Include="Content\Trumbowyg\dist\plugins\pasteembed\trumbowyg.pasteembed.min.js" />
+    <Content Include="Content\Trumbowyg\dist\plugins\pasteimage\trumbowyg.pasteimage.js" />
+    <Content Include="Content\Trumbowyg\dist\plugins\pasteimage\trumbowyg.pasteimage.min.js" />
+    <Content Include="Content\Trumbowyg\dist\plugins\preformatted\trumbowyg.preformatted.js" />
+    <Content Include="Content\Trumbowyg\dist\plugins\preformatted\trumbowyg.preformatted.min.js" />
+    <Content Include="Content\Trumbowyg\dist\plugins\resizimg\trumbowyg.resizimg.js" />
+    <Content Include="Content\Trumbowyg\dist\plugins\resizimg\trumbowyg.resizimg.min.js" />
+    <Content Include="Content\Trumbowyg\dist\plugins\ruby\trumbowyg.ruby.js" />
+    <Content Include="Content\Trumbowyg\dist\plugins\ruby\trumbowyg.ruby.min.js" />
+    <Content Include="Content\Trumbowyg\dist\plugins\table\trumbowyg.table.js" />
+    <Content Include="Content\Trumbowyg\dist\plugins\table\trumbowyg.table.min.js" />
+    <Content Include="Content\Trumbowyg\dist\plugins\table\ui\trumbowyg.table.css" />
+    <Content Include="Content\Trumbowyg\dist\plugins\table\ui\trumbowyg.table.min.css" />
+    <Content Include="Content\Trumbowyg\dist\plugins\template\trumbowyg.template.js" />
+    <Content Include="Content\Trumbowyg\dist\plugins\template\trumbowyg.template.min.js" />
+    <Content Include="Content\Trumbowyg\dist\plugins\upload\trumbowyg.upload.js" />
+    <Content Include="Content\Trumbowyg\dist\plugins\upload\trumbowyg.upload.min.js" />
+    <Content Include="Content\Trumbowyg\dist\trumbowyg.js" />
+    <Content Include="Content\Trumbowyg\dist\trumbowyg.min.js" />
+    <Content Include="Content\Trumbowyg\dist\ui\icons.svg" />
+    <Content Include="Content\Trumbowyg\dist\ui\trumbowyg.css" />
+    <Content Include="Content\Trumbowyg\dist\ui\trumbowyg.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -280,6 +396,13 @@
     <Content Include="Content\fonts\slick.eot" />
     <Content Include="Content\fonts\slick.ttf" />
     <Content Include="Content\fonts\slick.woff" />
+    <Content Include="Content\Trumbowyg\dist\plugins\colors\ui\sass\trumbowyg.colors.scss" />
+    <Content Include="Content\Trumbowyg\dist\plugins\emoji\ui\sass\trumbowyg.emoji.scss" />
+    <Content Include="Content\Trumbowyg\dist\plugins\highlight\ui\sass\trumbowyg.highlight.scss" />
+    <Content Include="Content\Trumbowyg\dist\plugins\mathml\ui\sass\trumbowyg.mathml.scss" />
+    <Content Include="Content\Trumbowyg\dist\plugins\mention\ui\sass\trumbowyg.mention.scss" />
+    <Content Include="Content\Trumbowyg\dist\plugins\table\ui\sass\trumbowyg.table.scss" />
+    <Content Include="Content\Trumbowyg\dist\ui\sass\trumbowyg.scss" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -319,9 +442,14 @@
     <Content Include="Views\User\login.cshtml" />
     <Content Include="Views\User\account_settings.cshtml" />
     <Content Include="Views\Home\Search.cshtml" />
+    <Content Include="Views\ItemManagement\list.cshtml" />
+    <Content Include="Views\ItemManagement\index.cshtml" />
+    <Content Include="Views\ItemManagement\add.cshtml" />
+    <Content Include="Views\ItemManagement\detail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\img\items\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
