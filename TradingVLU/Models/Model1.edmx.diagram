@@ -5,16 +5,20 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="eab3c370f888479ebdf08e9f2bd6d789" Name="Diagram1">
-        <EntityTypeShape EntityType="vlutrading3545Model.item" Width="1.5" PointX="5.25" PointY="1.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="vlutrading3545Model.role" Width="1.5" PointX="0.75" PointY="3.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="vlutrading3545Model.security_question" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="vlutrading3545Model.user" Width="1.5" PointX="3" PointY="2.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="vlutrading3545Model.user_personal_information" Width="1.5" PointX="5.25" PointY="5.75" IsExpanded="true" />
-        <AssociationConnector Association="vlutrading3545Model.FK_item_userBuyerId" ManuallyRouted="false" />
-        <AssociationConnector Association="vlutrading3545Model.FK_item_userSellerId" ManuallyRouted="false" />
-        <AssociationConnector Association="vlutrading3545Model.FK_user_roleId" ManuallyRouted="false" />
-        <AssociationConnector Association="vlutrading3545Model.FK_user_security_questionId" ManuallyRouted="false" />
-        <AssociationConnector Association="vlutrading3545Model.FK_user_personal_information_userId" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="vlutrading3545Model.item" Width="1.5" PointX="5.25" PointY="3" />
+        <EntityTypeShape EntityType="vlutrading3545Model.item_images" Width="1.5" PointX="7.5" PointY="3.5" />
+        <EntityTypeShape EntityType="vlutrading3545Model.item_status" Width="1.5" PointX="3" PointY="9.75" />
+        <EntityTypeShape EntityType="vlutrading3545Model.role" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="vlutrading3545Model.security_question" Width="1.5" PointX="0.75" PointY="4.125" />
+        <EntityTypeShape EntityType="vlutrading3545Model.user" Width="1.5" PointX="3" PointY="2.375" />
+        <EntityTypeShape EntityType="vlutrading3545Model.user_personal_information" Width="1.5" PointX="5.25" PointY="8.75" />
+        <AssociationConnector Association="vlutrading3545Model.FK_item_images_itemId" />
+        <AssociationConnector Association="vlutrading3545Model.FK_item_item_status" />
+        <AssociationConnector Association="vlutrading3545Model.FK_item_userBuyerId" />
+        <AssociationConnector Association="vlutrading3545Model.FK_item_userSellerId" />
+        <AssociationConnector Association="vlutrading3545Model.FK_user_roleId" />
+        <AssociationConnector Association="vlutrading3545Model.FK_user_security_questionId" />
+        <AssociationConnector Association="vlutrading3545Model.FK_user_personal_information_userId" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

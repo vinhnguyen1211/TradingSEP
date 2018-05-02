@@ -25,7 +25,17 @@
                     @Html.AntiForgeryToken()
 
                     <div class="form-horizontal">
+                        <div class="form-group" style="font-size:1.5em;">
+                            <div>
+                                <span class="label label-success">@ViewBag.SuccessMessage</span>
+                            </div>
+                        </div>
 
+                        <div class="form-group" style="font-size:1.5em;">
+                            <div>
+                                <span class="label label-danger">@ViewBag.DuplicateMessage</span>
+                            </div>
+                        </div>
                         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
                         <div class="form-group">
@@ -111,17 +121,7 @@
                         <div class="login-register">
                             <a href="@Url.Action("login", "User")" style="font-size: 1.5em">Login</a>
                         </div>
-                        <div class="form-group" style="font-size:1.5em;">
-                            <div>
-                                <span class="label label-success">@ViewBag.SuccessMessage</span>
-                            </div>
-                        </div>
-
-                        <div class="form-group" style="font-size:1.5em;">
-                            <div>
-                                <span class="label label-danger">@ViewBag.DuplicateMessage</span>
-                            </div>
-                        </div>
+                        
                     </div>
                 }
             </div>
