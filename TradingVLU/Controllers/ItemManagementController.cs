@@ -18,45 +18,105 @@ namespace TradingVLU.Controllers
         {
             return View();
         }
+
+        public ActionResult list()
+        {
+            return View();
+        }
+
+        public ActionResult add()
+        {
+            //if (Session["userLogged"] == null)
+            //{
+            //    return RedirectToAction("account_settings", "User");
+            //}
+            using(vlutrading3545Entities db = new vlutrading3545Entities())
+            {
+                var statusList = db.item_status.Select(x => new { x.id, x.status }).ToList();
+                ViewBag.statusList = statusList;
+            }
+           
+
+            return View();
+        }
+
         [HttpPost, ValidateInput(false)]
-        public ActionResult index(String name, String description, int quantity, int status, HttpPostedFileBase uploadImages)
+        public ActionResult add(String name, String description, int quantity, int status, HttpPostedFileBase index_image,
+                                IEnumerable<HttpPostedFileBase> detail_images)
         {
             using (vlutrading3545Entities db = new vlutrading3545Entities())
             {
+                //list status
+                var statusList = db.item_status.Select(x => new { x.id, x.status }).ToList();
+                ViewBag.statusList = statusList;
+                //
                 byte[] img = null;
-                string img_as_string = "";
-                if (uploadImages != null)
+                string index_img_base64 = String.Empty;
+                if (index_image != null)
                 {
-                    img = new byte[uploadImages.ContentLength];
-                    using (BinaryReader read = new BinaryReader(uploadImages.InputStream))
+                    img = new byte[index_image.ContentLength];
+                    using (BinaryReader read = new BinaryReader(index_image.InputStream))
                     {
-                        img = read.ReadBytes(uploadImages.ContentLength);
+                        img = read.ReadBytes(index_image.ContentLength);
                     }
-                    img_as_string = Convert.ToBase64String(img);
+                    index_img_base64 = Convert.ToBase64String(img);
                 }
+
+                string[] detail_img = new string[5];
+                int count = 0;
+                if (detail_images != null)
+                {
+                    if(detail_images.Count() > 5)
+                    {
+                        ViewBag.ErrorMessage = "Error occurred while create new item. Contact Admin for details";
+                        return View();
+                    }
+
+                    foreach (var file in detail_images)
+                    {
+                        if (file != null && file.ContentLength > 0)
+                        {
+                            
+                            var fileName = Guid.NewGuid() + Path.GetExtension(file.FileName);
+                            string RootFolder = @Server.MapPath("~/Content/img/items/");
+                            string path = Path.Combine(RootFolder, fileName);
+                            detail_img[count] = fileName;
+                            file.SaveAs(path);
+                            count++;
+                        }
+                    }
+                }
+
+
                 item item = new item
                 {
                     item_name = name,
                     description = description,
                     quantity = quantity,
                     status = status,
-                    images = img_as_string,
+                    index_image = index_img_base64,
                     seller_id = 1,
                     create_by = "vinh",
                     create_date = DateTime.Now,
                     update_by = "vinh",
-                    update_date = DateTime.Now
+                    update_date = DateTime.Now,
+                    detail_image1 = detail_img[0],
+                    detail_image2 = detail_img[1],
+                    detail_image3 = detail_img[2],
+                    detail_image4 = detail_img[3],
+                    detail_image5 = detail_img[4]
                 };
                 try
                 {
                     db.items.Add(item);
+                    
                     db.SaveChanges();
                 }
                 catch (Exception e)
                 {
-                    ViewBag.DuplicateMessage = "Error occurred while create new item. Contact Admin for details";
+                    ViewBag.ErrorMessage = "Error occurred while create new item. Contact Admin for details";
                     return View();
-                    throw;
+
                 }
                 //if (uploadImages != null)
                 //{
@@ -94,38 +154,6 @@ namespace TradingVLU.Controllers
 
             return View();
         }
-
-        public ActionResult list()
-        {
-            return View();
-        }
-
-        public ActionResult add()
-        {
-            return View();
-        }
-
-        [Route("detail/{id:int:min(1)}")]
-        public ActionResult detail(int id)
-        {
-            using(vlutrading3545Entities db = new vlutrading3545Entities())
-            {
-                var item = db.items.FirstOrDefault(x => x.id == id);
-                var imgList = db.item_images.Where(x => x.item_id == id)
-                                            .Select(x => new { x.filename, imgString = x.base64_string })
-                                            .ToList();
-
-                ViewBag.DetailItem = item;
-                ViewBag.imgList = imgList;
-                
-            }
-            ViewBag.IdItem = id;
-            return View();
-        }
-            
-            
-            
-        
 
     }
 }

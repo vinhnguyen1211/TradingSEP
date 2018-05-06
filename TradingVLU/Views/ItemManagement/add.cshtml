@@ -2,73 +2,199 @@
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "add";
+
+    var statusList = Json.Decode(Json.Encode(ViewBag.statusList));
+
 }
-<link type="text/css" rel="stylesheet" href="~/Content/css/register.css" />
+
+
+<link rel="stylesheet" href="~/Content/Trumbowyg/dist/ui/trumbowyg.min.css" />
+<link rel="stylesheet" href="~/Content/css/new_item.css" />
 
 <div class="container">
-    <div class="row main">
-        <div class="panel-heading">
-            <div class="panel-title text-center">
-                <h2 class="title">Register</h2>
-                <hr />
+    <form action="/manageitem/add" enctype="multipart/form-data" method="post">
+        <div class="form-group" style="font-size:1.5em;">
+            <div>
+                <span class="label label-danger">@ViewBag.ErrorMessage</span>
             </div>
         </div>
-        <div class="main-login main-center">
-            @using (Html.BeginForm("add", "ItemManagementController", FormMethod.Post, new { enctype = "multipart/form-data" }))
-            {
-                <div class="form-group">
-                    <label for="name" class="cols-sm-2 control-label">Item Name</label>
-                    <div class="cols-sm-10">
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-                            <input type="text" class="form-control" name="name" id="name" placeholder="Enter your Name" />
-                        </div>
+        <div class="row">
+            <div class="form-group col-md-8">
+                <label for="name" class="cols-sm-2 control-label">Item Name</label>
+                <div class="cols-sm-2">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                        <input type="text" class="form-control" name="name" id="name" placeholder="Enter your Name" required />
                     </div>
                 </div>
-                <div class="form-group">
-                    <label for="email" class="cols-sm-2 control-label">Description</label>
-                    <div class="cols-sm-10">
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
-                            <input type="text" class="form-control" name="description" id="email" placeholder="Enter your Email" />
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="username" class="cols-sm-2 control-label">Quantity</label>
-                    <div class="cols-sm-10">
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
-                            <input type="text" class="form-control" name="quantity" id="username" placeholder="Enter your Username" />
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="password" class="cols-sm-2 control-label">Status</label>
-                    <div class="cols-sm-10">
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
-                            <input type="password" class="form-control" name="status" id="password" placeholder="Enter your Password" />
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="name" class="cols-sm-2 control-label">Images</label>
-                    <div class="cols-sm-10">
-                        <div class="input-group">
-                            <span class="span4">
-                                <input type="file" name="uploadImages" multiple="multiple" class="input-files" accept=".png , .jpg, .jpeg" />
-                            </span>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group ">
-                    <button type="submit" class="btn btn-primary btn-lg btn-block login-button">Submit</button>
-                </div>
-                <div class="login-register">
-                    <a href="index.php">Login</a>
-                </div>
-            }
+            </div>
         </div>
-    </div>
+
+        <div class="form-group">
+            <label for="email" class="cols-sm-2 control-label">Description</label>
+            <div class="cols-sm-10">
+                <textarea class="form-control editor" id="" name="description" required>Enter text here...</textarea>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group col-md-5">
+                <label for="username" class="cols-sm-2 control-label">Quantity</label>
+                <div class="cols-sm-10">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-bar-chart" aria-hidden="true"></i></span>
+                        <input type="number" class="form-control" name="quantity" min="1" id="username" placeholder="Enter your quantity" required />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group col-md-5">
+                <label for="username" class="cols-sm-2 control-label">Status</label>
+                <div class="cols-sm-10">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-list" aria-hidden="true"></i></span>
+                        <select class="form-control" name="status" id="status" required>
+                            @foreach (var obj in statusList)
+                        {
+                            <option value="@obj.id">@obj.status</option>
+                    }
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="form-group col-md-5">
+                <label for="password" class="cols-sm-2 control-label">Avatar Image</label>
+                <div class="input-group image-preview">
+                    <span class="input-group-addon"><i class="fa fa-picture-o" aria-hidden="true"></i></span>
+                    <input type="text" class="form-control image-preview-filename" disabled="disabled"> <!-- don't give a name === doesn't send on POST/GET -->
+                    <span class="input-group-btn">
+                        <!-- image-preview-clear button -->
+                        <button type="button" class="btn btn-default image-preview-clear" style="display:none;">
+                            <span class="fa fa-times"></span> Clear
+                        </button>
+                        <!-- image-preview-input -->
+                        <div class="btn btn-default image-preview-input">
+                            <span class="fa fa-folder-open"></span>
+                            <span class="image-preview-input-title">Browse</span>
+                            <input type="file" accept="image/png, image/jpeg" value="data:image/jpeg,image/png;base64," name="index_image" required /> <!-- rename it -->
+                        </div>
+                    </span>
+                </div><!-- /input-group image-preview [TO HERE]-->
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group col-md-5">
+                <label for="password" class="cols-sm-2 control-label">Detail Image 1</label>
+                <input type="file" name="detail_images" accept="image/x-png,image/gif,image/jpeg" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-5">
+                <label for="password" class="cols-sm-2 control-label">Detail Image 2</label>
+                <input type="file" name="detail_images" accept="image/x-png,image/gif,image/jpeg" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-5">
+                <label for="password" class="cols-sm-2 control-label">Detail Image 3</label>
+                <input type="file" name="detail_images" accept="image/x-png,image/gif,image/jpeg" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-5">
+                <label for="password" class="cols-sm-2 control-label">Detail Image 4</label>
+                <input type="file" name="detail_images" accept="image/x-png,image/gif,image/jpeg" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-5">
+                <label for="password" class="cols-sm-2 control-label">Detail Image 5</label>
+                <input type="file" name="detail_images" accept="image/x-png,image/gif,image/jpeg" />
+            </div>
+        </div>
+
+
+
+        <div class="row">
+            <div class="form-group col-md-3 text-center">
+                <button type="submit" class="btn btn-primary btn-lg btn-block login-button">Submit</button>
+            </div>
+        </div>
+    </form>
 </div>
+
+@section _script_bottom{
+    <script src="~/Content/Trumbowyg/dist/trumbowyg.min.js"></script>
+    <script>
+        $(".editor").trumbowyg();
+    </script>
+    <script>
+        $(document).on('click', '#close-preview', function () {
+            $('.image-preview').popover('hide');
+            // Hover befor close the preview
+            $('.image-preview').hover(
+                function () {
+                    $('.image-preview').popover('show');
+                },
+                function () {
+                    $('.image-preview').popover('hide');
+                }
+            );
+        });
+
+        $(function () {
+            // Create the close button
+            var closebtn = $('<button/>', {
+                type: "button",
+                text: 'x',
+                id: 'close-preview',
+                style: 'font-size: initial;',
+            });
+            closebtn.attr("class", "close pull-right");
+            // Set the popover default content
+            $('.image-preview').popover({
+                trigger: 'manual',
+                html: true,
+                title: "<strong>Preview</strong>" + $(closebtn)[0].outerHTML,
+                content: "There's no image",
+                placement: 'bottom'
+            });
+            // Clear event
+            $('.image-preview-clear').click(function () {
+                $('.image-preview').attr("data-content", "").popover('hide');
+                $('.image-preview-filename').val("");
+                $('.image-preview-clear').hide();
+                $('.image-preview-input input:file').val("");
+                $(".image-preview-input-title").text("Browse");
+            });
+            // Create the preview image
+            $(".image-preview-input input:file").change(function () {
+                var img = $('<img/>', {
+                    id: 'dynamic',
+                    width: 250,
+                    height: 200
+                });
+                var file = this.files[0];
+                var reader = new FileReader();
+                // Set preview image into the popover data-content
+                reader.onload = function (e) {
+                    $(".image-preview-input-title").text("Change");
+                    $(".image-preview-clear").show();
+                    $(".image-preview-filename").val(file.name);
+                    img.attr('src', e.target.result);
+                    $(".image-preview").attr("data-content", $(img)[0].outerHTML).popover("show");
+                }
+                reader.readAsDataURL(file);
+            });
+        });
+
+    </script>
+    
+}

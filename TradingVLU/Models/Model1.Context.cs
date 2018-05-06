@@ -28,7 +28,6 @@ namespace TradingVLU.Models
         }
     
         public virtual DbSet<item> items { get; set; }
-        public virtual DbSet<item_images> item_images { get; set; }
         public virtual DbSet<item_status> item_status { get; set; }
         public virtual DbSet<role> roles { get; set; }
         public virtual DbSet<security_question> security_question { get; set; }
