@@ -328,7 +328,7 @@ namespace TradingVLU.Controllers
 
             user.password = hashPwd(Newpassword);
             db.SaveChanges();
-            
+            Response.Redirect("~/User/login");
         }
     }
 }

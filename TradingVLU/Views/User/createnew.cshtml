@@ -18,9 +18,31 @@
 
 }
 
+@*<div class="container">
+    <form action="@Url.Action("UpdatePassword","User")" method="post">
 
-<form action="@Url.Action("UpdatePassword","User")" method="post">
-    newpassword:<input type="password" name="Newpassword"/>
-    <button type="submit">Submit</button>
-    
-</form>
+        newpassword:<input type="password" name="Newpassword" />
+        <button type="submit">Submit</button>
+
+        </form>
+</div>*@
+
+<div class="container">
+    <div class="main-login main-center">
+        <form action="@Url.Action("UpdatePassword","User")" method="post" >
+            <div class="form-group">
+                <label class="cols-sm-6 control-label">New Password</label>
+                <div class="cols-sm-3" >
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-user fa"  aria-hidden="true"></i></span>
+                        <input class="form-control text-box single-line" style="max-width:300px" name="Newpassword" placeholder="Enter your new Password" type="password">
+                    </div>
+                </div>
+                
+            </div>
+            <div class="form-group">
+                <button id="btn_GetNewPass" type="submit" class="btn btn-warning">Submit</button>
+            </div>
+        </form>
+    </div>
+</div>
