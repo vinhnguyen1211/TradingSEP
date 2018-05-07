@@ -276,7 +276,8 @@ namespace TradingVLU.Controllers
         [HttpGet]
         public ActionResult ForgotPassword()
         {
-            //var ques = db.security_question.ToList();
+            var ques = db.security_question.ToList();
+            
             //List<SelectListItem> item = new List<SelectListItem>();
             //foreach (var i in ques)
             //{
@@ -290,9 +291,44 @@ namespace TradingVLU.Controllers
 
             ////var user =db.users.FirstOrDefault(x=>x.username)
             ////*
+            return View(ques);
+
+
+        }
+        [HttpPost]
+        public void ForgotPassword(string username, int id_security_question,String answer_security_question)
+        {
+            var user = db.users.FirstOrDefault(x => x.username == username);
+            if (user.id_security_question == id_security_question&&user.answer_security_question==answer_security_question.Trim())
+            {
+                Session["newPassword"] = "true";
+                Session["newpass_user"] = user.id;
+                Response.Redirect("~/User/createnew");
+            }
+            else
+            {
+                Session["newPassword"] = "false";
+                Response.Redirect("~/User/createnew");
+            }
+            
+
+        }
+        public ActionResult createnew()
+        {
+            
             return View();
 
 
+        }
+
+        public void UpdatePassword(String Newpassword)
+        {
+            var userid = Session["newpass_user"];
+            var user = db.users.Find(userid);
+
+            user.password = hashPwd(Newpassword);
+            db.SaveChanges();
+            
         }
     }
 }

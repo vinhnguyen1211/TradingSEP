@@ -1,0 +1,26 @@
+﻿
+@{
+    ViewBag.Title = "createnew";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    String check = Session["newPassword"] as String;
+    if (check == "false")
+    {
+        Response.Redirect("~/User/ForgotPassword", false);
+
+    }
+    else if(check == null)
+    {
+        Response.Redirect("~/Home/index", false);
+    }
+
+}
+
+
+<form action="@Url.Action("UpdatePassword","User")" method="post">
+    newpassword:<input type="password" name="Newpassword"/>
+    <button type="submit">Submit</button>
+    
+</form>
