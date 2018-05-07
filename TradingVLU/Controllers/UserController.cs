@@ -276,21 +276,21 @@ namespace TradingVLU.Controllers
         [HttpGet]
         public ActionResult ForgotPassword()
         {
-            var ques = db.security_question.ToList();
-            List<SelectListItem> item = new List<SelectListItem>();
-            foreach (var i in ques)
-            {
-                item.Add(new SelectListItem
-                {
-                    Text = i.question,
-                    Value = i.id.ToString()
-                });
-            }
-            ViewBag.question = item;
+            //var ques = db.security_question.ToList();
+            //List<SelectListItem> item = new List<SelectListItem>();
+            //foreach (var i in ques)
+            //{
+            //    item.Add(new SelectListItem
+            //    {
+            //        Text = i.question,
+            //        Value = i.id.ToString()
+            //    });
+            //}
+            //ViewBag.question = item;
 
-            //var user =db.users.FirstOrDefault(x=>x.username)
-            //*
-            return View(ForgotPassword());
+            ////var user =db.users.FirstOrDefault(x=>x.username)
+            ////*
+            return View();
 
 
         }
