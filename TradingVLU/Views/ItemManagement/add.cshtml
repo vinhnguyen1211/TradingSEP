@@ -43,7 +43,18 @@
                 <div class="cols-sm-10">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="fa fa-bar-chart" aria-hidden="true"></i></span>
-                        <input type="number" class="form-control" name="quantity" min="1" id="username" placeholder="Enter your quantity" required />
+                        <input type="number" class="form-control" name="quantity" min="1" id="quantity" placeholder="Enter your quantity" required />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-5">
+                <label for="username" class="cols-sm-2 control-label">Price</label>
+                <div class="cols-sm-10">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-usd" aria-hidden="true"></i></span>
+                        <input type="number" class="form-control" name="price" min="1" id="price" placeholder="Enter your price" required />
                     </div>
                 </div>
             </div>
@@ -57,9 +68,9 @@
                         <span class="input-group-addon"><i class="fa fa-list" aria-hidden="true"></i></span>
                         <select class="form-control" name="status" id="status" required>
                             @foreach (var obj in statusList)
-                        {
-                            <option value="@obj.id">@obj.status</option>
-                    }
+                            {
+                                <option value="@obj.id">@obj.status</option>
+                            }
                         </select>
                     </div>
                 </div>

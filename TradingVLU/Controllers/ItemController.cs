@@ -14,6 +14,12 @@ namespace TradingVLU.Controllers
     {
         public ActionResult index()
         {
+            using(vlutrading3545Entities db = new vlutrading3545Entities())
+            {
+                var itemList = db.items.Select(x => new { x.id, x.item_name, x.price, x.index_image }).ToList();
+                ViewBag.itemList = itemList;
+
+            }
             return View();
         }
 

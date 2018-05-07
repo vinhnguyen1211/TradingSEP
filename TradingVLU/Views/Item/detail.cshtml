@@ -9,10 +9,9 @@
 <div id="breadcrumb">
     <div class="container">
         <ul class="breadcrumb">
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Products</a></li>
-            <li><a href="#">Category</a></li>
-            <li class="active">Product Name Goes Here</li>
+            <li><a href="~/">Home</a></li>
+            <li><a href="~/item">Products</a></li>
+            <li class="active">@detailItem.item_name</li>
         </ul>
     </div>
 </div>
@@ -29,37 +28,43 @@
                 <div class="col-md-6">
                     <div id="product-main-view">
                         <div class="product-view">
-                            <img src="~/Content/img/items/@detailItem.detail_image1" alt="detail_image">
+                            <img src="~/Content/img/items/index_img/@detailItem.index_image" alt="detail_image">
                         </div>
                         <div class="product-view">
-                            <img src="~/Content/img/items/@detailItem.detail_image2" alt="detail_image">
+                            <img src="~/Content/img/items/detail_img/@detailItem.detail_image1" alt="detail_image">
                         </div>
                         <div class="product-view">
-                            <img src="~/Content/img/items/@detailItem.detail_image3" alt="detail_image">
+                            <img src="~/Content/img/items/detail_img/@detailItem.detail_image2" alt="detail_image">
                         </div>
                         <div class="product-view">
-                            <img src="~/Content/img/items/@detailItem.detail_image4" alt="detail_image">
+                            <img src="~/Content/img/items/detail_img/@detailItem.detail_image3" alt="detail_image">
                         </div>
                         <div class="product-view">
-                            <img src="~/Content/img/items/@detailItem.detail_image5" alt="detail_image">
+                            <img src="~/Content/img/items/detail_img/@detailItem.detail_image4" alt="detail_image">
+                        </div>
+                        <div class="product-view">
+                            <img src="~/Content/img/items/detail_img/@detailItem.detail_image5" alt="detail_image">
                         </div>
 
                     </div>
                     <div id="product-view">
                         <div class="product-view">
-                            <img src="~/Content/img/items/@detailItem.detail_image1" alt="detail_image">
+                            <img src="~/Content/img/items/index_img/@detailItem.index_image" alt="detail_image">
                         </div>
                         <div class="product-view">
-                            <img src="~/Content/img/items/@detailItem.detail_image2" alt="detail_image">
+                            <img src="~/Content/img/items/detail_img/@detailItem.detail_image1" alt="detail_image">
                         </div>
                         <div class="product-view">
-                            <img src="~/Content/img/items/@detailItem.detail_image3" alt="detail_image">
+                            <img src="~/Content/img/items/detail_img/@detailItem.detail_image2" alt="detail_image">
                         </div>
                         <div class="product-view">
-                            <img src="~/Content/img/items/@detailItem.detail_image4" alt="detail_image">
+                            <img src="~/Content/img/items/detail_img/@detailItem.detail_image3" alt="detail_image">
                         </div>
                         <div class="product-view">
-                            <img src="~/Content/img/items/@detailItem.detail_image5" alt="detail_image">
+                            <img src="~/Content/img/items/detail_img/@detailItem.detail_image4" alt="detail_image">
+                        </div>
+                        <div class="product-view">
+                            <img src="~/Content/img/items/detail_img/@detailItem.detail_image5" alt="detail_image">
                         </div>
                     </div>
                 </div>
@@ -69,8 +74,16 @@
                             <span>New</span>
                             <span class="sale">-20%</span>
                         </div>
-                        <h2 class="product-name">Product Name Goes Here</h2>
-                        <h3 class="product-price">$32.50 <del class="product-old-price">$45.00</del></h3>
+                        <h2 class="product-name">@detailItem.item_name</h2>
+                        @{ 
+                            double new_price = System.Convert.ToDouble(detailItem.price);
+                            double price = Math.Round(new_price, 2);
+                            string price_str = string.Format("{0:N2}", price);
+                            new_price = new_price / 0.8;
+                            double old_price = Math.Round(new_price, 2);
+                            string old_price_str = string.Format("{0:N2}", old_price);
+                        }
+                        <h3 class="product-price">$@price_str <del class="product-old-price">$@old_price_str</del></h3>
                         <div>
                             <div class="product-rating">
                                 <i class="fa fa-star"></i>

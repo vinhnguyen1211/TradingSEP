@@ -41,7 +41,7 @@ namespace TradingVLU.Controllers
         }
 
         [HttpPost, ValidateInput(false)]
-        public ActionResult add(String name, String description, int quantity, int status, HttpPostedFileBase index_image,
+        public ActionResult add(String name, String description, int quantity, int price, int status, HttpPostedFileBase index_image,
                                 IEnumerable<HttpPostedFileBase> detail_images)
         {
             using (vlutrading3545Entities db = new vlutrading3545Entities())
@@ -50,16 +50,20 @@ namespace TradingVLU.Controllers
                 var statusList = db.item_status.Select(x => new { x.id, x.status }).ToList();
                 ViewBag.statusList = statusList;
                 //
-                byte[] img = null;
-                string index_img_base64 = String.Empty;
-                if (index_image != null)
+                string index_img = String.Empty;
+                if (index_image != null && index_image.ContentLength > 0)
                 {
-                    img = new byte[index_image.ContentLength];
-                    using (BinaryReader read = new BinaryReader(index_image.InputStream))
-                    {
-                        img = read.ReadBytes(index_image.ContentLength);
-                    }
-                    index_img_base64 = Convert.ToBase64String(img);
+                    //img = new byte[index_image.ContentLength];
+                    //using (BinaryReader read = new BinaryReader(index_image.InputStream))
+                    //{
+                    //    img = read.ReadBytes(index_image.ContentLength);
+                    //}
+                    //index_img_base64 = Convert.ToBase64String(img);
+                    var fileName = Guid.NewGuid() + Path.GetExtension(index_image.FileName);
+                    string RootFolder = @Server.MapPath("~/Content/img/items/index_img/");
+                    string path = Path.Combine(RootFolder, fileName);
+                    index_img = fileName;
+                    index_image.SaveAs(path);
                 }
 
                 string[] detail_img = new string[5];
@@ -74,11 +78,12 @@ namespace TradingVLU.Controllers
 
                     foreach (var file in detail_images)
                     {
+                        detail_img[count] = String.Empty;
                         if (file != null && file.ContentLength > 0)
                         {
                             
                             var fileName = Guid.NewGuid() + Path.GetExtension(file.FileName);
-                            string RootFolder = @Server.MapPath("~/Content/img/items/");
+                            string RootFolder = @Server.MapPath("~/Content/img/items/detail_img/");
                             string path = Path.Combine(RootFolder, fileName);
                             detail_img[count] = fileName;
                             file.SaveAs(path);
@@ -93,8 +98,9 @@ namespace TradingVLU.Controllers
                     item_name = name,
                     description = description,
                     quantity = quantity,
+                    price = price,
                     status = status,
-                    index_image = index_img_base64,
+                    index_image = index_img,
                     seller_id = 1,
                     create_by = "vinh",
                     create_date = DateTime.Now,
