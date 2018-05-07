@@ -19,7 +19,7 @@ namespace TradingVLU.Tests.Controllers
             HomeController controller = new HomeController();
 
             // Act
-            ViewResult result = controller.Index() as ViewResult;
+            ViewResult result = controller.index() as ViewResult;
 
             // Assert
             Assert.IsNotNull(result);
@@ -32,7 +32,7 @@ namespace TradingVLU.Tests.Controllers
             HomeController controller = new HomeController();
 
             // Act
-            ViewResult result = controller.About() as ViewResult;
+            ViewResult result = controller.about() as ViewResult;
 
             // Assert
             Assert.AreEqual("Your application description page.", result.ViewBag.Message);
@@ -45,7 +45,7 @@ namespace TradingVLU.Tests.Controllers
             HomeController controller = new HomeController();
 
             // Act
-            ViewResult result = controller.Contact() as ViewResult;
+            ViewResult result = controller.contact() as ViewResult;
 
             // Assert
             Assert.IsNotNull(result);

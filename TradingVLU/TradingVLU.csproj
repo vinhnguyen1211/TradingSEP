@@ -446,6 +446,7 @@
     <Content Include="Views\ItemManagement\index.cshtml" />
     <Content Include="Views\ItemManagement\add.cshtml" />
     <Content Include="Views\ItemManagement\detail.cshtml" />
+    <Content Include="Views\User\ForgotPassword.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

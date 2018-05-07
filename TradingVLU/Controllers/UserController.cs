@@ -14,6 +14,7 @@ namespace TradingVLU.Controllers
     [Route("{action=index}")]
     public class UserController : Controller
     {
+        vlutrading3545Entities db = new vlutrading3545Entities();
         // GET: User
         public ActionResult Index()
         {
@@ -271,6 +272,27 @@ namespace TradingVLU.Controllers
                 strBuilder.Append(result[i].ToString("x2"));
             }
             return strBuilder.ToString();
+        }
+        [HttpGet]
+        public ActionResult ForgotPassword()
+        {
+            var ques = db.security_question.ToList();
+            List<SelectListItem> item = new List<SelectListItem>();
+            foreach (var i in ques)
+            {
+                item.Add(new SelectListItem
+                {
+                    Text = i.question,
+                    Value = i.id.ToString()
+                });
+            }
+            ViewBag.question = item;
+
+            //var user =db.users.FirstOrDefault(x=>x.username)
+            //*
+            return View(ForgotPassword());
+
+
         }
     }
 }
