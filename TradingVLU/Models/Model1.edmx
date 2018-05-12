@@ -20,21 +20,13 @@
           <Property Name="create_date" Type="datetime" />
           <Property Name="update_by" Type="varchar" MaxLength="20" />
           <Property Name="update_date" Type="datetime" />
-          <Property Name="images" Type="varchar(max)" />
-        </EntityType>
-        <EntityType Name="item_images">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="item_id" Type="int" Nullable="false" />
-          <Property Name="filename" Type="varchar" MaxLength="255" Nullable="false" />
-          <Property Name="path" Type="varchar" MaxLength="255" Nullable="false" />
-          <Property Name="create_by" Type="varchar" MaxLength="20" />
-          <Property Name="create_date" Type="datetime" />
-          <Property Name="update_by" Type="varchar" MaxLength="20" />
-          <Property Name="update_date" Type="datetime" />
-          <Property Name="base64_string" Type="varchar(max)" />
+          <Property Name="index_image" Type="varchar(max)" />
+          <Property Name="detail_image1" Type="varchar(max)" />
+          <Property Name="detail_image2" Type="varchar(max)" />
+          <Property Name="detail_image3" Type="varchar(max)" />
+          <Property Name="detail_image4" Type="varchar(max)" />
+          <Property Name="detail_image5" Type="varchar(max)" />
+          <Property Name="price" Type="decimal" Precision="18" Scale="3" />
         </EntityType>
         <EntityType Name="item_status">
           <Key>
@@ -101,18 +93,6 @@
           <Property Name="update_by" Type="varchar" MaxLength="20" />
           <Property Name="update_date" Type="datetime" />
         </EntityType>
-        <Association Name="FK_item_images_itemId">
-          <End Role="item" Type="Self.item" Multiplicity="1" />
-          <End Role="item_images" Type="Self.item_images" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="item">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="item_images">
-              <PropertyRef Name="item_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_item_item_status">
           <End Role="item_status" Type="Self.item_status" Multiplicity="0..1" />
           <End Role="item" Type="Self.item" Multiplicity="*" />
@@ -226,16 +206,11 @@
         <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="vlutrading3545ModelStoreContainer">
           <EntitySet Name="item" EntityType="Self.item" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="item_images" EntityType="Self.item_images" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="item_status" EntityType="Self.item_status" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="role" EntityType="Self.role" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="security_question" EntityType="Self.security_question" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="user" EntityType="Self.user" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="user_personal_information" EntityType="Self.user_personal_information" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_item_images_itemId" Association="Self.FK_item_images_itemId">
-            <End Role="item" EntitySet="item" />
-            <End Role="item_images" EntitySet="item_images" />
-          </AssociationSet>
           <AssociationSet Name="FK_item_item_status" Association="Self.FK_item_item_status">
             <End Role="item_status" EntitySet="item_status" />
             <End Role="item" EntitySet="item" />
@@ -305,16 +280,11 @@
           </FunctionImport>
           <FunctionImport Name="sp_upgraddiagrams" />
           <EntitySet Name="items" EntityType="vlutrading3545Model.item" />
-          <EntitySet Name="item_images" EntityType="vlutrading3545Model.item_images" />
           <EntitySet Name="item_status" EntityType="vlutrading3545Model.item_status" />
           <EntitySet Name="roles" EntityType="vlutrading3545Model.role" />
           <EntitySet Name="security_question" EntityType="vlutrading3545Model.security_question" />
           <EntitySet Name="users" EntityType="vlutrading3545Model.user" />
           <EntitySet Name="user_personal_information" EntityType="vlutrading3545Model.user_personal_information" />
-          <AssociationSet Name="FK_item_images_itemId" Association="vlutrading3545Model.FK_item_images_itemId">
-            <End Role="item" EntitySet="items" />
-            <End Role="item_images" EntitySet="item_images" />
-          </AssociationSet>
           <AssociationSet Name="FK_item_item_status" Association="vlutrading3545Model.FK_item_item_status">
             <End Role="item_status" EntitySet="item_status" />
             <End Role="item" EntitySet="items" />
@@ -339,7 +309,7 @@
             <End Role="user" EntitySet="users" />
             <End Role="user_personal_information" EntitySet="user_personal_information" />
           </AssociationSet>
-        </EntityContainer>
+          </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
           <Property Type="Binary" Name="definition" Nullable="true" />
@@ -366,26 +336,16 @@
           <Property Name="create_date" Type="DateTime" Precision="3" />
           <Property Name="update_by" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="update_date" Type="DateTime" Precision="3" />
-          <Property Name="images" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="item_images" Relationship="vlutrading3545Model.FK_item_images_itemId" FromRole="item" ToRole="item_images" />
+          <Property Name="index_image" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="detail_image1" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="detail_image2" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="detail_image3" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="detail_image4" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="detail_image5" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="price" Type="Decimal" Precision="18" Scale="3" />
           <NavigationProperty Name="item_status" Relationship="vlutrading3545Model.FK_item_item_status" FromRole="item" ToRole="item_status" />
           <NavigationProperty Name="user" Relationship="vlutrading3545Model.FK_item_userBuyerId" FromRole="item" ToRole="user" />
           <NavigationProperty Name="user1" Relationship="vlutrading3545Model.FK_item_userSellerId" FromRole="item" ToRole="user" />
-        </EntityType>
-        <EntityType Name="item_images">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="item_id" Type="Int32" Nullable="false" />
-          <Property Name="filename" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="path" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="create_by" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="create_date" Type="DateTime" Precision="3" />
-          <Property Name="update_by" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="update_date" Type="DateTime" Precision="3" />
-          <Property Name="base64_string" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="item" Relationship="vlutrading3545Model.FK_item_images_itemId" FromRole="item_images" ToRole="item" />
         </EntityType>
         <EntityType Name="item_status">
           <Key>
@@ -461,18 +421,6 @@
           <Property Name="update_date" Type="DateTime" Precision="3" />
           <NavigationProperty Name="user" Relationship="vlutrading3545Model.FK_user_personal_information_userId" FromRole="user_personal_information" ToRole="user" />
         </EntityType>
-        <Association Name="FK_item_images_itemId">
-          <End Type="vlutrading3545Model.item" Role="item" Multiplicity="1" />
-          <End Type="vlutrading3545Model.item_images" Role="item_images" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="item">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="item_images">
-              <PropertyRef Name="item_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_item_item_status">
           <End Type="vlutrading3545Model.item_status" Role="item_status" Multiplicity="0..1" />
           <End Type="vlutrading3545Model.item" Role="item" Multiplicity="*" />
@@ -545,7 +493,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -580,7 +528,13 @@
           <EntitySetMapping Name="items">
             <EntityTypeMapping TypeName="vlutrading3545Model.item">
               <MappingFragment StoreEntitySet="item">
-                <ScalarProperty Name="images" ColumnName="images" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="detail_image5" ColumnName="detail_image5" />
+                <ScalarProperty Name="detail_image4" ColumnName="detail_image4" />
+                <ScalarProperty Name="detail_image3" ColumnName="detail_image3" />
+                <ScalarProperty Name="detail_image2" ColumnName="detail_image2" />
+                <ScalarProperty Name="detail_image1" ColumnName="detail_image1" />
+                <ScalarProperty Name="index_image" ColumnName="index_image" />
                 <ScalarProperty Name="update_date" ColumnName="update_date" />
                 <ScalarProperty Name="update_by" ColumnName="update_by" />
                 <ScalarProperty Name="create_date" ColumnName="create_date" />
@@ -591,21 +545,6 @@
                 <ScalarProperty Name="quantity" ColumnName="quantity" />
                 <ScalarProperty Name="description" ColumnName="description" />
                 <ScalarProperty Name="item_name" ColumnName="item_name" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="item_images">
-            <EntityTypeMapping TypeName="vlutrading3545Model.item_images">
-              <MappingFragment StoreEntitySet="item_images">
-                <ScalarProperty Name="base64_string" ColumnName="base64_string" />
-                <ScalarProperty Name="update_date" ColumnName="update_date" />
-                <ScalarProperty Name="update_by" ColumnName="update_by" />
-                <ScalarProperty Name="create_date" ColumnName="create_date" />
-                <ScalarProperty Name="create_by" ColumnName="create_by" />
-                <ScalarProperty Name="path" ColumnName="path" />
-                <ScalarProperty Name="filename" ColumnName="filename" />
-                <ScalarProperty Name="item_id" ColumnName="item_id" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -680,7 +619,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-        </EntityContainerMapping>
+          </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>

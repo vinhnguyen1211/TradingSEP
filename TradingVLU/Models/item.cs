@@ -14,12 +14,6 @@ namespace TradingVLU.Models
     
     public partial class item
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public item()
-        {
-            this.item_images = new HashSet<item_images>();
-        }
-    
         public int id { get; set; }
         public string item_name { get; set; }
         public string description { get; set; }
@@ -31,10 +25,16 @@ namespace TradingVLU.Models
         public Nullable<System.DateTime> create_date { get; set; }
         public string update_by { get; set; }
         public Nullable<System.DateTime> update_date { get; set; }
-        public string images { get; set; }
+        public string index_image { get; set; }
+        public string detail_image1 { get; set; }
+        public string detail_image2 { get; set; }
+        public string detail_image3 { get; set; }
+        public string detail_image4 { get; set; }
+        public string detail_image5 { get; set; }
+        public Nullable<decimal> price { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection <item_images> item_images { get; set; }
+        public virtual ICollection<item_images> item_images { get; set; }
         public virtual item_status item_status { get; set; }
         public virtual user user { get; set; }
         public virtual user user1 { get; set; }

@@ -1,22 +1,45 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using TradingVLU.Models;
 
 namespace TradingVLU.Controllers
 {
-    [RoutePrefix("items")]
+    [RoutePrefix("item")]
     [Route("{action=index}")]
     public class ItemController : Controller
     {
         public ActionResult index()
         {
+            using(vlutrading3545Entities db = new vlutrading3545Entities())
+            {
+                var itemList = db.items.Select(x => new { x.id, x.item_name, x.price, x.index_image }).ToList();
+                ViewBag.itemList = itemList;
+
+            }
             return View();
         }
 
-        public ActionResult detail()
+        [Route("detail/{id:int:min(1)}")]
+        public ActionResult detail(int id)
         {
+            using (vlutrading3545Entities db = new vlutrading3545Entities())
+            {
+                var item = db.items.FirstOrDefault(x => x.id == id);
+                if(item == null)
+                {
+                    //return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                    return HttpNotFound();
+                }
+
+                ViewBag.DetailItem = item;
+                
+
+            }
+            ViewBag.IdItem = id;
             return View();
         }
 
