@@ -5,6 +5,29 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="vlutrading3545Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="order_detail">
+          <Key>
+            <PropertyRef Name="item_id" />
+            <PropertyRef Name="order_id" />
+          </Key>
+          <Property Name="item_id" Type="int" Nullable="false" />
+          <Property Name="order_id" Type="int" Nullable="false" />
+          <Property Name="quantity" Type="int" />
+          <Property Name="price" Type="decimal" Precision="18" Scale="3" />
+        </EntityType>
+        <EntityType Name="order_items">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="create_date" Type="datetime" />
+          <Property Name="buyer_id" Type="int" />
+          <Property Name="ship_name" Type="nvarchar" MaxLength="50" />
+          <Property Name="ship_mobile" Type="varchar" MaxLength="50" />
+          <Property Name="ship_address" Type="nvarchar" MaxLength="50" />
+          <Property Name="ship_email" Type="nvarchar" MaxLength="50" />
+          <Property Name="status" Type="int" />
+        </EntityType>
         <EntityType Name="item">
           <Key>
             <PropertyRef Name="id" />
@@ -205,6 +228,8 @@
         </Function>
         <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="vlutrading3545ModelStoreContainer">
+          <EntitySet Name="order_detail" EntityType="Self.order_detail" Schema="admin3545" store:Type="Tables" />
+          <EntitySet Name="order_items" EntityType="Self.order_items" Schema="admin3545" store:Type="Tables" />
           <EntitySet Name="item" EntityType="Self.item" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="item_status" EntityType="Self.item_status" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="role" EntityType="Self.role" Schema="dbo" store:Type="Tables" />
@@ -279,6 +304,8 @@
             <Parameter Name="new_diagramname" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_upgraddiagrams" />
+          <EntitySet Name="order_detail" EntityType="vlutrading3545Model.order_detail" />
+          <EntitySet Name="order_items" EntityType="vlutrading3545Model.order_items" />
           <EntitySet Name="items" EntityType="vlutrading3545Model.item" />
           <EntitySet Name="item_status" EntityType="vlutrading3545Model.item_status" />
           <EntitySet Name="roles" EntityType="vlutrading3545Model.role" />
@@ -321,6 +348,29 @@
           <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
           <Property Type="Int32" Name="OwnerID" Nullable="false" />
         </ComplexType>
+        <EntityType Name="order_detail">
+          <Key>
+            <PropertyRef Name="item_id" />
+            <PropertyRef Name="order_id" />
+          </Key>
+          <Property Name="item_id" Type="Int32" Nullable="false" />
+          <Property Name="order_id" Type="Int32" Nullable="false" />
+          <Property Name="quantity" Type="Int32" />
+          <Property Name="price" Type="Decimal" Precision="18" Scale="3" />
+        </EntityType>
+        <EntityType Name="order_items">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="create_date" Type="DateTime" Precision="3" />
+          <Property Name="buyer_id" Type="Int32" />
+          <Property Name="ship_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ship_mobile" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ship_address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ship_email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="status" Type="Int32" />
+        </EntityType>
         <EntityType Name="item">
           <Key>
             <PropertyRef Name="id" />
@@ -525,6 +575,30 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="vlutrading3545Model.Store.sp_renamediagram" />
           <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="vlutrading3545Model.Store.sp_upgraddiagrams" />
+          <EntitySetMapping Name="order_detail">
+            <EntityTypeMapping TypeName="vlutrading3545Model.order_detail">
+              <MappingFragment StoreEntitySet="order_detail">
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="order_id" ColumnName="order_id" />
+                <ScalarProperty Name="item_id" ColumnName="item_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="order_items">
+            <EntityTypeMapping TypeName="vlutrading3545Model.order_items">
+              <MappingFragment StoreEntitySet="order_items">
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="ship_email" ColumnName="ship_email" />
+                <ScalarProperty Name="ship_address" ColumnName="ship_address" />
+                <ScalarProperty Name="ship_mobile" ColumnName="ship_mobile" />
+                <ScalarProperty Name="ship_name" ColumnName="ship_name" />
+                <ScalarProperty Name="buyer_id" ColumnName="buyer_id" />
+                <ScalarProperty Name="create_date" ColumnName="create_date" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="items">
             <EntityTypeMapping TypeName="vlutrading3545Model.item">
               <MappingFragment StoreEntitySet="item">

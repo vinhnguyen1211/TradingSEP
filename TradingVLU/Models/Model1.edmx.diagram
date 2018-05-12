@@ -5,6 +5,8 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="eab3c370f888479ebdf08e9f2bd6d789" Name="Diagram1">
+        <EntityTypeShape EntityType="vlutrading3545Model.order_detail" Width="1.5" PointX="7.75" PointY="2.5" />
+        <EntityTypeShape EntityType="vlutrading3545Model.order_items" Width="1.5" PointX="7.75" PointY="5.5" />
         <EntityTypeShape EntityType="vlutrading3545Model.item" Width="1.5" PointX="5.25" PointY="4.5" />
         <EntityTypeShape EntityType="vlutrading3545Model.item_status" Width="1.5" PointX="3" PointY="0.75" />
         <EntityTypeShape EntityType="vlutrading3545Model.role" Width="1.5" PointX="0.75" PointY="5.75" />

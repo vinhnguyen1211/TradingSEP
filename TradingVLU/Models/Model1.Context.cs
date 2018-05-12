@@ -27,6 +27,8 @@ namespace TradingVLU.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<order_detail> order_detail { get; set; }
+        public virtual DbSet<order_items> order_items { get; set; }
         public virtual DbSet<item> items { get; set; }
         public virtual DbSet<item_status> item_status { get; set; }
         public virtual DbSet<role> roles { get; set; }
@@ -162,13 +164,5 @@ namespace TradingVLU.Models
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_upgraddiagrams");
         }
-    }
-
-    public class sp_helpdiagrams_Result
-    {
-    }
-
-    public class sp_helpdiagramdefinition_Result
-    {
     }
 }
