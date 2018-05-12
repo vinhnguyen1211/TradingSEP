@@ -164,4 +164,12 @@ namespace TradingVLU.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_upgraddiagrams");
         }
     }
+
+    public class sp_helpdiagrams_Result
+    {
+    }
+
+    public class sp_helpdiagramdefinition_Result
+    {
+    }
 }
