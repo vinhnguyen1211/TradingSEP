@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Security.Cryptography;
@@ -147,6 +148,7 @@ namespace TradingVLU.Controllers
                     {
                         
                         Session["userLogged"] = user;
+                        Session["userID"] = user.id;
                         updateLastLoginTimeAndIp();
                         ViewBag.SuccessMessage = "Successful Logged";
                         ViewBag.LoggedStatus = true;
@@ -169,6 +171,40 @@ namespace TradingVLU.Controllers
             }
 
             return View();
+        }
+        public ActionResult ChangePassword()
+        {
+
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ChangePassword(ChangePasswordViewModel model)
+        {
+            try
+            {
+                int userID = int.Parse(Session["userID"].ToString());
+                var user = db.users.FirstOrDefault(x => x.id == userID);
+                if (user.password == hashPwd(model.Password))
+                {
+                    user.password = hashPwd(model.NewPassword);
+                    db.Entry(user).State = EntityState.Modified;
+                    db.SaveChanges();
+                    ViewBag.SuccessMessage = "Successful changed password";
+                }
+                else
+                {
+                    ViewBag.DuplicateMessage = "Current Password is not match";
+                }
+            }
+            catch (Exception)
+            {
+                ModelState.AddModelError("", "Error occured");
+                throw;
+            }
+
+            return View(model);
         }
 
         [HttpGet]

@@ -5,9 +5,6 @@
     var user_security_answer = Json.Decode(q);
     var user_detail = ViewBag.user_detail as TradingVLU.Models.user;
 }
-@user_security_answer[0].username <br />
-@Html.Raw(user_security_answer[0].question) <br />
-@user_security_answer[0].answer
 <!------ Include the above in your HEAD tag ---------->
 <div class="container">
 
@@ -15,7 +12,6 @@
         <div class="col-md-3">
             <ul class="nav nav-pills nav-stacked admin-menu">
                 <li class="active"><a href="" data-target-id="profile"><i class="fa fa-user-o"></i> Profile</a></li>
-                <li><a href="" data-target-id="change-password"><i class="fa fa-lock"></i> Change Password</a></li>
                 <li><a href="" data-target-id="settings"><i class="fa fa-cog"></i> Settings</a></li>
                 <li><a href="" data-target-id="logout"><i class="fa fa-sign-out"></i> Logout</a></li>
             </ul>
@@ -71,59 +67,6 @@
                     <div class="label label-success">yes</div>
                 </div>
             </div>
-        </div>
-        <div class="col-md-9  admin-content" id="change-password">
-            <form action="/password" method="post">
-
-                <div class="panel panel-info" style="margin: 1em;">
-                    <div class="panel-heading">
-                        <h3 class="panel-title"><label for="new_password" class="control-label panel-title">Current Password</label></h3>
-                    </div>
-                    <div class="panel-body">
-                        <div class="form-group">
-                            <div class="col-sm-10">
-                                <input type="password" class="form-control" name="password" id="current_password">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="panel panel-info" style="margin: 1em;">
-                    <div class="panel-heading">
-                        <h3 class="panel-title"><label for="new_password" class="control-label panel-title">New Password</label></h3>
-                    </div>
-                    <div class="panel-body">
-                        <div class="form-group">
-                            <div class="col-sm-10">
-                                <input type="password" class="form-control" name="password" id="new_password">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="panel panel-info" style="margin: 1em;">
-                    <div class="panel-heading">
-                        <h3 class="panel-title"><label for="confirm_password" class="control-label panel-title">Confirm password</label></h3>
-                    </div>
-                    <div class="panel-body">
-                        <div class="form-group">
-                            <div class="col-sm-10">
-                                <input type="password" class="form-control" name="password_confirmation" id="confirm_password">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="panel panel-info border" style="margin: 1em;">
-                    <div class="panel-body">
-                        <div class="form-group">
-                            <div class="pull-left">
-                                <input type="submit" class="form-control btn btn-primary" name="submit" id="submit">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </form>
         </div>
         <div class="col-md-9  admin-content" id="logout">
             <div class="panel panel-info" style="margin: 1em;">
