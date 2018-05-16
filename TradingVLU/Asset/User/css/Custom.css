@@ -1,0 +1,11 @@
+b{
+    display: inline-block;
+}
+
+p {
+    display: inline-block;
+}
+
+.menu-item-has-project {
+    z-index: 9999;
+}

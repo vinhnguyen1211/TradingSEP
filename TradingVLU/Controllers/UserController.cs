@@ -144,7 +144,7 @@ namespace TradingVLU.Controllers
                 if(db.users.Any(x => x.username == userLogin.username))
                 {
                     var user = db.users.FirstOrDefault(x => x.username == userLogin.username);
-                    if(user.password == hashPwd(userLogin.password))
+                    if(user.password == hashPwd(userLogin.password) && user.is_active== 1)
                     {
                         
                         Session["userLogged"] = user;
@@ -154,7 +154,11 @@ namespace TradingVLU.Controllers
                         ViewBag.LoggedStatus = true;
 
                     }
-                    else
+                    else if (user.password == hashPwd(userLogin.password) && user.is_active == 0)
+                    {
+                        ViewBag.DuplicateMessage = "Your Account Isn't Active!";
+                    }
+                    else if (user.password != hashPwd(userLogin.password))
                     {
                         ViewBag.DuplicateMessage = "Login failed!";
                     }
