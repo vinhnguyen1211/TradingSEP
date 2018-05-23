@@ -94,7 +94,7 @@ namespace TradingVLU.Controllers
                             role = 1,
                             id_security_question = newUser.id_security_question,
                             answer_security_question = newUser.answer_security_question,
-                            is_active = 1,
+                            is_active = 0,
                             ip_last_login = ip_login,
                             last_login_date = DateTime.Now,
                             create_by = newUser.username,
