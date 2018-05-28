@@ -27,6 +27,7 @@
           <Property Name="detail_image4" Type="varchar(max)" />
           <Property Name="detail_image5" Type="varchar(max)" />
           <Property Name="price" Type="decimal" Precision="18" Scale="3" />
+          <Property Name="approve" Type="int" />
         </EntityType>
         <EntityType Name="item_status">
           <Key>
@@ -59,6 +60,16 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="question" Type="nvarchar" MaxLength="255" Nullable="false" />
           <Property Name="is_active" Type="int" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="user">
           <Key>
@@ -209,6 +220,7 @@
           <EntitySet Name="item_status" EntityType="Self.item_status" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="role" EntityType="Self.role" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="security_question" EntityType="Self.security_question" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="user" EntityType="Self.user" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="user_personal_information" EntityType="Self.user_personal_information" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_item_item_status" Association="Self.FK_item_item_status">
@@ -309,6 +321,7 @@
             <End Role="user" EntitySet="users" />
             <End Role="user_personal_information" EntitySet="user_personal_information" />
           </AssociationSet>
+          <EntitySet Name="sysdiagrams" EntityType="vlutrading3545Model.sysdiagram" />
           </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -346,6 +359,7 @@
           <NavigationProperty Name="item_status" Relationship="vlutrading3545Model.FK_item_item_status" FromRole="item" ToRole="item_status" />
           <NavigationProperty Name="user" Relationship="vlutrading3545Model.FK_item_userBuyerId" FromRole="item" ToRole="user" />
           <NavigationProperty Name="user1" Relationship="vlutrading3545Model.FK_item_userSellerId" FromRole="item" ToRole="user" />
+          <Property Name="approve" Type="Int32" />
         </EntityType>
         <EntityType Name="item_status">
           <Key>
@@ -493,6 +507,16 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -528,6 +552,7 @@
           <EntitySetMapping Name="items">
             <EntityTypeMapping TypeName="vlutrading3545Model.item">
               <MappingFragment StoreEntitySet="item">
+                <ScalarProperty Name="approve" ColumnName="approve" />
                 <ScalarProperty Name="price" ColumnName="price" />
                 <ScalarProperty Name="detail_image5" ColumnName="detail_image5" />
                 <ScalarProperty Name="detail_image4" ColumnName="detail_image4" />
@@ -616,6 +641,17 @@
                 <ScalarProperty Name="phone" ColumnName="phone" />
                 <ScalarProperty Name="id_user" ColumnName="id_user" />
                 <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="vlutrading3545Model.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

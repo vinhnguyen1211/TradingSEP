@@ -32,6 +32,7 @@ namespace TradingVLU.Models
         public string detail_image4 { get; set; }
         public string detail_image5 { get; set; }
         public Nullable<decimal> price { get; set; }
+        public Nullable<int> approve { get; set; }
     
         public virtual item_status item_status { get; set; }
         public virtual user user { get; set; }

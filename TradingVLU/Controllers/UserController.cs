@@ -313,20 +313,6 @@ namespace TradingVLU.Controllers
         public ActionResult ForgotPassword()
         {
             var ques = db.security_question.ToList();
-            
-            //List<SelectListItem> item = new List<SelectListItem>();
-            //foreach (var i in ques)
-            //{
-            //    item.Add(new SelectListItem
-            //    {
-            //        Text = i.question,
-            //        Value = i.id.ToString()
-            //    });
-            //}
-            //ViewBag.question = item;
-
-            ////var user =db.users.FirstOrDefault(x=>x.username)
-            ////*
             return View(ques);
 
 
@@ -335,26 +321,29 @@ namespace TradingVLU.Controllers
         public void ForgotPassword(string username, int id_security_question,String answer_security_question)
         {
             var user = db.users.FirstOrDefault(x => x.username == username);
-            if (user.id_security_question == id_security_question&&user.answer_security_question==answer_security_question.Trim())
+            if (user == null)
             {
-                Session["newPassword"] = "true";
-                Session["newpass_user"] = user.id;
-                Response.Redirect("~/User/createnew");
+                Session["erorr_forgot"] = "true";
+                Response.Redirect("~/User/ForgotPassword");
             }
             else
             {
-                Session["newPassword"] = "false";
-                Response.Redirect("~/User/createnew");
+                if (user.id_security_question == id_security_question && user.answer_security_question == answer_security_question.Trim())
+                {
+                    Session["newPassword"] = "true";
+                    Session["newpass_user"] = user.id;
+                    Response.Redirect("~/User/createnew");
+                }
+                else
+                {
+                    Session["erorr_forgot"] = "true";
+                    Response.Redirect("~/User/ForgotPassword");
+                }
             }
-            
-
         }
         public ActionResult createnew()
         {
-            
             return View();
-
-
         }
 
         public void UpdatePassword(String Newpassword)
@@ -364,7 +353,8 @@ namespace TradingVLU.Controllers
 
             user.password = hashPwd(Newpassword);
             db.SaveChanges();
-            Response.Redirect("~/User/login");
+            Session["changeMessage"] = "true";
+            Response.Redirect("~/User/createnew");
         }
     }
 }

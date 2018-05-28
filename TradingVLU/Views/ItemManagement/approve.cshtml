@@ -1,0 +1,97 @@
+﻿
+@{
+    ViewBag.Title = "approve";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var itemList = Json.Decode(Json.Encode(ViewBag.itemList));
+}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<style>
+    .content {
+        min-height: 600px;
+    }
+    .card img {
+        width: 150px;
+        height: 150px;
+        margin: auto;
+    }
+    .card{
+        width: 180px;
+        height: 280px;
+    }
+
+    .container .title {
+        font-weight: bold;
+        font-size: 25px;
+        text-align: center;
+        margin-bottom: 20px;
+    }.let-hide{
+         display:none;
+    }
+    .list-items{
+        margin-top:100px;
+    }
+</style>
+<div class="container content">
+    <h2 class="title">Approve</h2>
+    <div class="row list-items">
+
+        @foreach (var item in itemList)
+        {
+            <div class="col-md-3 item-@item.id">
+                <div class="card item-box" style="width: 18rem;">
+                    <img class="card-img-top" src="~/Content/img/items/index_img/@item.index_image" alt="Card image cap">
+                    <div class="card-body">
+                        <span class="let-hide item-id">@item.id</span>
+                        <h5 class="card-title">@item.item_name</h5>
+                        <p class="card-text">@item.description</p>
+                        <a href="#" class="btn btn-success btn-approve">Approve</a>
+                        <a href="#" class="btn btn-danger btn-reject">Reject</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+</div>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous">
+</script>
+<script>
+    $(document).ready(function () {
+        $('.btn-approve').on('click', function () {
+            let item_id = $(this).parents('.card-body').find('.item-id').html();
+            $.ajax({
+                url: '/manageitem/approve/',
+                type: "POST",
+                data: { id: item_id },
+                dataType: "json",
+            }).done(function (response) {
+                let status = response.Message;
+                let name = 'item-' + item_id;
+                if (status == 'success') {
+                    //hide
+                    $('.'+name).hide('drop');
+                }
+                console.log(name);
+                });
+        });
+        $('.btn-reject').on('click', function () {
+            let item_id = $(this).parents('.card-body').find('.item-id').html();
+            $.ajax({
+                url: '/manageitem/reject/',
+                type: "POST",
+                data: { id: item_id },
+                dataType: "json",
+            }).done(function (response) {
+                let status = response.Message;
+                let name = 'item-' + item_id;
+                if (status == 'success') {
+                    //hide
+                    $('.' + name).hide('drop');
+                }
+                console.log(name);
+            });
+        });
+    });
+</script>

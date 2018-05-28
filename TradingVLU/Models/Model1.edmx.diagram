@@ -17,6 +17,7 @@
         <AssociationConnector Association="vlutrading3545Model.FK_user_roleId" />
         <AssociationConnector Association="vlutrading3545Model.FK_user_security_questionId" />
         <AssociationConnector Association="vlutrading3545Model.FK_user_personal_information_userId" />
+        <EntityTypeShape EntityType="vlutrading3545Model.sysdiagram" Width="1.5" PointX="5.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
