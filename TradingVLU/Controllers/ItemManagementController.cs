@@ -219,6 +219,32 @@ namespace TradingVLU.Controllers
 
             return View();
         }
+        [HttpGet]
+        public ActionResult EditItem(int id)
+        {
+            using (vlutrading3545Entities db = new vlutrading3545Entities())
+            {
+                var Data = db.items.FirstOrDefault(x => x.id == id);
+                return View(Data);
+            }
+        }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditItem(int id, item its)
+        {
+            using (vlutrading3545Entities db = new vlutrading3545Entities())
+            {
+                var Data = db.items.FirstOrDefault(x => x.id == id);
+                Data.item_name = its.item_name;
+                Data.description = its.description;
+                Data.quantity = its.quantity;
+                Data.status = its.status;
+                db.SaveChanges();
+                return RedirectToAction("Sale_ProjectsList");
+            }
+        }
     }
 }
+            
+            

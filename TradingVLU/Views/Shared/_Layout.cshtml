@@ -45,7 +45,7 @@
         <div id="top-header">
             <div class="container">
                 <div class="pull-left">
-                    <span>Welcome to E-shop!</span>
+                    <span>Welcome to VLU Trading Website!</span>
                 </div>
                 <div class="pull-right">
                     <ul class="header-top-links">
@@ -250,11 +250,11 @@ else
                     <div class="footer">
                         <h3 class="footer-header">My Account</h3>
                         <ul class="list-links">
-                            <li><a href="#">My Account</a></li>
+                            @*<li><a href="#">My Account</a></li>
                             <li><a href="#">My Wishlist</a></li>
                             <li><a href="#">Compare</a></li>
-                            <li><a href="#">Checkout</a></li>
-                            <li><a href="#">Login</a></li>
+                            <li><a href="#">Checkout</a></li>*@
+                            <li><a href="@Url.Action("login","User")">Login</a></li>
                         </ul>
                     </div>
                 </div>
@@ -267,10 +267,10 @@ else
                     <div class="footer">
                         <h3 class="footer-header">Customer Service</h3>
                         <ul class="list-links">
-                            <li><a href="#">About Us</a></li>
-                            <li><a href="#">Shiping & Return</a></li>
+                            <li><a href="@Url.Action("about","Home")">About Us</a></li>
+                            @*<li><a href="#">Shiping & Return</a></li>
                             <li><a href="#">Shiping Guide</a></li>
-                            <li><a href="#">FAQ</a></li>
+                            <li><a href="#">FAQ</a></li>*@
                         </ul>
                     </div>
                 </div>
