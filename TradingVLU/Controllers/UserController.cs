@@ -113,7 +113,7 @@ namespace TradingVLU.Controllers
                             return View();
                             throw;
                         }
-                        ViewBag.SuccessMessage = "Successful Register";
+                        ViewBag.SuccessMessage = "Successful.Your account will be actived in 24h";
                         ModelState.Clear();
                         return View();
                     }
