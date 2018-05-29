@@ -25,25 +25,26 @@
 
 <div class="container">
     <div class="main-login main-center">
-        <form action="@Url.Action("UpdatePassword","User")" method="post" >
+        <form action="@Url.Action("UpdatePassword", "User")" method="post" >
             <div class="form-group">
-                @{ 
+                @{
                     if (Session["changeMessage"] != null)
                     {
-                        
-                        <span style="color:limegreen;background-color:floralwhite" id="password-reset-success"><b>Your password has been reset successfully!</b></span><br />
-                        Session.Remove("changeMessage");
+                <span class="label label-success" id="password-reset"  style="font-size: 14px">Your password has been reset successfully!</span>
+
+
+                            Session.Remove("changeMessage");
+                        }
                     }
-                }
-                
-                <label class="cols-sm-6 control-label">New Password</label>
-                <div class="cols-sm-3" >
+
+                <label class="cols-sm-6 control-label" style="margin-top:20px ; display:block" >New Password</label>
+                <div class="cols-sm-3">
                     <div class="input-group">
-                        <span class="input-group-addon"><i class="fa fa-user fa"  aria-hidden="true"></i></span>
+                        <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
                         <input class="form-control text-box single-line" id="reset-pass-form" style="max-width:300px" name="Newpassword" placeholder="Enter your new Password" type="password">
                     </div>
                 </div>
-                
+
             </div>
             <div class="form-group">
                 <button id="btn-GetNewPass" type="submit" class="btn btn-warning">Send</button>
