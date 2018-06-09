@@ -1,0 +1,65 @@
+﻿@model IEnumerable<TradingVLU.Models.Order>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>listitem</title>
+</head>
+<body>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.username)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.item_name)
+            </th>
+
+            <th></th>
+        </tr>
+    
+    @foreach (var item in Model) {
+        <tr>
+            @{ if (item.status == 0)
+                {
+                    <td>waiting</td>
+                }
+                else if (item.status == 1)
+                {
+                    <td>Accept</td>
+                }
+                else
+                {
+                    <td>Cancel</td>
+                }
+            }
+            <td>
+                @Html.DisplayFor(modelItem => item.username)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.item_name)
+            </td>
+            <td>
+                <a href="@Url.Action("Change", "Item",new { id = item.item_id})">edit</a>
+               @*@Html.ActionLink("Edit", "Item", new { id = item.item_id }) |*@
+                @*@Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
+            </td>
+        </tr>
+    }
+    
+    </table>
+</body>
+</html>
