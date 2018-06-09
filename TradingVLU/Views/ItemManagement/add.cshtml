@@ -1,4 +1,4 @@
-﻿
+﻿@model TradingVLU.Models.item
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "add";
@@ -33,8 +33,9 @@
         <div class="form-group">
             <label for="email" class="cols-sm-2 control-label">Description</label>
             <div class="cols-sm-10">
-                <textarea class="form-control editor" id="" name="description" required>Enter text here...</textarea>
+                <textarea class="form-control editor" id="" name="description" required>Enter text here...</textarea>                
             </div>
+           
         </div>
 
         <div class="row">
@@ -207,5 +208,5 @@
         });
 
     </script>
-    
+
 }

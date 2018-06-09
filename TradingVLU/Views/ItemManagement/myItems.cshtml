@@ -1,26 +1,29 @@
 ﻿
 @{
-    ViewBag.Title = "approve";
+    ViewBag.Title = "myItems";
     Layout = "~/Views/Shared/_Layout.cshtml";
     var itemList = Json.Decode(Json.Encode(ViewBag.itemList));
+
 }
+
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <style>
     .content {
         min-height: 600px;
     }
+
     .card img {
         width: 150px;
         height: 150px;
         margin: auto;
         margin-top: 5px;
     }
+
     .card {
         width: 180px;
         height: 280px;
         margin-bottom: 10px;
         border-radius: 5px 5px 0 0;
-        
     }
 
     .container .title {
@@ -28,15 +31,39 @@
         font-size: 25px;
         text-align: center;
         margin-bottom: 20px;
-    }.let-hide{
-         display:none;
     }
-    .list-items{
-        margin-top:100px;
+
+    .let-hide {
+        display: none;
+    }
+
+    .list-items {
+        margin-top: 100px;
     }
 </style>
 <div class="container content">
-    <h2 class="title">Approve</h2>
+    <h2 class="title">My Items</h2>
+    <form action="@Url.Action("myItems", "ItemManagement")" method="get" id="form-select" style="font-size:14px">
+        <select name="status" id="select-status">
+            @{ 
+                String[] a = { "Waiting for approval", "Approved", "Rejected"};
+                int status = ViewBag.status;
+                for (int i = 0; i < a.Length; i++)
+                {
+                    if (status==i)
+                    {
+                        <option value=@i selected>@a[i]</option>
+                    }
+                    else
+                    {
+                        <option value=@i>@a[i]</option>
+                    }
+
+                }
+             }
+            
+        </select>
+    </form>
     <div class="row list-items">
 
         @foreach (var item in itemList)
@@ -48,13 +75,10 @@
                         <span class="let-hide item-id">@item.id</span>
                         <h5 class="card-title">@item.item_name</h5>
                         <p class="card-text">@item.description</p>
-                        @*<p class="card-text">@item.quantity</p>*@
-                        @*<p class="card-text">@item.price</p>*@
-                        <div style="text-align:right">
-                            <a href="#" class="btn btn-success btn-approve">Approve</a>
-                            <a href="#" class="btn btn-danger btn-reject">Reject</a>
-                        </div>
-                        
+                        <p class="card-text">@item.quantity</p>
+                        <p class="card-text">@item.price</p>
+                        @*<a href="#" class="btn btn-success btn-approve">Approve</a>
+                        <a href="#" class="btn btn-danger btn-reject">Reject</a>*@
                     </div>
                 </div>
             </div>
@@ -102,5 +126,9 @@
                 console.log(name);
             });
         });
+        $('#select-status').on('change', function () {
+            $('#form-select').submit();
+        });
     });
 </script>
+
