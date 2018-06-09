@@ -72,6 +72,23 @@ namespace TradingVLU.Controllers
             return Json(new { Message = message, JsonRequestBehavior.AllowGet });
             
         }
+
+        [HttpGet]
+        public ActionResult myItems(int status = 0)
+        {
+            using (vlutrading3545Entities db = new vlutrading3545Entities())
+            {
+                var itemList = db.items.Where(x => x.approve == status).Select(x => new { x.id, x.item_name, x.price, x.index_image, x.description }).ToList();
+
+                ViewBag.itemList = itemList;
+                ViewBag.status = status;
+            }
+            return View();
+
+        }
+
+      
+
         [HttpPost]
         public ActionResult reject(int id)
         {
