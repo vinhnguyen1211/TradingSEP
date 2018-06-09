@@ -13,6 +13,8 @@ namespace TradingVLU.Models
         [Required(ErrorMessage = "Fullname must not be null")]
         [DataType(DataType.Text)]
         [Display(Name = "Username")]
+        [RegularExpression(@"^[0-9a-zA-Z''-'\s]{1,40}$",ErrorMessage = "special characters are not allowed.")]
+        [StringLength(100, MinimumLength = 6,ErrorMessage = "The Username must be at least 6 characters.")]
         public string username { get; set; }
 
         [Required(ErrorMessage = "Password must not be null")]
@@ -36,6 +38,7 @@ namespace TradingVLU.Models
 
         [Required(ErrorMessage = "Name must not be null")]
         [Display(Name = "Name")]
+        [StringLength(100, MinimumLength = 6, ErrorMessage = "The Name must be at least 6 characters.")]
         public string name { get; set; }
 
         [Required(ErrorMessage = "Please select a value")]
@@ -45,6 +48,7 @@ namespace TradingVLU.Models
 
         [Required(ErrorMessage = "Answer must not be null")]
         [Display(Name = "Answer")]
+        [StringLength(100, MinimumLength = 6, ErrorMessage = "The Answer must be at least 6 characters.")]
         public string answer_security_question { get; set; }
 
         

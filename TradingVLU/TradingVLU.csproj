@@ -644,6 +644,7 @@
     <Content Include="Views\User\ChangePassword.cshtml" />
     <Content Include="Views\Item\listitem.cshtml" />
     <Content Include="Views\Item\Edit.cshtml" />
+    <Content Include="Views\ItemManagement\approve.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

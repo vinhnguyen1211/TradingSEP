@@ -37,7 +37,65 @@ namespace TradingVLU.Controllers
             }
             return View();
         }
+        [HttpGet]
+        public ActionResult approve()
+        {
+            using (vlutrading3545Entities db = new vlutrading3545Entities())
+            {
+                var itemList = db.items.Where(x => x.approve == 0).Select(x => new { x.id, x.item_name, x.price, x.index_image,x.description }).ToList();
 
+                ViewBag.itemList = itemList;
+            }
+            return View();
+        }
+        [HttpPost]
+        public ActionResult approve(int id)
+        {
+            String message;
+            using (vlutrading3545Entities db = new vlutrading3545Entities())
+            {
+               
+                try
+                {
+                   
+                    var item = db.items.Find(id);
+                    item.approve = 1;
+                    //db.Configuration.ValidateOnSaveEnabled = false;
+                    db.SaveChanges();
+                    message = "success";
+                }
+                catch(Exception ex)
+                {
+                    message = "failed";
+                }
+            }
+            return Json(new { Message = message, JsonRequestBehavior.AllowGet });
+            
+        }
+        [HttpPost]
+        public ActionResult reject(int id)
+        {
+            String message;
+            using (vlutrading3545Entities db = new vlutrading3545Entities())
+            {
+
+                try
+                {
+
+                    var item = db.items.Find(id);
+                    item.approve = 2;
+                    //db.Configuration.ValidateOnSaveEnabled = false;
+                    db.SaveChanges();
+                    message = "success";
+                }
+                catch (Exception ex)
+                {
+                    message = "failed";
+                }
+            }
+            return Json(new { Message = message, JsonRequestBehavior.AllowGet });
+
+        }
         [HttpPost, ValidateInput(false)]
         public ActionResult add(String name, String description, int quantity, int price, int status, HttpPostedFileBase index_image,
                                 IEnumerable<HttpPostedFileBase> detail_images)
@@ -108,7 +166,8 @@ namespace TradingVLU.Controllers
                     detail_image2 = detail_img[1],
                     detail_image3 = detail_img[2],
                     detail_image4 = detail_img[3],
-                    detail_image5 = detail_img[4]
+                    detail_image5 = detail_img[4],
+                    approve=0
                 };
                 try
                 {

@@ -11,14 +11,11 @@
 
 <h2>Manage Account</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 <div class="row">
     <div class="col-lg-12">
         <div class="panel panel-default">
             <div class="panel-heading">
-                Item List
+                User List
             </div>
             <!-- /.panel-heading -->
             <div class="panel-body">
@@ -30,15 +27,7 @@
                             <th>name</th>
                             <th>email</th>
                             <th>is_active</th>
-                            <th>last_login_date</th>
-                            <th>last_logout_date</th>
-                            <th>ip_last_login</th>
-                            <th>ip_last_logout</th>
-                            <th>create_by</th>
-                            <th>create_date</th>
-                            <th>update_by</th>
-                            <th>update_date</th>
-
+                            <th>change</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -58,30 +47,6 @@
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.email)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.last_login_date)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.last_logout_date)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.ip_last_login)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.ip_last_logout)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.create_by)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.create_date)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.update_by)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.update_date)
                             </td>
                             <td>
                                 <a href="#" class="btn-active" data-id="@item.id">@(item.is_active != 1 ? "Deactive" : "Active")</a>

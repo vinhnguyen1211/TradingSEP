@@ -339,7 +339,104 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="vlutrading3545Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+
         <EntityType Name="Comment">
+        <EntityContainer Name="vlutrading3545Entities" annotation:LazyLoadingEnabled="true">
+          <FunctionImport Name="updateLastLogoutIpAddress">
+            <Parameter Name="userId" Mode="In" Type="Int32" />
+            <Parameter Name="ip_address" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="updateLastLoginIpAddress">
+            <Parameter Name="userId" Mode="In" Type="Int32" />
+            <Parameter Name="ip_address" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_alterdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(vlutrading3545Model.sp_helpdiagramdefinition_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(vlutrading3545Model.sp_helpdiagrams_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_renamediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams" />
+          <EntitySet Name="order_detail" EntityType="vlutrading3545Model.order_detail" />
+          <EntitySet Name="order_items" EntityType="vlutrading3545Model.order_items" />
+          <EntitySet Name="items" EntityType="vlutrading3545Model.item" />
+          <EntitySet Name="item_status" EntityType="vlutrading3545Model.item_status" />
+          <EntitySet Name="roles" EntityType="vlutrading3545Model.role" />
+          <EntitySet Name="security_question" EntityType="vlutrading3545Model.security_question" />
+          <EntitySet Name="users" EntityType="vlutrading3545Model.user" />
+          <EntitySet Name="user_personal_information" EntityType="vlutrading3545Model.user_personal_information" />
+          <AssociationSet Name="FK_item_item_status" Association="vlutrading3545Model.FK_item_item_status">
+            <End Role="item_status" EntitySet="item_status" />
+            <End Role="item" EntitySet="items" />
+          </AssociationSet>
+          <AssociationSet Name="FK_item_userBuyerId" Association="vlutrading3545Model.FK_item_userBuyerId">
+            <End Role="user" EntitySet="users" />
+            <End Role="item" EntitySet="items" />
+          </AssociationSet>
+          <AssociationSet Name="FK_item_userSellerId" Association="vlutrading3545Model.FK_item_userSellerId">
+            <End Role="user" EntitySet="users" />
+            <End Role="item" EntitySet="items" />
+          </AssociationSet>
+          <AssociationSet Name="FK_user_roleId" Association="vlutrading3545Model.FK_user_roleId">
+            <End Role="role" EntitySet="roles" />
+            <End Role="user" EntitySet="users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_user_security_questionId" Association="vlutrading3545Model.FK_user_security_questionId">
+            <End Role="security_question" EntitySet="security_question" />
+            <End Role="user" EntitySet="users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_user_personal_information_userId" Association="vlutrading3545Model.FK_user_personal_information_userId">
+            <End Role="user" EntitySet="users" />
+            <End Role="user_personal_information" EntitySet="user_personal_information" />
+          </AssociationSet>
+          <EntitySet Name="sysdiagrams" EntityType="vlutrading3545Model.sysdiagram" />
+          </EntityContainer>
+        <ComplexType Name="sp_helpdiagramdefinition_Result">
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams_Result">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
+        <EntityType Name="order_detail">
+          <Key>
+            <PropertyRef Name="item_id" />
+            <PropertyRef Name="order_id" />
+          </Key>
+          <Property Name="item_id" Type="Int32" Nullable="false" />
+          <Property Name="order_id" Type="Int32" Nullable="false" />
+          <Property Name="quantity" Type="Int32" />
+          <Property Name="price" Type="Decimal" Precision="18" Scale="3" />
+        </EntityType>
+        <EntityType Name="order_items">
+
           <Key>
             <PropertyRef Name="id" />
           </Key>
@@ -598,6 +695,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+
         <EntityContainer Name="vlutrading3545Entities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Comments" EntityType="Self.Comment" />
           <EntitySet Name="items" EntityType="Self.item" />
@@ -699,6 +797,7 @@
           <Property Type="Int32" Name="OwnerID" Nullable="false" />
         </ComplexType>
       </Schema>
+
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -717,6 +816,26 @@
           <EntitySetMapping Name="items">
             <EntityTypeMapping TypeName="vlutrading3545Model.item">
               <MappingFragment StoreEntitySet="item">
+
+                <ScalarProperty Name="approve" ColumnName="approve" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="detail_image5" ColumnName="detail_image5" />
+                <ScalarProperty Name="detail_image4" ColumnName="detail_image4" />
+                <ScalarProperty Name="detail_image3" ColumnName="detail_image3" />
+                <ScalarProperty Name="detail_image2" ColumnName="detail_image2" />
+                <ScalarProperty Name="detail_image1" ColumnName="detail_image1" />
+                <ScalarProperty Name="index_image" ColumnName="index_image" />
+                <ScalarProperty Name="update_date" ColumnName="update_date" />
+                <ScalarProperty Name="update_by" ColumnName="update_by" />
+                <ScalarProperty Name="create_date" ColumnName="create_date" />
+                <ScalarProperty Name="create_by" ColumnName="create_by" />
+                <ScalarProperty Name="buyer_id" ColumnName="buyer_id" />
+                <ScalarProperty Name="seller_id" ColumnName="seller_id" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="item_name" ColumnName="item_name" />
+                
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="item_name" ColumnName="item_name" />
                 <ScalarProperty Name="description" ColumnName="description" />
@@ -831,6 +950,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+
           <FunctionImportMapping FunctionImportName="updateLastLogoutIpAddress" FunctionName="vlutrading3545Model.Store.updateLastLogoutIpAddress" />
           <FunctionImportMapping FunctionImportName="updateLastLoginIpAddress" FunctionName="vlutrading3545Model.Store.updateLastLoginIpAddress" />
           <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="vlutrading3545Model.Store.sp_alterdiagram" />
@@ -858,6 +978,7 @@
           <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="vlutrading3545Model.Store.sp_renamediagram" />
           <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="vlutrading3545Model.Store.sp_upgraddiagrams" />
         </EntityContainerMapping>
+
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>

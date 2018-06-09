@@ -19,6 +19,13 @@ namespace TradingVLU.Areas.Admin.Controllers
             var user = db.users.OrderByDescending(x => x.id).ToList();
             return View(user);
         }
+        public ActionResult Delete(int id)
+        {
+            var user = db.users.FirstOrDefault(x => x.id == id);
+            db.users.Remove(user);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
         [HttpPost]
         public JsonResult ChangeStatus(int id)
         {

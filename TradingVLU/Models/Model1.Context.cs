@@ -36,6 +36,7 @@ namespace TradingVLU.Models
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<user> users { get; set; }
         public virtual DbSet<user_personal_information> user_personal_information { get; set; }
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
     
         public virtual int updateLastLogoutIpAddress(Nullable<int> userId, string ip_address)
         {
