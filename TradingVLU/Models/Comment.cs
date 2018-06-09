@@ -12,11 +12,14 @@ namespace TradingVLU.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class order_detail
+    public partial class Comment
     {
-        public int item_id { get; set; }
-        public int order_id { get; set; }
-        public Nullable<int> quantity { get; set; }
-        public Nullable<decimal> price { get; set; }
+        public int id { get; set; }
+        public int id_item { get; set; }
+        public int id_user { get; set; }
+        public string comment1 { get; set; }
+    
+        public virtual item item { get; set; }
+        public virtual user user { get; set; }
     }
 }

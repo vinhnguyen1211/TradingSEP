@@ -27,12 +27,13 @@ namespace TradingVLU.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<order_detail> order_detail { get; set; }
-        public virtual DbSet<order_items> order_items { get; set; }
+        public virtual DbSet<Comment> Comments { get; set; }
         public virtual DbSet<item> items { get; set; }
         public virtual DbSet<item_status> item_status { get; set; }
+        public virtual DbSet<Order> Orders { get; set; }
         public virtual DbSet<role> roles { get; set; }
         public virtual DbSet<security_question> security_question { get; set; }
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<user> users { get; set; }
         public virtual DbSet<user_personal_information> user_personal_information { get; set; }
     

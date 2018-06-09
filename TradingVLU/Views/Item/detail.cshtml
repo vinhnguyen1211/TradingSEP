@@ -121,7 +121,10 @@
                                 <span class="text-uppercase">QTY: </span>
                                 <input class="input" type="number">
                             </div>
-                            <button class="primary-btn add-to-cart"><i class="fa fa-shopping-cart"></i> Add to Cart</button>
+                            <form action="~/item/Order/@detailItem.id">
+                                <button class="primary-btn add-to-cart" type="submit"><i class="fa fa-shopping-cart"></i> Add to Cart</button>
+                            </form>
+
                             <div class="pull-right">
                                 <button class="main-btn icon-btn"><i class="fa fa-heart"></i></button>
                                 <button class="main-btn icon-btn"><i class="fa fa-exchange"></i></button>

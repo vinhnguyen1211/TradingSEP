@@ -35,8 +35,6 @@ namespace TradingVLU.Controllers
                 var statusList = db.item_status.Select(x => new { x.id, x.status }).ToList();
                 ViewBag.statusList = statusList;
             }
-           
-
             return View();
         }
 

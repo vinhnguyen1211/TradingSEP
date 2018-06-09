@@ -14,6 +14,13 @@ namespace TradingVLU.Models
     
     public partial class item
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public item()
+        {
+            this.Comments = new HashSet<Comment>();
+            this.Orders = new HashSet<Order>();
+        }
+    
         public int id { get; set; }
         public string item_name { get; set; }
         public string description { get; set; }
@@ -32,9 +39,14 @@ namespace TradingVLU.Models
         public string detail_image4 { get; set; }
         public string detail_image5 { get; set; }
         public Nullable<decimal> price { get; set; }
+        public Nullable<int> approve { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Comment> Comments { get; set; }
         public virtual item_status item_status { get; set; }
         public virtual user user { get; set; }
         public virtual user user1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Order> Orders { get; set; }
     }
 }

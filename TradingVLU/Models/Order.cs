@@ -12,15 +12,15 @@ namespace TradingVLU.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class order_items
+    public partial class Order
     {
-        public int id { get; set; }
-        public Nullable<System.DateTime> create_date { get; set; }
-        public Nullable<int> buyer_id { get; set; }
-        public string ship_name { get; set; }
-        public string ship_mobile { get; set; }
-        public string ship_address { get; set; }
-        public string ship_email { get; set; }
-        public Nullable<int> status { get; set; }
+        public int item_id { get; set; }
+        public int user_id { get; set; }
+        public int status { get; set; }
+        public string username { get; set; }
+        public string item_name { get; set; }
+    
+        public virtual item item { get; set; }
+        public virtual user user { get; set; }
     }
 }
