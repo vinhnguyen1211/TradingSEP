@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="vlutrading3545Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="vlutrading3545Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Comment">
           <Key>
             <PropertyRef Name="id" />
@@ -13,6 +13,7 @@
           <Property Name="id_item" Type="int" Nullable="false" />
           <Property Name="id_user" Type="int" Nullable="false" />
           <Property Name="comment" Type="nvarchar(max)" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="item">
           <Key>
@@ -58,7 +59,7 @@
           <Property Name="item_id" Type="int" Nullable="false" />
           <Property Name="user_id" Type="int" Nullable="false" />
           <Property Name="status" Type="int" Nullable="false" />
-          <Property Name="username" Type="varchar" MaxLength="20" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" />
           <Property Name="item_name" Type="nvarchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="role">
@@ -295,8 +296,7 @@
             <End Role="user" EntitySet="user" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="vlutrading3545Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -310,6 +310,7 @@
           <Property Name="comment1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="item" Relationship="Self.FK_Comment_item" FromRole="Comment" ToRole="item" />
           <NavigationProperty Name="user" Relationship="Self.FK_Comment_user" FromRole="Comment" ToRole="user" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="item">
           <Key>
@@ -361,10 +362,10 @@
           <Property Name="item_id" Type="Int32" Nullable="false" />
           <Property Name="user_id" Type="Int32" Nullable="false" />
           <Property Name="status" Type="Int32" Nullable="false" />
-          <Property Name="username" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="item_name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="item" Relationship="Self.FK_Order_item" FromRole="Order" ToRole="item" />
           <NavigationProperty Name="user" Relationship="Self.FK_Order_user" FromRole="Order" ToRole="user" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="role">
           <Key>
@@ -619,6 +620,7 @@
           <EntitySetMapping Name="Comments">
             <EntityTypeMapping TypeName="vlutrading3545Model.Comment">
               <MappingFragment StoreEntitySet="Comment">
+                <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="id_item" ColumnName="id_item" />
                 <ScalarProperty Name="id_user" ColumnName="id_user" />
@@ -667,10 +669,10 @@
           <EntitySetMapping Name="Orders">
             <EntityTypeMapping TypeName="vlutrading3545Model.Order">
               <MappingFragment StoreEntitySet="Order">
+                <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="item_id" ColumnName="item_id" />
                 <ScalarProperty Name="user_id" ColumnName="user_id" />
                 <ScalarProperty Name="status" ColumnName="status" />
-                <ScalarProperty Name="username" ColumnName="username" />
                 <ScalarProperty Name="item_name" ColumnName="item_name" />
               </MappingFragment>
             </EntityTypeMapping>
