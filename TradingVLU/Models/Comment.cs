@@ -18,6 +18,7 @@ namespace TradingVLU.Models
         public int id_item { get; set; }
         public int id_user { get; set; }
         public string comment1 { get; set; }
+        public string name { get; set; }
     
         public virtual item item { get; set; }
         public virtual user user { get; set; }

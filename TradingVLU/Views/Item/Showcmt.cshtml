@@ -1,0 +1,23 @@
+﻿@model IEnumerable<TradingVLU.Models.Comment>
+
+@if (Model != null)
+{
+    foreach (var item in Model)
+    {
+        <div class="col-md-6">
+            <div class="product-reviews">
+                <div class="single-review">
+                    <div class="review-heading">
+                        <div><a href="#"><i class="fa fa-user-o"></i>@item.user.name</a></div>
+                    </div>
+                    <div class="review-body">
+                        <p>
+                            @item.comment1
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+}
+

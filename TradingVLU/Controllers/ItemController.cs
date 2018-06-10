@@ -29,16 +29,21 @@ namespace TradingVLU.Controllers
             using (vlutrading3545Entities db = new vlutrading3545Entities())
             {
                 var item = db.items.FirstOrDefault(x => x.id == id);
+                Session["Item"] = item.id;
+                var cmt = db.Comments.Where(x => x.id_item == id);
+                var count =cmt.Count();
                 if(item == null)
                 {
                     //return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                     return HttpNotFound();
                 }
-
+                ViewBag.Count = count;
                 ViewBag.DetailItem = item;
-                          }
-            ViewBag.IdItem = id;
-            return View();
+                ViewBag.cmt = cmt.ToList();
+                ViewBag.IdItem = id;
+                return View(cmt.ToList());
+            }
+
         }
 
         public ActionResult list()
@@ -56,15 +61,15 @@ namespace TradingVLU.Controllers
                 using (vlutrading3545Entities db = new vlutrading3545Entities())
                 {
                     var item = db.items.FirstOrDefault(x => x.id == ID);
-                    var username = db.users.FirstOrDefault(x => x.id == userID).name;
+                    var name = db.users.FirstOrDefault(x => x.id == userID).name;
                     //item.status = 2;
                     Order nOrder = new Order();
                     nOrder.item_id = ID;
-                    nOrder.user_id = userID;
+                    nOrder.user_id = userID;           
                     nOrder.status = 0;
                     //
                     nOrder.item_name = item.item_name;
-                    nOrder.username = username;
+                    nOrder.name = name;
                     //
                     db.Orders.Add(nOrder);
                     db.SaveChanges();
@@ -127,5 +132,40 @@ namespace TradingVLU.Controllers
             }
         }
 
+        //public ActionResult Showcmt()
+        //{
+        //    int ID = (int)Session["Item"];
+        //    using (vlutrading3545Entities db = new vlutrading3545Entities())
+        //    {
+        //        var model = db.Comments.Where(x => x.id_item == ID).ToList();
+        //        return PartialView(model);
+        //    }
+        //}
+
+        public ActionResult Comments(string masp, string cmt)
+        {
+
+            if (Session["userID"] != null)
+            {
+                int userID = int.Parse(Session["userID"].ToString());
+                int ID = int.Parse(masp);                
+                using (vlutrading3545Entities db = new vlutrading3545Entities())
+                {
+                    var name = db.users.FirstOrDefault(x => x.id == userID).name;
+                    Comment nCom = new Comment();
+                    nCom.id_item = ID;
+                    nCom.comment1 = cmt;
+                    nCom.id_user = userID;
+                    nCom.name = name;
+                    db.Comments.Add(nCom);
+                    db.SaveChanges();
+                }
+                return RedirectToAction("detail", "Item", new { id = ID });
+            }
+            else
+            {
+                return RedirectToAction("Login", "User");
+            }
+        }
     }
 }
