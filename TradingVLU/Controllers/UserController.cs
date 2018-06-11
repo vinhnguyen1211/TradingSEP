@@ -146,13 +146,18 @@ namespace TradingVLU.Controllers
                     var user = db.users.FirstOrDefault(x => x.username == userLogin.username);
                     if(user.password == hashPwd(userLogin.password) && user.is_active== 1)
                     {
-                        
                         Session["userLogged"] = user;
                         Session["userID"] = user.id;
+                        Session["Role"] = user.role;
                         updateLastLoginTimeAndIp();
                         ViewBag.SuccessMessage = "Successful Logged";
                         ViewBag.LoggedStatus = true;
-
+                        if (Convert.ToInt32(Session["Role"]) == 2 )
+                            return Redirect("http://localhost:50166/Admin/User");
+                        else if (Convert.ToInt32(Session["Role"]) == 1)
+             
+                        return RedirectToAction("Index", "Home");
+                
                     }
                     else if (user.password == hashPwd(userLogin.password) && user.is_active == 0)
                     {

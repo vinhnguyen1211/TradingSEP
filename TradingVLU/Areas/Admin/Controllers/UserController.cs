@@ -14,7 +14,7 @@ namespace TradingVLU.Areas.Admin.Controllers
     {
         vlutrading3545Entities db = new vlutrading3545Entities();
         // GET: Admin/User
-        public ActionResult Index()
+        public ActionResult Index() 
         {
             var user = db.users.OrderByDescending(x => x.id).ToList();
             return View(user);
