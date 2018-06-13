@@ -148,6 +148,7 @@ namespace TradingVLU.Controllers
                     {
                         
                         Session["userLogged"] = user;
+                        Session["username"] = user.username;
                         Session["userID"] = user.id;
                         updateLastLoginTimeAndIp();
                         ViewBag.SuccessMessage = "Successful Logged";

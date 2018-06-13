@@ -338,7 +338,6 @@
     <Content Include="Views\Home\index.cshtml" />
     <Content Include="Views\Shared\_Layout_Navigation_Slider.cshtml" />
     <Content Include="Views\Item\index.cshtml" />
-    <Content Include="Views\Item\list.cshtml" />
     <Content Include="Views\Item\detail.cshtml" />
     <Content Include="Views\User\Index.cshtml" />
     <Content Include="Views\User\register.cshtml" />
@@ -351,6 +350,7 @@
     <Content Include="Views\User\ForgotPassword.cshtml" />
     <Content Include="Views\User\createnew.cshtml" />
     <Content Include="Views\User\ChangePassword.cshtml" />
+    <Content Include="Views\Item\list.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
