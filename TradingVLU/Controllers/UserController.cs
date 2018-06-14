@@ -154,10 +154,12 @@ namespace TradingVLU.Controllers
                         ViewBag.LoggedStatus = true;
                         if (Convert.ToInt32(Session["Role"]) == 2 )
                             return Redirect("http://localhost:50166/Admin/User");
-                        else if (Convert.ToInt32(Session["Role"]) == 1)
-             
-                        return RedirectToAction("Index", "Home");
-                
+                        if (Convert.ToInt32(Session["Role"]) == 1002)
+                            return Redirect("http://localhost:50166/manageitem/approve");
+
+                        //else if (Convert.ToInt32(Session["Role"]) == 1)
+                        //    return RedirectToAction("Index", "Home");
+
                     }
                     else if (user.password == hashPwd(userLogin.password) && user.is_active == 0)
                     {
