@@ -14,13 +14,20 @@ namespace TradingVLU.Models
     
     public partial class Order
     {
-        public int item_id { get; set; }
-        public int user_id { get; set; }
-        public int status { get; set; }
-        public string item_name { get; set; }
-        public string name { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Order()
+        {
+            this.order_detail = new HashSet<order_detail>();
+        }
     
-        public virtual item item { get; set; }
+        public int orderID { get; set; }
+        public int buyerID { get; set; }
+        public int status { get; set; }
+        public string buyer_name { get; set; }
+        public Nullable<System.DateTime> orderdate { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<order_detail> order_detail { get; set; }
         public virtual user user { get; set; }
     }
 }

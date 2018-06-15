@@ -25,6 +25,8 @@ namespace TradingVLU.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<order_detail> order_detail { get; set; }
+        public virtual DbSet<tempshoppingcart> tempshoppingcarts { get; set; }
         public virtual DbSet<Comment> Comments { get; set; }
         public virtual DbSet<item> items { get; set; }
         public virtual DbSet<item_status> item_status { get; set; }
