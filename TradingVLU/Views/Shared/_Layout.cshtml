@@ -86,14 +86,14 @@
                     <!-- /Logo -->
                     <!-- Search -->
                     <div class="header-search">
-                        <form class="topsearch-form" role="search" action="@Url.Action("Search","Home")" method="post">
-                            <input class="input search-input" type="text" placeholder="Enter your keyword" name="Search">
+                        <form class="topsearch-form" role="search" action="@Url.Action("Search","Home")" method="get">
+                            <input class="input search-input" type="text" placeholder="Enter your keyword" name="text">
                             <select class="input search-categories">
                                 <option value="0">All Categories</option>
                                 <option value="1">Category 01</option>
                                 <option value="1">Category 02</option>
                             </select>
-                            <button class="search-btn"><i class="fa fa-search"></i></button>
+                            <button class="search-btn" type="submit"><i class="fa fa-search"></i></button>
                         </form>
                     </div>
                     <!-- /Search -->
@@ -140,6 +140,7 @@
                                     <li><a href="#"><i class="fa fa-check"></i> Checkout</a></li>
                                     <li><a href="@Url.Action("account_settings","User")"><i class="fa fa-cog"></i> Settings</a></li>
                                     <li><a href="@Url.Action("ChangePassword","User")"><i class="fa fa-cog"></i> Change Password</a></li>
+                                    <li><a href="@Url.Action("add","ItemManagement")"><i class="fa fa-cog"></i> Post Item </a></li>
                                     <li><a href="@Url.Action("logout","User")"><i class="fa fa-sign-out"></i> Logout</a></li>
 }
 else

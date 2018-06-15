@@ -37,12 +37,13 @@ namespace TradingVLU.Controllers
 
             return View();
         }
-        [HttpPost]
-        public ActionResult Search(string Search)
-        {
-            var product = db.items.Where(x => x.item_name.ToLower().Contains(Search.ToLower())).ToList();
 
-            if (product.Count() > 0)
+        [Route("search")]
+        public ActionResult Search(string text)
+        {
+            var itemsz = db.items.Where(x => x.item_name.ToLower().Contains(text.ToLower())).ToList();
+
+            if (itemsz.Count() > 0)
             {
                 ViewBag.Message = "  ";
 
@@ -52,8 +53,8 @@ namespace TradingVLU.Controllers
                 ViewBag.Message = "No Item found";
 
             }
-            ViewData["project"] = product;
-            return View();
+            ViewData["Item"] = itemsz;
+            return View(itemsz);
         }
     }
 }
