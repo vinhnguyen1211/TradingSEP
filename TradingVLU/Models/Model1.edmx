@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="vlutrading3545Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="vlutrading3545Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="order_detail">
           <Key>
             <PropertyRef Name="orderID" />
@@ -18,9 +18,9 @@
           <Key>
             <PropertyRef Name="temporderid" />
           </Key>
-          <Property Name="temporderid" Type="int" Nullable="false" />
-          <Property Name="item_id" Type="int" Nullable="false" />
-          <Property Name="item_name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="temporderid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="item_id" Type="int" />
+          <Property Name="item_name" Type="nvarchar" MaxLength="100" />
           <Property Name="quantity" Type="int" />
         </EntityType>
         <EntityType Name="Comment">
@@ -331,8 +331,7 @@
             <End Role="user" EntitySet="user" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="vlutrading3545Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -352,8 +351,8 @@
             <PropertyRef Name="temporderid" />
           </Key>
           <Property Name="temporderid" Type="Int32" Nullable="false" />
-          <Property Name="item_id" Type="Int32" Nullable="false" />
-          <Property Name="item_name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="item_id" Type="Int32" />
+          <Property Name="item_name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="quantity" Type="Int32" />
         </EntityType>
         <EntityType Name="Comment">

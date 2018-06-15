@@ -15,7 +15,7 @@ namespace TradingVLU.Models
     public partial class tempshoppingcart
     {
         public int temporderid { get; set; }
-        public int item_id { get; set; }
+        public Nullable<int> item_id { get; set; }
         public string item_name { get; set; }
         public Nullable<int> quantity { get; set; }
     }

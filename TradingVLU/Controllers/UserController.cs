@@ -223,6 +223,7 @@ namespace TradingVLU.Controllers
         {
             updateLastLogoutTimeAndIp();
             Session["userLogged"] = null;
+            ViewBag.Cart = null;
             return Redirect(Request.UrlReferrer.ToString());
         }
 
