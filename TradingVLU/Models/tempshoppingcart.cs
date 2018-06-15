@@ -18,5 +18,6 @@ namespace TradingVLU.Models
         public Nullable<int> item_id { get; set; }
         public string item_name { get; set; }
         public Nullable<int> quantity { get; set; }
+        public Nullable<decimal> price { get; set; }
     }
 }

@@ -170,7 +170,7 @@
                                             </div>
                                             <strong class="text-uppercase">My Cart:</strong>
                                             <br>
-                                            <span>Calculating</span>
+                                            <span>@ViewBag.CartTotalPrice $</span>
                                         }
                                         else
                                         {
@@ -201,7 +201,7 @@
                                                                         <img src="~/Content/img/thumb-product01.jpg" alt="">
                                                                     </div>*@
                                                                 <div class="product-body">
-                                                                    <h3 class="product-price">...$ <span class="qty">x @item.quantity</span></h3>
+                                                                    <h3 class="product-price">@item.price $ <span class="qty">x @item.quantity</span></h3>
                                                                     <h2 class="product-name"><a href="#">@item.item_name</a></h2>
                                                                 </div>
                                                                 <button class="cancel-btn"><i class="fa fa-trash"></i></button>

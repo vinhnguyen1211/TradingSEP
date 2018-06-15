@@ -28,7 +28,7 @@
             </div>
          
             <!-- section title -->
-            @foreach(var item in itemList)
+            @foreach (var item in itemList)
             {
                 <!-- Product Single -->
                 <div class="col-md-3 col-sm-6 col-xs-6">
@@ -60,9 +60,9 @@
                             </div>
                             <h2 class="product-name"><a href="~/item/detail/@item.id">@item.item_name</a></h2>
                             <div class="product-btns">
-                                <button class="main-btn icon-btn"><i class="fa fa-heart"></i></button>
-                                <button class="main-btn icon-btn"><i class="fa fa-exchange"></i></button>
-                                <button class="primary-btn add-to-cart"><i class="fa fa-shopping-cart"></i> Add to Cart</button>
+                                <form action="~/item/Order/@item.id">
+                                    <button class="primary-btn add-to-cart" type="submit"><i class="fa fa-shopping-cart"></i> Add to Cart</button>
+                                </form>
                             </div>
                         </div>
                     </div>

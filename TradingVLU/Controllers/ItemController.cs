@@ -204,7 +204,7 @@ namespace TradingVLU.Controllers
                         {
                             item_name = product.item_name,
                             item_id = product.id,
-                            //UnitPrice = product.UnitPrice,
+                            price = product.price,
                             quantity = 1
                         };
 

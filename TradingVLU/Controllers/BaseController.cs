@@ -13,9 +13,9 @@ namespace TradingVLU.Controllers
         // GET: Base
         public BaseController()
         {
-                //ViewBag.CartTotalPrice = CartTotalPrice;
-                ViewBag.Cart = Cart;
-                ViewBag.CartUnits = Cart.Count;
+            ViewBag.CartTotalPrice = CartTotalPrice;
+            ViewBag.Cart = Cart;
+            ViewBag.CartUnits = Cart.Count;
         }
 
         private List<tempshoppingcart> Cart
@@ -26,12 +26,15 @@ namespace TradingVLU.Controllers
             }
         }
 
-        //private decimal CartTotalPrice
-        //{
-        //    get
-        //    {
-        //        return Cart.Sum(c => c.quantity * c.UnitPrice);
-        //    }
-        //}
+        private decimal CartTotalPrice
+        {
+            get
+            {
+                decimal? temp = Cart.Sum(c => c.quantity * c.price);
+                decimal myDecimal = temp ?? 0;
+                return myDecimal;
+            }
+            
+        }
     }
 }

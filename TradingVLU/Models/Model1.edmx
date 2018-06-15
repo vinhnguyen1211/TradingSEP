@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="vlutrading3545Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="vlutrading3545Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="order_detail">
           <Key>
             <PropertyRef Name="orderID" />
@@ -13,6 +13,7 @@
           <Property Name="orderID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="item_id" Type="int" Nullable="false" />
           <Property Name="quantity" Type="int" />
+          <Property Name="totalprice" Type="money" />
         </EntityType>
         <EntityType Name="tempshoppingcart">
           <Key>
@@ -22,6 +23,7 @@
           <Property Name="item_id" Type="int" />
           <Property Name="item_name" Type="nvarchar" MaxLength="100" />
           <Property Name="quantity" Type="int" />
+          <Property Name="price" Type="money" />
         </EntityType>
         <EntityType Name="Comment">
           <Key>
@@ -54,7 +56,7 @@
           <Property Name="detail_image3" Type="varchar(max)" />
           <Property Name="detail_image4" Type="varchar(max)" />
           <Property Name="detail_image5" Type="varchar(max)" />
-          <Property Name="price" Type="decimal" Precision="18" Scale="3" />
+          <Property Name="price" Type="money" />
           <Property Name="approve" Type="int" />
         </EntityType>
         <EntityType Name="item_status">
@@ -331,7 +333,8 @@
             <End Role="user" EntitySet="user" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="vlutrading3545Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -343,6 +346,7 @@
           <Property Name="orderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="item_id" Type="Int32" Nullable="false" />
           <Property Name="quantity" Type="Int32" />
+          <Property Name="totalprice" Type="Decimal" Precision="19" Scale="4" />
           <NavigationProperty Name="item" Relationship="Self.FK_order_detail_item1" FromRole="order_detail" ToRole="item" />
           <NavigationProperty Name="Order" Relationship="Self.FK_order_detail_Order1" FromRole="order_detail" ToRole="Order" />
         </EntityType>
@@ -350,10 +354,11 @@
           <Key>
             <PropertyRef Name="temporderid" />
           </Key>
-          <Property Name="temporderid" Type="Int32" Nullable="false" />
+          <Property Name="temporderid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="item_id" Type="Int32" />
           <Property Name="item_name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="quantity" Type="Int32" />
+          <Property Name="price" Type="Decimal" Precision="19" Scale="4" />
         </EntityType>
         <EntityType Name="Comment">
           <Key>
@@ -388,7 +393,7 @@
           <Property Name="detail_image3" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="detail_image4" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="detail_image5" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="price" Type="Decimal" Precision="18" Scale="3" />
+          <Property Name="price" Type="Decimal" Precision="19" Scale="4" />
           <Property Name="approve" Type="Int32" />
           <NavigationProperty Name="order_detail" Relationship="Self.FK_order_detail_item1" FromRole="item" ToRole="order_detail" />
           <NavigationProperty Name="Comments" Relationship="Self.FK_Comment_item" FromRole="item" ToRole="Comment" />
@@ -695,6 +700,7 @@
                 <ScalarProperty Name="orderID" ColumnName="orderID" />
                 <ScalarProperty Name="item_id" ColumnName="item_id" />
                 <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="totalprice" ColumnName="totalprice" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -705,6 +711,7 @@
                 <ScalarProperty Name="item_id" ColumnName="item_id" />
                 <ScalarProperty Name="item_name" ColumnName="item_name" />
                 <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="price" ColumnName="price" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

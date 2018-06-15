@@ -17,6 +17,7 @@ namespace TradingVLU.Models
         public int orderID { get; set; }
         public int item_id { get; set; }
         public Nullable<int> quantity { get; set; }
+        public Nullable<decimal> totalprice { get; set; }
     
         public virtual item item { get; set; }
         public virtual Order Order { get; set; }
