@@ -147,6 +147,7 @@ namespace TradingVLU.Controllers
                     if(user.password == hashPwd(userLogin.password) && user.is_active== 1)
                     {
                         Session["userLogged"] = user;
+                        Session["username"] = user.username;
                         Session["userID"] = user.id;
                         Session["Role"] = user.role;
                         updateLastLoginTimeAndIp();
