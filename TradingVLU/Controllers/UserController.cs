@@ -16,6 +16,7 @@ namespace TradingVLU.Controllers
     public class UserController : Controller
     {
         vlutrading3545Entities db = new vlutrading3545Entities();
+
         // GET: User
         public ActionResult Index()
         {
@@ -141,7 +142,7 @@ namespace TradingVLU.Controllers
         {
             using(vlutrading3545Entities db = new vlutrading3545Entities())
             {
-                if(db.users.Any(x => x.username == userLogin.username))
+                if (db.users.Any(x => x.username == userLogin.username))
                 {
                     var user = db.users.FirstOrDefault(x => x.username == userLogin.username);
                     if(user.password == hashPwd(userLogin.password) && user.is_active== 1)
@@ -149,18 +150,13 @@ namespace TradingVLU.Controllers
                         Session["userLogged"] = user;
                         Session["username"] = user.username;
                         Session["userID"] = user.id;
-                        Session["Role"] = user.role;
                         updateLastLoginTimeAndIp();
                         ViewBag.SuccessMessage = "Successful Logged";
                         ViewBag.LoggedStatus = true;
-                        if (Convert.ToInt32(Session["Role"]) == 2 )
-                            return Redirect("http://localhost:50166/Admin/User");
-                        if (Convert.ToInt32(Session["Role"]) == 1002)
-                            return Redirect("http://localhost:50166/manageitem/approve");
-
-                        //else if (Convert.ToInt32(Session["Role"]) == 1)
-                        //    return RedirectToAction("Index", "Home");
-
+                        if (user.role == 2 )
+                            return RedirectToAction("Index", "User", new { Area="Admin" });
+                        if (user.role == 1002)
+                            return RedirectToAction("approve", "ItemManagement");
                     }
                     else if (user.password == hashPwd(userLogin.password) && user.is_active == 0)
                     {
@@ -235,11 +231,11 @@ namespace TradingVLU.Controllers
                 
                 return RedirectToAction("login", "User");
             }
-            var user = Session["userLogged"] as TradingVLU.Models.user;
+            else {
 
             using(vlutrading3545Entities db = new vlutrading3545Entities())
             {
-
+                var user = Session["userLogged"] as TradingVLU.Models.user;
                 ViewBag.user_question = db.users.Join(db.security_question, 
                                             usr => user.id_security_question, 
                                             ques => ques.id, 
@@ -256,6 +252,7 @@ namespace TradingVLU.Controllers
 
 
             return View();
+            }
         }
 
         [NonAction]
