@@ -371,7 +371,6 @@
     <Content Include="Content\img\banner13.jpg" />
     <Content Include="Content\img\banner14.jpg" />
     <Content Include="Content\img\banner15.jpg" />
-    <Content Include="Content\img\logo.png" />
     <Content Include="Content\img\main-product01.jpg" />
     <Content Include="Content\img\main-product02.jpg" />
     <Content Include="Content\img\main-product03.jpg" />
@@ -388,6 +387,7 @@
     <Content Include="Content\img\thumb-product02.jpg" />
     <Content Include="Content\img\thumb-product03.jpg" />
     <Content Include="Content\img\thumb-product04.jpg" />
+    <Content Include="Content\img\VLU-Trading-Logo2.png" />
     <Content Include="Content\js\bootstrap.min.js" />
     <Content Include="Content\js\jquery.min.js" />
     <Content Include="Content\js\jquery.zoom.min.js" />
