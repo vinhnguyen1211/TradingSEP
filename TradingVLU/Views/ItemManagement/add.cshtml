@@ -13,9 +13,14 @@
 
 <div class="container">
     <form action="/manageitem/add" enctype="multipart/form-data" method="post">
-        <div class="form-group" style="font-size:1.5em;">
+        <div class="form-group" style="font-size:1.5em; text-align: center;">
             <div>
-                <span class="label label-danger">@ViewBag.ErrorMessage</span>
+                <span class="label label-success">@ViewBag.SuccessMessage</span>
+            </div>
+        </div>
+        <div class="form-group" style="font-size:1.5em; text-align: center">
+            <div>
+                <span class="label label-danger">@ViewBag.ErrorMessage</span>                
             </div>
         </div>
         <div class="row">
@@ -33,9 +38,9 @@
         <div class="form-group">
             <label for="email" class="cols-sm-2 control-label">Description</label>
             <div class="cols-sm-10">
-                <textarea class="form-control editor" id="" name="description" required>Enter text here...</textarea>                
+                <textarea class="form-control editor" id="" name="description" required>Enter text here...</textarea>
             </div>
-           
+
         </div>
 
         <div class="row">
@@ -69,9 +74,9 @@
                         <span class="input-group-addon"><i class="fa fa-list" aria-hidden="true"></i></span>
                         <select class="form-control" name="status" id="status" required>
                             @foreach (var obj in statusList)
-                            {
-                                <option value="@obj.id">@obj.status</option>
-                            }
+                        {
+                            <option value="@obj.id">@obj.status</option>
+                    }
                         </select>
                     </div>
                 </div>
