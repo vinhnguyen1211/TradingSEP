@@ -1,6 +1,12 @@
-﻿
+﻿@model IEnumerable<TradingVLU.Models.item>
+
 @{
     ViewBag.Title = "List";
+    if(Convert.ToString(Session["userLogged"]) == "")
+    {
+        Response.Redirect("/");
+    }
+
 }
 
 <!-- BREADCRUMB -->
@@ -15,3 +21,108 @@
     </div>
 </div>
 <!-- /BREADCRUMB -->
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.item_name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.quantity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.create_by)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.create_date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.update_by)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.update_date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.index_image)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.detail_image1)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.detail_image2)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.detail_image3)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.detail_image4)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.detail_image5)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.price)
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            if (Session["username"].ToString() == item.create_by)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.item_name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.quantity)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.create_by)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.create_date)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.update_by)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.update_date)
+                    </td>
+                    <td>
+                        <img src="~/Content/img/@item.index_image" style="width: 150px" />
+                        @*@Html.DisplayFor(modelItem => item.index_image)*@
+                    </td>
+                    <td>
+                        <img src="~/Content/img/@item.detail_image1" style="width: 150px" />
+                        @*@Html.DisplayFor(modelItem => item.detail_image1)*@
+                    </td>
+                    <td>
+                        <img src="~/Content/img/@item.detail_image2" style="width: 150px" />
+                        @*@Html.DisplayFor(modelItem => item.detail_image2)*@
+                    </td>
+                    <td>
+                        <img src="~/Content/img/@item.detail_image3" style="width: 150px" />
+                        @*@Html.DisplayFor(modelItem => item.detail_image3)*@
+                    </td>
+                    <td>
+                        <img src="~/Content/img/@item.detail_image4" style="width: 150px" />
+                        @*@Html.DisplayFor(modelItem => item.detail_image4)*@
+                    </td>
+                    <td>
+                        <img src="~/Content/img/@item.detail_image5" style="width: 150px" />
+                        @*@Html.DisplayFor(modelItem => item.detail_image5)*@
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.price)
+                    </td>
+                </tr>
+            }
+        }
+
+
+    </table>

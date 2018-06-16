@@ -46,9 +46,15 @@ namespace TradingVLU.Controllers
 
         }
 
+        [HttpGet]
         public ActionResult list()
         {
-            return View();
+            using (vlutrading3545Entities db = new vlutrading3545Entities())
+            {
+                var itemslist = db.items.ToList();
+                return View(itemslist);
+            }
+           
         }
 
         //[Route("Order/{id:int:min(1)}")]
