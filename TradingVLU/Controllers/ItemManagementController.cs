@@ -26,11 +26,11 @@ namespace TradingVLU.Controllers
 
         public ActionResult add()
         {
-            //if (Session["userLogged"] == null)
-            //{
-            //    return RedirectToAction("account_settings", "User");
-            //}
-            using(vlutrading3545Entities db = new vlutrading3545Entities())
+            if (Session["userLogged"] == null)
+            {
+                return RedirectToAction("account_settings", "User");
+            }
+            using (vlutrading3545Entities db = new vlutrading3545Entities())
             {
                 var statusList = db.item_status.Select(x => new { x.id, x.status }).ToList();
                 ViewBag.statusList = statusList;
