@@ -81,7 +81,7 @@ namespace TradingVLU.Controllers
                     }
                     else
                     {
-                        string ip_login = "";
+                        string ip_login = String.Empty;
                         if(Request.UserHostAddress != null)
                         {
                             ip_login = Request.UserHostAddress;
@@ -145,8 +145,13 @@ namespace TradingVLU.Controllers
                 if (db.users.Any(x => x.username == userLogin.username))
                 {
                     var user = db.users.FirstOrDefault(x => x.username == userLogin.username);
-                    if(user.password == hashPwd(userLogin.password) && user.is_active== 1)
+                    if(user.password == hashPwd(userLogin.password))
                     {
+                        if(user.is_active != 1)
+                        {
+                            ViewBag.DuplicateMessage = "Your account has not been activated yet. \nContact Admin for details";
+                            return View();
+                        }
                         Session["userLogged"] = user;
                         Session["username"] = user.username;
                         Session["userID"] = user.id;
@@ -158,19 +163,10 @@ namespace TradingVLU.Controllers
                         if (user.role == 1002)
                             return RedirectToAction("approve", "ItemManagement");
                     }
-                    else if (user.password == hashPwd(userLogin.password) && user.is_active == 0)
-                    {
-                        ViewBag.DuplicateMessage = "Your Account Isn't Active!";
-                    }
-                    else if (user.password != hashPwd(userLogin.password))
-                    {
-                        ViewBag.DuplicateMessage = "Login failed!";
-                    }
-                    
                 }
                 else
                 {
-                    ViewBag.DuplicateMessage = "Login failed!";
+                    ViewBag.DuplicateMessage = "Incorrect username or password";
                 }
             }
             if(Session["userLogged"] != null)
@@ -282,7 +278,7 @@ namespace TradingVLU.Controllers
             var user = Session["userLogged"] as TradingVLU.Models.user;
             if (user != null)
             {
-                string ip_logout = "default";
+                string ip_logout = String.Empty;
                 if (Request.UserHostAddress != null)
                 {
                     ip_logout = Request.UserHostAddress;
