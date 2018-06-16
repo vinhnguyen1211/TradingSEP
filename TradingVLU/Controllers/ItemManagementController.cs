@@ -117,11 +117,23 @@ namespace TradingVLU.Controllers
         public ActionResult add(String name, String description, int quantity, int price, int status, HttpPostedFileBase index_image,
                                 IEnumerable<HttpPostedFileBase> detail_images)
         {
+
+            if (Session["userLogged"] == null)
+            {
+                return RedirectToAction("account_settings", "User");
+            }
+            
             using (vlutrading3545Entities db = new vlutrading3545Entities())
             {
                 //list status
                 var statusList = db.item_status.Select(x => new { x.id, x.status }).ToList();
                 ViewBag.statusList = statusList;
+                //validate: require length of item name >= 10 characters
+                if (name.Trim().Length < 10)
+                {
+                    ViewBag.ErrorMessage = "Name of item requires at lease 10 characters";
+                    return View();
+                }
                 //
                 string index_img = String.Empty;
                 if (index_image != null && index_image.ContentLength > 0)
@@ -165,6 +177,7 @@ namespace TradingVLU.Controllers
                     }
                 }
 
+                var user = Session["userLogged"] as TradingVLU.Models.user;
 
                 item item = new item
                 {
@@ -174,10 +187,10 @@ namespace TradingVLU.Controllers
                     price = price,
                     status = status,
                     index_image = index_img,
-                    seller_id = 1,
-                    create_by = "vinh",
+                    seller_id = user.id,
+                    create_by = user.name,
                     create_date = DateTime.Now,
-                    update_by = "vinh",
+                    update_by = user.name,
                     update_date = DateTime.Now,
                     detail_image1 = detail_img[0],
                     detail_image2 = detail_img[1],
@@ -229,9 +242,7 @@ namespace TradingVLU.Controllers
                 //}
             }
 
-
-
-
+            ViewBag.SuccessMessage = "Created new item successfully!";
             return View();
         }
 
