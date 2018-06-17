@@ -4,22 +4,14 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="b92d4f10ff01453683d42bf9fbd39a51" Name="Diagram1">
-        <EntityTypeShape EntityType="vlutrading3545Model.order_detail" Width="1.5" PointX="10.5" PointY="11.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="vlutrading3545Model.tempshoppingcart" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="vlutrading3545Model.Comment" Width="1.5" PointX="5.25" PointY="7.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="vlutrading3545Model.item" Width="1.5" PointX="8.25" PointY="6.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="vlutrading3545Model.item_status" Width="1.5" PointX="6" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="vlutrading3545Model.Order" Width="1.5" PointX="5.25" PointY="15.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="vlutrading3545Model.role" Width="1.5" PointX="0.75" PointY="7.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="vlutrading3545Model.security_question" Width="1.5" PointX="0.75" PointY="5.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="vlutrading3545Model.sysdiagram" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="vlutrading3545Model.user" Width="1.5" PointX="3" PointY="6.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="vlutrading3545Model.user_personal_information" Width="1.5" PointX="5.25" PointY="18.875" IsExpanded="true" />
-        <AssociationConnector Association="vlutrading3545Model.FK_order_detail_item1" ManuallyRouted="false" />
-        <AssociationConnector Association="vlutrading3545Model.FK_order_detail_Order1" ManuallyRouted="false" />
-        <AssociationConnector Association="vlutrading3545Model.FK_Comment_item" ManuallyRouted="false" />
-        <AssociationConnector Association="vlutrading3545Model.FK_Comment_user" ManuallyRouted="false" />
+      <Diagram DiagramId="c5822b1ed06f4b71916be29812f378e8" Name="Diagram1">
+        <EntityTypeShape EntityType="vlutrading3545Model.item" Width="1.5" PointX="8.25" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="vlutrading3545Model.item_status" Width="1.5" PointX="6" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="vlutrading3545Model.order" Width="1.5" PointX="5.25" PointY="17" IsExpanded="true" />
+        <EntityTypeShape EntityType="vlutrading3545Model.role" Width="1.5" PointX="0.75" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="vlutrading3545Model.security_question" Width="1.5" PointX="0.75" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="vlutrading3545Model.user" Width="1.5" PointX="3" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="vlutrading3545Model.user_personal_information" Width="1.5" PointX="5.25" PointY="19.875" IsExpanded="true" />
         <AssociationConnector Association="vlutrading3545Model.FK_item_item_status" ManuallyRouted="false" />
         <AssociationConnector Association="vlutrading3545Model.FK_item_userBuyerId" ManuallyRouted="false" />
         <AssociationConnector Association="vlutrading3545Model.FK_item_userSellerId" ManuallyRouted="false" />
@@ -27,6 +19,13 @@
         <AssociationConnector Association="vlutrading3545Model.FK_user_roleId" ManuallyRouted="false" />
         <AssociationConnector Association="vlutrading3545Model.FK_user_security_questionId" ManuallyRouted="false" />
         <AssociationConnector Association="vlutrading3545Model.FK_user_personal_information_userId" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="vlutrading3545Model.order_detail" Width="1.5" PointX="10.875" PointY="11.875" />
+        <EntityTypeShape EntityType="vlutrading3545Model.tempshoppingcart" Width="1.5" PointX="0.75" PointY="0.75" />
+        <AssociationConnector Association="vlutrading3545Model.FK_order_detail_item1" />
+        <AssociationConnector Association="vlutrading3545Model.FK_order_detail_Order1" />
+        <EntityTypeShape EntityType="vlutrading3545Model.comment" Width="1.5" PointX="5.875" PointY="8.125" />
+        <AssociationConnector Association="vlutrading3545Model.FK_Comment_item" />
+        <AssociationConnector Association="vlutrading3545Model.FK_Comment_user" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
