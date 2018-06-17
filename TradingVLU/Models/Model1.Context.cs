@@ -12,6 +12,8 @@ namespace TradingVLU.Models
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class vlutrading3545Entities : DbContext
     {
@@ -25,16 +27,41 @@ namespace TradingVLU.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<order_detail> order_detail { get; set; }
-        public virtual DbSet<tempshoppingcart> tempshoppingcarts { get; set; }
-        public virtual DbSet<Comment> Comments { get; set; }
         public virtual DbSet<item> items { get; set; }
         public virtual DbSet<item_status> item_status { get; set; }
-        public virtual DbSet<Order> Orders { get; set; }
+        public virtual DbSet<order> orders { get; set; }
         public virtual DbSet<role> roles { get; set; }
         public virtual DbSet<security_question> security_question { get; set; }
-        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<user> users { get; set; }
         public virtual DbSet<user_personal_information> user_personal_information { get; set; }
+        public virtual DbSet<order_detail> order_detail { get; set; }
+        public virtual DbSet<tempshoppingcart> tempshoppingcarts { get; set; }
+        public virtual DbSet<comment> comments { get; set; }
+    
+        public virtual int updateLastLogoutIpAddress(Nullable<int> userId, string ip_address)
+        {
+            var userIdParameter = userId.HasValue ?
+                new ObjectParameter("userId", userId) :
+                new ObjectParameter("userId", typeof(int));
+    
+            var ip_addressParameter = ip_address != null ?
+                new ObjectParameter("ip_address", ip_address) :
+                new ObjectParameter("ip_address", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("updateLastLogoutIpAddress", userIdParameter, ip_addressParameter);
+        }
+    
+        public virtual int updateLastLoginIpAddress(Nullable<int> userId, string ip_address)
+        {
+            var userIdParameter = userId.HasValue ?
+                new ObjectParameter("userId", userId) :
+                new ObjectParameter("userId", typeof(int));
+    
+            var ip_addressParameter = ip_address != null ?
+                new ObjectParameter("ip_address", ip_address) :
+                new ObjectParameter("ip_address", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("updateLastLoginIpAddress", userIdParameter, ip_addressParameter);
+        }
     }
 }

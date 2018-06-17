@@ -30,7 +30,7 @@ namespace TradingVLU.Controllers
             {
                 var item = db.items.FirstOrDefault(x => x.id == id);
                 Session["Item"] = item.id;
-                var cmt = db.Comments.Where(x => x.id_item == id);
+                var cmt = db.comments.Where(x => x.id_item == id);
                 var count =cmt.Count();
                 if(item == null)
                 {
@@ -157,12 +157,12 @@ namespace TradingVLU.Controllers
                 using (vlutrading3545Entities db = new vlutrading3545Entities())
                 {
                     var name = db.users.FirstOrDefault(x => x.id == userID).name;
-                    Comment nCom = new Comment();
+                    comment nCom = new comment();
                     nCom.id_item = ID;
-                    nCom.comment1 = cmt;
+                    nCom.comment_txt = cmt;
                     nCom.id_user = userID;
-                    nCom.name = name;
-                    db.Comments.Add(nCom);
+                    nCom.name_comment = name;
+                    db.comments.Add(nCom);
                     db.SaveChanges();
                 }
                 return RedirectToAction("detail", "Item", new { id = ID });

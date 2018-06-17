@@ -1,4 +1,4 @@
-﻿@model IEnumerable<TradingVLU.Models.Comment>
+﻿@model IEnumerable<TradingVLU.Models.comment>
 @{
     ViewBag.Title = "detail";
     var detailItem = ViewBag.DetailItem as TradingVLU.Models.item;
@@ -163,10 +163,10 @@
                                                 {
                                                     <div class="single-review">
                                                         <div class="review-heading">
-                                                            <div> <i class="fa fa-user-o"></i> @item.name </div>
+                                                            <div> <i class="fa fa-user-o"></i> @item.name_comment </div>
                                                         </div>
                                                         <div class="review-body">
-                                                            <p> @item.comment1</p>
+                                                            <p> @item.comment_txt</p>
                                                         </div>
                                                     </div>
                                                 }
