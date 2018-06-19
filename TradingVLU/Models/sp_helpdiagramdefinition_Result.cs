@@ -10,16 +10,10 @@
 namespace TradingVLU.Models
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class tempshoppingcart
+    public partial class sp_helpdiagramdefinition_Result
     {
-        public int temporderid { get; set; }
-        public int item_id { get; set; }
-        public string item_name { get; set; }
-        public Nullable<int> quantity { get; set; }
-        public Nullable<decimal> price { get; set; }
-        public int buyer_id { get; set; }
-        public string buyer_name { get; set; }
+        public Nullable<int> version { get; set; }
+        public byte[] definition { get; set; }
     }
 }

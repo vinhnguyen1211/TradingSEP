@@ -1,0 +1,202 @@
+﻿@model IEnumerable<TradingVLU.Models.tempshoppingcart>
+@{
+    ViewBag.Title = "CheckoutIndex";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+
+    body {
+        padding-top: 50px;
+        padding-bottom: 20px;
+    }
+
+    .body-content {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    .list-view {
+        display: flex;
+        flex-wrap: wrap
+    }
+
+    .list-item {
+        width: calc(100% / 3 - 34px);
+        margin: 20px 25px;
+        opacity: .8;
+        transition: .3s;
+        -webkit-transition: .3s;
+        padding: 20px;
+        border: 1px solid #2dbb9b;
+    }
+
+        .list-item:hover {
+            opacity: 1
+        }
+
+        .list-item:nth-child(3n+1) {
+            margin-left: 0;
+        }
+
+        .list-item:nth-child(3n) {
+            margin-right: 0
+        }
+
+        .list-item .p-cat {
+            color: #2dbb9b;
+            display: inline-block;
+            padding: 9px 0;
+            font-size: .8em;
+            font-weight: bold;
+        }
+
+        .list-item .p-brand {
+            color: #2dbb9b;
+            border: 1px solid #2dbb9b;
+            font-size: .8em;
+            font-weight: bold;
+            padding: 7px;
+            float: right;
+        }
+
+        .list-item .p-name {
+            display: block;
+            font-weight: bold;
+            margin: 5px 0;
+        }
+
+        .list-item .p-description {
+            /*font-size: 0.9em;*/
+            color: #808080;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .list-item .add-to-cart {
+            display: inline-block;
+            vertical-align: bottom;
+            margin-top: 10px;
+        }
+
+
+            .list-item .add-to-cart a {
+                border: 1px solid #2dbb9b;
+                padding: 10px;
+                font-weight: bold;
+                font-size: .8em;
+                margin: 0;
+                cursor: pointer;
+                text-decoration: none;
+                text-transform: uppercase;
+                color: #2dbb9b;
+            }
+
+                .list-item .add-to-cart a:hover {
+                    color: #fff;
+                    background: #2dbb9b;
+                }
+
+        .list-item .p-price {
+            color: #fff;
+            background: #2dbb9b;
+            font-weight: bold;
+            font-size: .9em;
+            padding: 10px;
+        }
+
+        .list-item .p-unit {
+            float: right;
+            font-weight: bold;
+            font-size: .8em;
+            vertical-align: bottom;
+        }
+
+    .cart-page {
+        width: 100%;
+        margin: 20px 0;
+        font-weight: bold;
+        color: #2f2f2f;
+    }
+
+        .cart-page th {
+            transition: .3s;
+            -webkit-transition: .3s
+        }
+
+            .cart-page th:hover {
+                background: rgba(45, 187, 155, 0.5);
+            }
+
+        .cart-page, .cart-page th, .cart-page td {
+            border: 1px solid #2dbb9b;
+            border-collapse: collapse;
+            text-align: center;
+            padding: 10px;
+        }
+
+            .cart-page .quantity {
+                vertical-align: middle;
+                background: #2dbb9b;
+                color: #fff;
+                font-weight: bold;
+                width: 30px;
+                height: 20px;
+                display: inline-block;
+                border-radius: 15px;
+                margin: 0 10px;
+            }
+
+            .cart-page .remove {
+                font-size: .7em;
+                text-transform: uppercase;
+                color: #ff6a00;
+                border: 1px solid #ff6a00;
+                padding: 3.5px 10px;
+                transition: .3s;
+                -webkit-transition: .3s;
+                border-radius: 15px;
+            }
+
+                .cart-page .remove:hover {
+                    background: #ff6a00;
+                    color: #fff;
+                }
+</style>
+<div class="container body-content">
+    <h2>Shopping Cart</h2>
+    @if (ViewBag.Cart.Count == 0)
+    {
+        <br />
+        <div id="EmptyDataMsg" class="alert alert-info">
+            <strong>Welcome!</strong> Your shopping cart is currently empty. Let's start shopping
+        </div>
+    }
+    else
+    {
+        <table class="cart-page">
+            @foreach (var item in ViewBag.Cart)
+            {
+                <tr>
+                    <td><span class="p-name">@item.item_name</span> </td>
+                    <td><span class="p-name">@String.Format("{0:c}", item.price)</span> </td>
+                    <td>
+                        <span class="p-name">@item.quantity</span>
+                        @*<a class="remove" onclick="Change(this, -1,  @item.item_id)">Remove</a>*@
+                        @*<button class="cancel-btn" ><i class="fa fa-trash"></i></button>*@
+                    </td>
+                    <td>
+                        <form action="~/item/RemoveCartItems/@item.item_id">
+                            <button class="remove" type="submit">Remove</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+            <tr><td>Total: </td><td id="totalPrice" colspan="2">@String.Format("{0:c}", ViewBag.CartTotalPrice)</td></tr>
+        </table>
+        <div class="button">
+            @Html.ActionLink("Clear Cart", "ClearCart", "item", null, new { @class = "btn btn-default" })
+            @Html.ActionLink("Order", "Order", "item", null, new { @class = "btn btn-info" })
+        </div>
+    }
+</div>

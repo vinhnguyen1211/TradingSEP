@@ -17,11 +17,11 @@ namespace TradingVLU.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public user()
         {
+            this.comments = new HashSet<comment>();
             this.items = new HashSet<item>();
             this.items1 = new HashSet<item>();
             this.orders = new HashSet<order>();
             this.user_personal_information = new HashSet<user_personal_information>();
-            this.comments = new HashSet<comment>();
         }
     
         public int id { get; set; }
@@ -43,6 +43,8 @@ namespace TradingVLU.Models
         public Nullable<System.DateTime> update_date { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<comment> comments { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<item> items { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<item> items1 { get; set; }
@@ -52,7 +54,5 @@ namespace TradingVLU.Models
         public virtual security_question security_question { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<user_personal_information> user_personal_information { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<comment> comments { get; set; }
     }
 }

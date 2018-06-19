@@ -272,54 +272,6 @@ namespace TradingVLU.Controllers
             }
         }
 
-        [Route("Order/{id:int:min(1)}")]
-        public ActionResult AddToCart(int id)
-        {
-            if (Session["userID"] != null)
-            {
-                addToCart(id);
-                //return RedirectToAction("Index");
-                return RedirectToAction("index", "item");
-            }
-            else
-            {
-                return RedirectToAction("Login", "User");
-            }
-
-        }
-
-        private void addToCart(int pId)
-        {
-            using (vlutrading3545Entities db = new vlutrading3545Entities())
-            {
-                // check if product is valid
-                item product = db.items.FirstOrDefault(p => p.id == pId);
-                if (product != null)
-                {
-                    // check if product already existed
-                    tempshoppingcart cart = db.tempshoppingcarts.FirstOrDefault(c => c.item_id == pId);
-                    if (cart != null)
-                    {
-                        cart.quantity++;
-                    }
-                    else
-                    {
-
-                        cart = new tempshoppingcart
-                        {
-                            item_name = product.item_name,
-                            item_id = product.id,
-                            price = product.price,
-                            quantity = 1
-                        };
-
-                        db.tempshoppingcarts.Add(cart);
-                    }
-                    //product.UnitsInStock--;
-                    db.SaveChanges();
-                }
-            }
-        }
     }
 }
             

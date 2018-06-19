@@ -141,7 +141,8 @@
 
                                             <li><a href="#"><i class="fa fa-user-o"></i> @Html.Raw(userLogged.name)</a></li>
                                             <li><a href="@Url.Action("myItems", "ItemManagement")?status=0"><i class="fa fa-heart-o"></i>Checkout My Post</a></li>
-                                            <li><a href="~/Item/listitem"><i class="fa fa-heart-o"></i> My Order</a></li>
+                                            <li><a href="~/Item/confirmorderlist"><i class="fa fa-heart-o"></i> My Order</a></li>
+                                             <li><a href="~/Item/CheckoutIndex"><i class="fa fa-check"></i> Checkout My Shopping Cart</a></li>
                                             <li><a href="@Url.Action("list", "Item")"><i class="fa fa-check"></i>My Items</a></li>
                                             <li><a href="@Url.Action("account_settings", "User")"><i class="fa fa-cog"></i> Settings</a></li>
                                             <li><a href="@Url.Action("ChangePassword", "User")"><i class="fa fa-cog"></i> Change Password</a></li>
@@ -160,30 +161,30 @@
                                 </ul>
                             </li>
                             <!-- /Account -->
-                            <!-- Cart -->
+                           <!-- Cart -->
                             <li class="header-cart dropdown default-dropdown">
                                 <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
                                     @{
                                         if (@userLogged != null)
                                         {
-                                            <div class="header-btns-icon">
-                                                <i class="fa fa-shopping-cart"></i>
-                                                <span class="qty"> @ViewBag.CartUnits </span>
-                                            </div>
-                                            <strong class="text-uppercase">My Cart:</strong>
-                                            <br>
-                                            <span>@ViewBag.CartTotalPrice $</span>
-                                        }
-                                        else
-                                        {
-                                            <div class="header-btns-icon">
-                                                <i class="fa fa-shopping-cart"></i>
-                                                <span class="qty">0</span>
-                                            </div>
-                                            <strong class="text-uppercase">My Cart:</strong>
-                                            <br>
-                                            <span>00.00$</span>
-                                        }
+                                        <div class="header-btns-icon">
+                                            <i class="fa fa-shopping-cart"></i>
+                                            <span class="qty"> @ViewBag.CartUnits </span>
+                                        </div>
+                                        <strong class="text-uppercase">My Cart:</strong>
+                                        <br>
+                                        <span>@ViewBag.CartTotalPrice $</span>
+                                }
+                                else
+                                {
+                                    <div class="header-btns-icon">
+                                        <i class="fa fa-shopping-cart"></i>
+                                        <span class="qty">0</span>
+                                    </div>
+                                    <strong class="text-uppercase">My Cart:</strong>
+                                    <br>
+                                    <span>00.00$</span>
+                            }
                                     }
                                 </a>
 
@@ -191,36 +192,39 @@
                                     <div id="shopping-cart">
                                         <div class="shopping-cart-list">
                                             @{
-                                                if (@userLogged != null)
+                                            if (@userLogged != null)
+                                            {
+                                                if (ViewBag.Cart != null)
                                                 {
-                                                    if (ViewBag.Cart != null)
+
+                                                    foreach (var item in ViewBag.Cart)
                                                     {
-
-                                                        foreach (var item in ViewBag.Cart)
-                                                        {
-                                                            <div class="product product-widget">
-                                                                @*<div class="product-thumb">
-                                                                        <img src="~/Content/img/thumb-product01.jpg" alt="">
-                                                                    </div>*@
-                                                                <div class="product-body">
-                                                                    <h3 class="product-price">@item.price $ <span class="qty">x @item.quantity</span></h3>
-                                                                    <h2 class="product-name"><a href="#">@item.item_name</a></h2>
-                                                                </div>
-                                                                <button class="cancel-btn"><i class="fa fa-trash"></i></button>
+                                                        <div class="product product-widget">
+                                                            @*<div class="product-thumb">
+                                                                <img src="~/Content/img/thumb-product01.jpg" alt="">
+                                                            </div>*@
+                                                            <div class="product-body">
+                                                                <h3 class="product-price">@item.price $ <span class="qty">x @item.quantity</span></h3>
+                                                                <h2 class="product-name"><a href="#">@item.item_name</a></h2>
                                                             </div>
-                                                        }
-                                                    }
-
+                                                            @*<button class="cancel-btn" ><i class="fa fa-trash"></i></button>*@
+                                                            @*<form action="~/item/RemoveCartItems/@item.item_id">
+                                                                <button class="cancel-btn" type="submit"><i class="fa fa-trash"></i></button>
+                                                            </form>*@
+                                                        </div>
                                                 }
-                                                else
-                                                {
+                                            }
 
-                                                }
+                                        }
+                                        else
+                                        {
+
+                                        }
                                             }
                                         </div>
                                         <div class="shopping-cart-btns">
-                                            <button class="main-btn">View Cart</button>
-                                            <button class="primary-btn">Checkout <i class="fa fa-arrow-circle-right"></i></button>
+                                            @*<button class="main-btn">View Cart</button>*@
+                                            <a class="primary-btn" href="~/Item/CheckoutIndex"> Checkout <i class="fa fa-arrow-circle-right"></i></a>
                                         </div>
                                     </div>
                                 </div>

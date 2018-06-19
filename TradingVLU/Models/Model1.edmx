@@ -63,7 +63,7 @@
           </Key>
           <Property Name="orderid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="buyerid" Type="int" Nullable="false" />
-          <Property Name="status" Type="int" Nullable="false" />
+          <Property Name="order_status" Type="int" Nullable="false" />
           <Property Name="buyer_name" Type="nvarchar" MaxLength="50" />
           <Property Name="orderdate" Type="datetime" />
         </EntityType>
@@ -72,10 +72,14 @@
             <PropertyRef Name="orderid" />
             <PropertyRef Name="item_id" />
           </Key>
-          <Property Name="orderid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="orderid" Type="int" Nullable="false" />
           <Property Name="item_id" Type="int" Nullable="false" />
           <Property Name="quantity" Type="int" />
           <Property Name="totalprice" Type="money" />
+          <Property Name="item_status" Type="int" />
+          <Property Name="item_orderdate" Type="datetime" />
+          <Property Name="item_name" Type="nvarchar" MaxLength="100" />
+          <Property Name="buyer_name" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="role">
           <Key>
@@ -107,6 +111,7 @@
           <Property Name="quantity" Type="int" />
           <Property Name="price" Type="money" />
           <Property Name="buyer_id" Type="int" Nullable="false" />
+          <Property Name="buyer_name" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="user">
           <Key>
@@ -225,7 +230,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Order_user">
+        <Association Name="FK_order_user">
           <End Role="user" Type="Self.user" Multiplicity="1" />
           <End Role="order" Type="Self.order" Multiplicity="*" />
           <ReferentialConstraint>
@@ -281,6 +286,37 @@
           <Parameter Name="userId" Type="int" Mode="In" />
           <Parameter Name="ip_address" Type="varchar" Mode="In" />
         </Function>
+        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="vlutrading3545ModelStoreContainer">
           <EntitySet Name="comment" EntityType="Self.comment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="item" EntityType="Self.item" Schema="dbo" store:Type="Tables" />
@@ -320,7 +356,7 @@
             <End Role="order" EntitySet="order" />
             <End Role="order_detail" EntitySet="order_detail" />
           </AssociationSet>
-          <AssociationSet Name="FK_Order_user" Association="Self.FK_Order_user">
+          <AssociationSet Name="FK_order_user" Association="Self.FK_order_user">
             <End Role="user" EntitySet="user" />
             <End Role="order" EntitySet="order" />
           </AssociationSet>
@@ -341,6 +377,22 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="vlutrading3545Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="comment">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_item" Type="Int32" Nullable="false" />
+          <Property Name="id_user" Type="Int32" Nullable="false" />
+          <Property Name="comment_txt" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="name_comment" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="created_by" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="created_date" Type="DateTime" Precision="3" />
+          <Property Name="updated_by" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="updated_date" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="item" Relationship="Self.FK_Comment_item" FromRole="comment" ToRole="item" />
+          <NavigationProperty Name="user" Relationship="Self.FK_Comment_user" FromRole="comment" ToRole="user" />
+        </EntityType>
         <EntityType Name="item">
           <Key>
             <PropertyRef Name="id" />
@@ -365,11 +417,11 @@
           <Property Name="detail_image5" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="price" Type="Decimal" Precision="19" Scale="4" />
           <Property Name="approve" Type="Int32" />
+          <NavigationProperty Name="comments" Relationship="Self.FK_Comment_item" FromRole="item" ToRole="comment" />
           <NavigationProperty Name="item_status" Relationship="Self.FK_item_item_status" FromRole="item" ToRole="item_status" />
           <NavigationProperty Name="user" Relationship="Self.FK_item_userBuyerId" FromRole="item" ToRole="user" />
           <NavigationProperty Name="user1" Relationship="Self.FK_item_userSellerId" FromRole="item" ToRole="user" />
-          <NavigationProperty Name="order_detail" Relationship="vlutrading3545Model.FK_order_detail_item1" FromRole="item" ToRole="order_detail" />
-          <NavigationProperty Name="comments" Relationship="vlutrading3545Model.FK_Comment_item" FromRole="item" ToRole="comment" />
+          <NavigationProperty Name="order_detail" Relationship="Self.FK_order_detail_item1" FromRole="item" ToRole="order_detail" />
         </EntityType>
         <EntityType Name="item_status">
           <Key>
@@ -391,11 +443,27 @@
           </Key>
           <Property Name="orderid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="buyerid" Type="Int32" Nullable="false" />
-          <Property Name="status" Type="Int32" Nullable="false" />
+          <Property Name="order_status" Type="Int32" Nullable="false" />
           <Property Name="buyer_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="orderdate" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="user" Relationship="Self.FK_Order_user" FromRole="order" ToRole="user" />
-          <NavigationProperty Name="order_detail" Relationship="vlutrading3545Model.FK_order_detail_Order1" FromRole="order" ToRole="order_detail" />
+          <NavigationProperty Name="order_detail" Relationship="Self.FK_order_detail_Order1" FromRole="order" ToRole="order_detail" />
+          <NavigationProperty Name="user" Relationship="Self.FK_order_user" FromRole="order" ToRole="user" />
+        </EntityType>
+        <EntityType Name="order_detail">
+          <Key>
+            <PropertyRef Name="orderid" />
+            <PropertyRef Name="item_id" />
+          </Key>
+          <Property Name="orderid" Type="Int32" Nullable="false" />
+          <Property Name="item_id" Type="Int32" Nullable="false" />
+          <Property Name="quantity" Type="Int32" />
+          <Property Name="totalprice" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="item_status" Type="Int32" />
+          <Property Name="item_orderdate" Type="DateTime" Precision="3" />
+          <Property Name="item_name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="buyer_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="item" Relationship="Self.FK_order_detail_item1" FromRole="order_detail" ToRole="item" />
+          <NavigationProperty Name="order" Relationship="Self.FK_order_detail_Order1" FromRole="order_detail" ToRole="order" />
         </EntityType>
         <EntityType Name="role">
           <Key>
@@ -419,6 +487,18 @@
           <Property Name="is_active" Type="Int32" />
           <NavigationProperty Name="users" Relationship="Self.FK_user_security_questionId" FromRole="security_question" ToRole="user" />
         </EntityType>
+        <EntityType Name="tempshoppingcart">
+          <Key>
+            <PropertyRef Name="temporderid" />
+          </Key>
+          <Property Name="temporderid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="item_id" Type="Int32" Nullable="false" />
+          <Property Name="item_name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="quantity" Type="Int32" />
+          <Property Name="price" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="buyer_id" Type="Int32" Nullable="false" />
+          <Property Name="buyer_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
         <EntityType Name="user">
           <Key>
             <PropertyRef Name="id" />
@@ -440,13 +520,13 @@
           <Property Name="create_date" Type="DateTime" Precision="3" />
           <Property Name="update_by" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="update_date" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="comments" Relationship="Self.FK_Comment_user" FromRole="user" ToRole="comment" />
           <NavigationProperty Name="items" Relationship="Self.FK_item_userBuyerId" FromRole="user" ToRole="item" />
           <NavigationProperty Name="items1" Relationship="Self.FK_item_userSellerId" FromRole="user" ToRole="item" />
-          <NavigationProperty Name="orders" Relationship="Self.FK_Order_user" FromRole="user" ToRole="order" />
+          <NavigationProperty Name="orders" Relationship="Self.FK_order_user" FromRole="user" ToRole="order" />
           <NavigationProperty Name="role1" Relationship="Self.FK_user_roleId" FromRole="user" ToRole="role" />
           <NavigationProperty Name="security_question" Relationship="Self.FK_user_security_questionId" FromRole="user" ToRole="security_question" />
           <NavigationProperty Name="user_personal_information" Relationship="Self.FK_user_personal_information_userId" FromRole="user" ToRole="user_personal_information" />
-          <NavigationProperty Name="comments" Relationship="vlutrading3545Model.FK_Comment_user" FromRole="user" ToRole="comment" />
         </EntityType>
         <EntityType Name="user_personal_information">
           <Key>
@@ -460,6 +540,30 @@
           <Property Name="update_date" Type="DateTime" Precision="3" />
           <NavigationProperty Name="user" Relationship="Self.FK_user_personal_information_userId" FromRole="user_personal_information" ToRole="user" />
         </EntityType>
+        <Association Name="FK_Comment_item">
+          <End Role="item" Type="Self.item" Multiplicity="1" />
+          <End Role="comment" Type="Self.comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="item">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="comment">
+              <PropertyRef Name="id_item" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Comment_user">
+          <End Role="user" Type="Self.user" Multiplicity="1" />
+          <End Role="comment" Type="Self.comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="comment">
+              <PropertyRef Name="id_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_item_item_status">
           <End Role="item_status" Type="Self.item_status" Multiplicity="0..1" />
           <End Role="item" Type="Self.item" Multiplicity="*" />
@@ -496,7 +600,31 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Order_user">
+        <Association Name="FK_order_detail_item1">
+          <End Role="item" Type="Self.item" Multiplicity="1" />
+          <End Role="order_detail" Type="Self.order_detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="item">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="order_detail">
+              <PropertyRef Name="item_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_order_detail_Order1">
+          <End Role="order" Type="Self.order" Multiplicity="1" />
+          <End Role="order_detail" Type="Self.order_detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="order">
+              <PropertyRef Name="orderid" />
+            </Principal>
+            <Dependent Role="order_detail">
+              <PropertyRef Name="orderid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_order_user">
           <End Role="user" Type="Self.user" Multiplicity="1" />
           <End Role="order" Type="Self.order" Multiplicity="*" />
           <ReferentialConstraint>
@@ -545,13 +673,24 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="vlutrading3545Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="comments" EntityType="Self.comment" />
           <EntitySet Name="items" EntityType="Self.item" />
           <EntitySet Name="item_status" EntityType="Self.item_status" />
           <EntitySet Name="orders" EntityType="Self.order" />
+          <EntitySet Name="order_detail" EntityType="Self.order_detail" />
           <EntitySet Name="roles" EntityType="Self.role" />
           <EntitySet Name="security_question" EntityType="Self.security_question" />
+          <EntitySet Name="tempshoppingcarts" EntityType="Self.tempshoppingcart" />
           <EntitySet Name="users" EntityType="Self.user" />
           <EntitySet Name="user_personal_information" EntityType="Self.user_personal_information" />
+          <AssociationSet Name="FK_Comment_item" Association="Self.FK_Comment_item">
+            <End Role="item" EntitySet="items" />
+            <End Role="comment" EntitySet="comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Comment_user" Association="Self.FK_Comment_user">
+            <End Role="user" EntitySet="users" />
+            <End Role="comment" EntitySet="comments" />
+          </AssociationSet>
           <AssociationSet Name="FK_item_item_status" Association="Self.FK_item_item_status">
             <End Role="item_status" EntitySet="item_status" />
             <End Role="item" EntitySet="items" />
@@ -564,7 +703,15 @@
             <End Role="user" EntitySet="users" />
             <End Role="item" EntitySet="items" />
           </AssociationSet>
-          <AssociationSet Name="FK_Order_user" Association="Self.FK_Order_user">
+          <AssociationSet Name="FK_order_detail_item1" Association="Self.FK_order_detail_item1">
+            <End Role="item" EntitySet="items" />
+            <End Role="order_detail" EntitySet="order_detail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_order_detail_Order1" Association="Self.FK_order_detail_Order1">
+            <End Role="order" EntitySet="orders" />
+            <End Role="order_detail" EntitySet="order_detail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_order_user" Association="Self.FK_order_user">
             <End Role="user" EntitySet="users" />
             <End Role="order" EntitySet="orders" />
           </AssociationSet>
@@ -581,126 +728,76 @@
             <End Role="user_personal_information" EntitySet="user_personal_information" />
           </AssociationSet>
           <FunctionImport Name="updateLastLogoutIpAddress">
-          <Parameter Name="userId" Mode="In" Type="Int32" />
+            <Parameter Name="userId" Mode="In" Type="Int32" />
             <Parameter Name="ip_address" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="updateLastLoginIpAddress">
-          <Parameter Name="userId" Mode="In" Type="Int32" />
+            <Parameter Name="userId" Mode="In" Type="Int32" />
             <Parameter Name="ip_address" Mode="In" Type="String" />
           </FunctionImport>
-          <EntitySet Name="order_detail" EntityType="vlutrading3545Model.order_detail" />
-          <EntitySet Name="tempshoppingcarts" EntityType="vlutrading3545Model.tempshoppingcart" />
-          <AssociationSet Name="FK_order_detail_item1" Association="vlutrading3545Model.FK_order_detail_item1">
-            <End Role="item" EntitySet="items" />
-            <End Role="order_detail" EntitySet="order_detail" />
-          </AssociationSet>
-          <AssociationSet Name="FK_order_detail_Order1" Association="vlutrading3545Model.FK_order_detail_Order1">
-            <End Role="order" EntitySet="orders" />
-            <End Role="order_detail" EntitySet="order_detail" />
-          </AssociationSet>
-          <EntitySet Name="comments" EntityType="vlutrading3545Model.comment" />
-          <AssociationSet Name="FK_Comment_item" Association="vlutrading3545Model.FK_Comment_item">
-            <End Role="item" EntitySet="items" />
-            <End Role="comment" EntitySet="comments" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Comment_user" Association="vlutrading3545Model.FK_Comment_user">
-            <End Role="user" EntitySet="users" />
-            <End Role="comment" EntitySet="comments" />
-          </AssociationSet>
+          <FunctionImport Name="sp_alterdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(vlutrading3545Model.sp_helpdiagramdefinition_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(vlutrading3545Model.sp_helpdiagrams_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_renamediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams" />
         </EntityContainer>
-        <EntityType Name="order_detail">
-          <Key>
-            <PropertyRef Name="orderid" />
-            <PropertyRef Name="item_id" />
-          </Key>
-          <Property Name="orderid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="item_id" Type="Int32" Nullable="false" />
-          <Property Name="quantity" Type="Int32" />
-          <Property Name="totalprice" Type="Decimal" Precision="19" Scale="4" />
-          <NavigationProperty Name="item" Relationship="vlutrading3545Model.FK_order_detail_item1" FromRole="order_detail" ToRole="item" />
-          <NavigationProperty Name="order" Relationship="vlutrading3545Model.FK_order_detail_Order1" FromRole="order_detail" ToRole="order" />
-        </EntityType>
-        <EntityType Name="tempshoppingcart">
-          <Key>
-            <PropertyRef Name="temporderid" />
-          </Key>
-          <Property Name="temporderid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="item_id" Type="Int32" Nullable="false" />
-          <Property Name="item_name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="quantity" Type="Int32" />
-          <Property Name="price" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="buyer_id" Type="Int32" Nullable="false" />
-        </EntityType>
-        <Association Name="FK_order_detail_item1">
-          <End Type="vlutrading3545Model.item" Role="item" Multiplicity="1" />
-          <End Type="vlutrading3545Model.order_detail" Role="order_detail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="item">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="order_detail">
-              <PropertyRef Name="item_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_order_detail_Order1">
-          <End Type="vlutrading3545Model.order" Role="order" Multiplicity="1" />
-          <End Type="vlutrading3545Model.order_detail" Role="order_detail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="order">
-              <PropertyRef Name="orderid" />
-            </Principal>
-            <Dependent Role="order_detail">
-              <PropertyRef Name="orderid" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="comment">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="id_item" Type="Int32" Nullable="false" />
-          <Property Name="id_user" Type="Int32" Nullable="false" />
-          <Property Name="comment_txt" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="name_comment" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="created_by" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="created_date" Type="DateTime" Precision="3" />
-          <Property Name="updated_by" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="updated_date" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="item" Relationship="vlutrading3545Model.FK_Comment_item" FromRole="comment" ToRole="item" />
-          <NavigationProperty Name="user" Relationship="vlutrading3545Model.FK_Comment_user" FromRole="comment" ToRole="user" />
-        </EntityType>
-        <Association Name="FK_Comment_item">
-          <End Type="vlutrading3545Model.item" Role="item" Multiplicity="1" />
-          <End Type="vlutrading3545Model.comment" Role="comment" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="item">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="comment">
-              <PropertyRef Name="id_item" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Comment_user">
-          <End Type="vlutrading3545Model.user" Role="user" Multiplicity="1" />
-          <End Type="vlutrading3545Model.comment" Role="comment" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="user">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="comment">
-              <PropertyRef Name="id_user" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
+        <ComplexType Name="sp_helpdiagramdefinition_Result">
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams_Result">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="vlutrading3545ModelStoreContainer" CdmEntityContainer="vlutrading3545Entities">
+          <EntitySetMapping Name="comments">
+            <EntityTypeMapping TypeName="vlutrading3545Model.comment">
+              <MappingFragment StoreEntitySet="comment">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="id_item" ColumnName="id_item" />
+                <ScalarProperty Name="id_user" ColumnName="id_user" />
+                <ScalarProperty Name="comment_txt" ColumnName="comment_txt" />
+                <ScalarProperty Name="name_comment" ColumnName="name_comment" />
+                <ScalarProperty Name="created_by" ColumnName="created_by" />
+                <ScalarProperty Name="created_date" ColumnName="created_date" />
+                <ScalarProperty Name="updated_by" ColumnName="updated_by" />
+                <ScalarProperty Name="updated_date" ColumnName="updated_date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="items">
             <EntityTypeMapping TypeName="vlutrading3545Model.item">
               <MappingFragment StoreEntitySet="item">
@@ -746,9 +843,23 @@
               <MappingFragment StoreEntitySet="order">
                 <ScalarProperty Name="orderid" ColumnName="orderid" />
                 <ScalarProperty Name="buyerid" ColumnName="buyerid" />
-                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="order_status" ColumnName="order_status" />
                 <ScalarProperty Name="buyer_name" ColumnName="buyer_name" />
                 <ScalarProperty Name="orderdate" ColumnName="orderdate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="order_detail">
+            <EntityTypeMapping TypeName="vlutrading3545Model.order_detail">
+              <MappingFragment StoreEntitySet="order_detail">
+                <ScalarProperty Name="orderid" ColumnName="orderid" />
+                <ScalarProperty Name="item_id" ColumnName="item_id" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="totalprice" ColumnName="totalprice" />
+                <ScalarProperty Name="item_status" ColumnName="item_status" />
+                <ScalarProperty Name="item_orderdate" ColumnName="item_orderdate" />
+                <ScalarProperty Name="item_name" ColumnName="item_name" />
+                <ScalarProperty Name="buyer_name" ColumnName="buyer_name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -771,6 +882,19 @@
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="question" ColumnName="question" />
                 <ScalarProperty Name="is_active" ColumnName="is_active" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tempshoppingcarts">
+            <EntityTypeMapping TypeName="vlutrading3545Model.tempshoppingcart">
+              <MappingFragment StoreEntitySet="tempshoppingcart">
+                <ScalarProperty Name="temporderid" ColumnName="temporderid" />
+                <ScalarProperty Name="item_id" ColumnName="item_id" />
+                <ScalarProperty Name="item_name" ColumnName="item_name" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="buyer_id" ColumnName="buyer_id" />
+                <ScalarProperty Name="buyer_name" ColumnName="buyer_name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -811,43 +935,30 @@
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="updateLastLogoutIpAddress" FunctionName="vlutrading3545Model.Store.updateLastLogoutIpAddress" />
           <FunctionImportMapping FunctionImportName="updateLastLoginIpAddress" FunctionName="vlutrading3545Model.Store.updateLastLoginIpAddress" />
-          <EntitySetMapping Name="order_detail">
-            <EntityTypeMapping TypeName="vlutrading3545Model.order_detail">
-              <MappingFragment StoreEntitySet="order_detail">
-                <ScalarProperty Name="totalprice" ColumnName="totalprice" />
-                <ScalarProperty Name="quantity" ColumnName="quantity" />
-                <ScalarProperty Name="item_id" ColumnName="item_id" />
-                <ScalarProperty Name="orderid" ColumnName="orderid" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="tempshoppingcarts">
-            <EntityTypeMapping TypeName="vlutrading3545Model.tempshoppingcart">
-              <MappingFragment StoreEntitySet="tempshoppingcart">
-                <ScalarProperty Name="buyer_id" ColumnName="buyer_id" />
-                <ScalarProperty Name="price" ColumnName="price" />
-                <ScalarProperty Name="quantity" ColumnName="quantity" />
-                <ScalarProperty Name="item_name" ColumnName="item_name" />
-                <ScalarProperty Name="item_id" ColumnName="item_id" />
-                <ScalarProperty Name="temporderid" ColumnName="temporderid" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="comments">
-            <EntityTypeMapping TypeName="vlutrading3545Model.comment">
-              <MappingFragment StoreEntitySet="comment">
-                <ScalarProperty Name="updated_date" ColumnName="updated_date" />
-                <ScalarProperty Name="updated_by" ColumnName="updated_by" />
-                <ScalarProperty Name="created_date" ColumnName="created_date" />
-                <ScalarProperty Name="created_by" ColumnName="created_by" />
-                <ScalarProperty Name="name_comment" ColumnName="name_comment" />
-                <ScalarProperty Name="comment_txt" ColumnName="comment_txt" />
-                <ScalarProperty Name="id_user" ColumnName="id_user" />
-                <ScalarProperty Name="id_item" ColumnName="id_item" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="vlutrading3545Model.Store.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="vlutrading3545Model.Store.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="vlutrading3545Model.Store.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="vlutrading3545Model.Store.sp_helpdiagramdefinition">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="vlutrading3545Model.sp_helpdiagramdefinition_Result">
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="vlutrading3545Model.Store.sp_helpdiagrams">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="vlutrading3545Model.sp_helpdiagrams_Result">
+                <ScalarProperty Name="Database" ColumnName="Database" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="vlutrading3545Model.Store.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="vlutrading3545Model.Store.sp_upgraddiagrams" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

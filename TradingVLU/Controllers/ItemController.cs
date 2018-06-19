@@ -55,97 +55,7 @@ namespace TradingVLU.Controllers
                 return View(itemslist);
             }
            
-        }
-
-        //[Route("Order/{id:int:min(1)}")]
-        //public ActionResult Order(string id)
-        //{
-        //    if (Session["userID"] != null)
-        //    {
-        //        int ID = int.Parse(id);
-        //        int userID = int.Parse(Session["userID"].ToString());
-        //        using (vlutrading3545Entities db = new vlutrading3545Entities())
-        //        {
-        //            var item = db.items.FirstOrDefault(x => x.id == ID);
-        //            var name = db.users.FirstOrDefault(x => x.id == userID).name;
-        //            //item.status = 2;
-        //            Order nOrder = new Order();
-        //            nOrder.item_id = ID;
-        //            nOrder.user_id = userID;           
-        //            nOrder.status = 0;
-        //            //
-        //            nOrder.item_name = item.item_name;
-        //            nOrder.name = name;
-        //            //
-        //            db.Orders.Add(nOrder);
-        //            db.SaveChanges();
-        //        }
-        //        return RedirectToAction("index", "item");
-        //    }
-        //    else
-        //    {
-        //        return RedirectToAction("Login", "User");
-        //    }
-        //}
-
-        public ActionResult listitem()
-        {
-
-            if (Session["userID"] != null)
-            {
-                int userID = int.Parse(Session["userID"].ToString());
-                using (vlutrading3545Entities db = new vlutrading3545Entities())
-                {
-                    var model = db.order_detail.Where(x => x.item.seller_id == userID).ToList();
-                    return View(model);
-                }
-            }
-            else
-            {
-                return RedirectToAction("Login", "User");
-            }
-        }
-
-        //[Route("Accept/{id:int:min(1)}")]
-        //public ActionResult Accept(string id)
-        //{
-        //    int ID = int.Parse(id);
-        //    using (vlutrading3545Entities db = new vlutrading3545Entities())
-        //    {
-        //        var model = db.Orders.FirstOrDefault(x => x.item_id == ID);
-        //        if (model.status != 1)
-        //        {
-        //            model.status = 1;
-        //        }               
-        //        db.SaveChanges();
-        //        return RedirectToAction("listitem", "Item");
-        //    }
-        //}
-        //[Route("Reject/{id:int:min(1)}")]
-        //public ActionResult Reject(string id)
-        //{
-        //    int ID = int.Parse(id);
-        //    using (vlutrading3545Entities db = new vlutrading3545Entities())
-        //    {
-        //        var model = db.Orders.FirstOrDefault(x => x.item_id == ID);
-        //        if (model.status != 2)
-        //        {
-        //            model.status = 2;
-        //        }
-        //        db.SaveChanges();
-        //        return RedirectToAction("listitem", "Item");
-        //    }
-        //}
-
-        //public ActionResult Showcmt()
-        //{
-        //    int ID = (int)Session["Item"];
-        //    using (vlutrading3545Entities db = new vlutrading3545Entities())
-        //    {
-        //        var model = db.Comments.Where(x => x.id_item == ID).ToList();
-        //        return PartialView(model);
-        //    }
-        //}
+        } 
 
         public ActionResult Comments(string masp, string cmt)
         {
@@ -173,12 +83,43 @@ namespace TradingVLU.Controllers
             }
         }
 
-        [Route("Order/{id:int:min(1)}")]
+        [Route("AddToCart/{id:int:min(1)}")]
         public ActionResult AddToCart(int id)
         {
             if (Session["userID"] != null)
             {
-                addToCart(id);
+                int userID = int.Parse(Session["userID"].ToString());
+                using (vlutrading3545Entities db = new vlutrading3545Entities())
+                {
+                    // check if product is valid
+                    item product = db.items.FirstOrDefault(p => p.id == id);
+                    var name = db.users.FirstOrDefault(x => x.id == userID);
+                    if (product != null)
+                    {
+                        // check if product already existed
+                        tempshoppingcart cart = db.tempshoppingcarts.FirstOrDefault(c => c.item_id == id);
+                        if (cart != null)
+                        {
+                            cart.quantity++;
+                        }
+                        else
+                        {
+                            cart = new tempshoppingcart
+                            {
+                                item_name = product.item_name,
+                                item_id = product.id,
+                                price = product.price,
+                                buyer_id = userID,
+                                buyer_name = name.name,
+                                quantity = 1
+                            };
+                            db.tempshoppingcarts.Add(cart);
+                        }
+                        //product.UnitsInStock--;
+                        db.SaveChanges();
+                    }
+                }
+                //addToCart(id);
                 //return RedirectToAction("Index");
                 return RedirectToAction("index", "item");
             }
@@ -189,36 +130,135 @@ namespace TradingVLU.Controllers
 
         }
 
-        private void addToCart(int pId)
+        // GET: Checkout
+        public ActionResult CheckoutIndex()
         {
+            if (Session["userID"] != null)
+            {
+                int userID = int.Parse(Session["userID"].ToString());
+                var db = new vlutrading3545Entities();
+                ViewBag.Cart = db.tempshoppingcarts.Where(x => x.buyer_id == userID).ToList<tempshoppingcart>();
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Login", "User");
+            }
+        }
+
+        //[Route("ClearCarts/{id:int:min(1)}")]
+        public ActionResult ClearCart()
+        {
+            var db = new vlutrading3545Entities();
+            try
+            {
+                List<tempshoppingcart> carts = db.tempshoppingcarts.ToList();
+                carts.ForEach(a => {
+                    item product = db.items.FirstOrDefault(p => p.id == a.item_id);
+                });
+                db.tempshoppingcarts.RemoveRange(carts);
+                db.SaveChanges();
+            }
+            catch (Exception) { }
+            return RedirectToAction("index", "item");
+        }
+
+        [Route("RemoveCartItems/{id:int:min(1)}")]
+        public ActionResult RemoveCartItem(int id)
+        {
+            vlutrading3545Entities db = new vlutrading3545Entities();
+            tempshoppingcart product = db.tempshoppingcarts.FirstOrDefault(p => p.item_id == id);
+            db.tempshoppingcarts.Remove(product);
+            db.SaveChanges();
+            return RedirectToAction("CheckoutIndex", "item");
+        }
+
+
+        public ActionResult Order()
+        {
+            int userID = int.Parse(Session["userID"].ToString());
+            vlutrading3545Entities db = new vlutrading3545Entities();
+            var name = db.users.FirstOrDefault(x => x.id == userID);
+            order o = new order
+            {
+                orderdate = DateTime.Now,
+                buyerid = userID,
+                order_status = 0,
+                buyer_name = name.name
+            };
+            db.orders.Add(o);
+
+            foreach (var i in db.tempshoppingcarts.ToList<tempshoppingcart>())
+            {
+                db.order_detail.Add(new order_detail
+                {
+                    orderid = o.orderid,
+                    item_id = i.item_id,
+                    quantity = i.quantity,
+                    totalprice = i.quantity * i.price,
+                    item_status = 0,
+                    item_orderdate = o.orderdate,
+                    item_name = i.item_name,
+                    buyer_name = i.buyer_name
+                });
+                db.tempshoppingcarts.Remove(i);
+            }
+            db.SaveChanges();
+            return RedirectToAction("OrderSuccess");
+        }
+        public ActionResult OrderSuccess()
+        {
+            return View();
+        }
+
+        public ActionResult confirmorderlist()
+        {
+            if (Session["userID"] != null)
+            {
+                int userID = int.Parse(Session["userID"].ToString());
+                using (vlutrading3545Entities db = new vlutrading3545Entities())
+                {
+                    db.Configuration.LazyLoadingEnabled = false;
+                    var model = db.order_detail.Where(x => x.item.seller_id == userID).ToList();
+                    return View(model);
+                }
+            }
+            else
+            {
+                return RedirectToAction("Login", "User");
+            }
+        }
+        [Route("Accept/{orid:int:min(1)}/{itemid:int:min(1)}")]
+        public ActionResult Accept(string orid, string itemid)
+        {
+            int ItemID = int.Parse(itemid);
+            int OrderID = int.Parse(orid);
             using (vlutrading3545Entities db = new vlutrading3545Entities())
             {
-                // check if product is valid
-                item product = db.items.FirstOrDefault(p => p.id == pId);
-                if (product != null)
+                var model = db.order_detail.FirstOrDefault(x => x.item_id == ItemID && x.orderid == OrderID);
+                if (model.item_status != 1)
                 {
-                    // check if product already existed
-                    tempshoppingcart cart = db.tempshoppingcarts.FirstOrDefault(c => c.item_id == pId);
-                    if (cart != null)
-                    {
-                        cart.quantity++;
-                    }
-                    else
-                    {
-
-                        cart = new tempshoppingcart
-                        {
-                            item_name = product.item_name,
-                            item_id = product.id,
-                            price = product.price,
-                            quantity = 1
-                        };
-
-                        db.tempshoppingcarts.Add(cart);
-                    }
-                    //product.UnitsInStock--;
-                    db.SaveChanges();
+                    model.item_status = 1;
                 }
+                db.SaveChanges();
+                return RedirectToAction("confirmorderlist", "Item");
+            }
+        }
+
+        [Route("Reject/{orid:int:min(1)}/{itemid:int:min(1)}")]
+        public ActionResult Reject(string orid, string itemid)
+        {
+            int ItemID = int.Parse(itemid);
+            int OrderID = int.Parse(orid);
+            using (vlutrading3545Entities db = new vlutrading3545Entities())
+            {
+                var model = db.order_detail.FirstOrDefault(x => x.item_id == ItemID && x.orderid == OrderID);
+                if (model.item_status != 2)
+                {
+                    model.item_status = 2;
+                }
+                db.SaveChanges();
+                return RedirectToAction("confirmorderlist", "Item");
             }
         }
 
