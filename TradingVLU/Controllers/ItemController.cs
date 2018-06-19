@@ -10,7 +10,7 @@ namespace TradingVLU.Controllers
 {
     [RoutePrefix("item")]
     [Route("{action=index}")]
-    public class ItemController : BaseController
+    public class ItemController : Controller
     {
         public ActionResult index()
         {
@@ -18,7 +18,21 @@ namespace TradingVLU.Controllers
             {
                 var itemList = db.items.Where(x=>x.approve==1).Select(x => new { x.id, x.item_name, x.price, x.index_image}).ToList();
                 ViewBag.itemList = itemList;
+                if (Session["userID"] != null)
+                {
+                    int userID = int.Parse(Session["userID"].ToString());
+                    List<tempshoppingcart> tempcart = db.tempshoppingcarts.Where(x => x.buyer_id == userID).ToList();
+                    ViewBag.Cart = tempcart;
+                    ViewBag.CartUnits = tempcart.Count();
+                    decimal? temp = tempcart.Sum(c => c.quantity * c.price);
+                    decimal myDecimal = temp ?? 0;
+                    ViewBag.CartTotalPrice = myDecimal;
+                }
+                else
+                {
 
+                }
+               
             }
             return View();
         }
@@ -45,6 +59,27 @@ namespace TradingVLU.Controllers
             }
 
         }
+
+        [Route("edit/{id:int:min(1)}")]
+        [HttpGet]
+        public ActionResult edit(int id)
+        {
+            using (vlutrading3545Entities db = new vlutrading3545Entities())
+            {
+                //ViewBag.StatusSelect = db.item_status.Select(h => new SelectListItem { Value = h.id.ToString(), Text = h.status });
+                var item = db.items.FirstOrDefault(x => x.id == id);
+                return View(item);
+            }
+        }
+
+        [HttpPost]
+        public ActionResult edit(item nitem)
+        {
+            vlutrading3545Entities db = new vlutrading3545Entities();
+            var data = db.items.FirstOrDefault(x => x.id == nitem.id);
+            return View();
+        }
+
 
         [HttpGet]
         public ActionResult list()
@@ -86,6 +121,7 @@ namespace TradingVLU.Controllers
         [Route("AddToCart/{id:int:min(1)}")]
         public ActionResult AddToCart(int id)
         {
+            vlutrading3545Entities dbc = new vlutrading3545Entities();
             if (Session["userID"] != null)
             {
                 int userID = int.Parse(Session["userID"].ToString());
@@ -114,11 +150,12 @@ namespace TradingVLU.Controllers
                                 quantity = 1
                             };
                             db.tempshoppingcarts.Add(cart);
-                        }
+                        }                        
                         //product.UnitsInStock--;
                         db.SaveChanges();
                     }
                 }
+                
                 //addToCart(id);
                 //return RedirectToAction("Index");
                 return RedirectToAction("index", "item");
@@ -262,6 +299,40 @@ namespace TradingVLU.Controllers
             }
         }
 
+
+        //private int x = (int)System.Web.HttpContext.Current.Session["userID"];
+        // GET: Base
+        //public ItemController()
+        //{
+        //    ViewBag.CartTotalPrice = CartTotalPrice;
+        //    ViewBag.Cart = Cart;
+        //    ViewBag.CartUnits = Cart.Count;
+        //}
+
+        //private List<tempshoppingcart> Cart
+        //{
+        //    get
+        //    {
+        //        vlutrading3545Entities db = new vlutrading3545Entities();
+        //        if (Session["userID"] != null)
+        //        {
+        //            int userID = int.Parse(Session["userID"].ToString());
+        //            return db.tempshoppingcarts.Where(x => userID == x.buyer_id).ToList();
+        //        }
+        //        return null;
+        //    }
+        //}
+
+        //private decimal CartTotalPrice
+        //{
+        //    get
+        //    {
+        //        decimal? temp = Cart.Sum(c => c.quantity * c.price);
+        //        decimal myDecimal = temp ?? 0;
+        //        return myDecimal;
+        //    }
+
+        //}
 
     }
 }

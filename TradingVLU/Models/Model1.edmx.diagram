@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="e9a7df9427c14134b95e684f68e53939" Name="Diagram1">
+      <Diagram DiagramId="cc54bb75ce034dc29f0da876858ca4cd" Name="Diagram1">
         <EntityTypeShape EntityType="vlutrading3545Model.comment" Width="1.5" PointX="5.25" PointY="8" IsExpanded="true" />
         <EntityTypeShape EntityType="vlutrading3545Model.item" Width="1.5" PointX="8.25" PointY="6.625" IsExpanded="true" />
         <EntityTypeShape EntityType="vlutrading3545Model.item_status" Width="1.5" PointX="6" PointY="4.25" IsExpanded="true" />
@@ -12,7 +12,7 @@
         <EntityTypeShape EntityType="vlutrading3545Model.order_detail" Width="1.5" PointX="10.5" PointY="11.75" IsExpanded="true" />
         <EntityTypeShape EntityType="vlutrading3545Model.role" Width="1.5" PointX="0.75" PointY="8.375" IsExpanded="true" />
         <EntityTypeShape EntityType="vlutrading3545Model.security_question" Width="1.5" PointX="0.75" PointY="5.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="vlutrading3545Model.tempshoppingcart" Width="1.5" PointX="2.875" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="vlutrading3545Model.tempshoppingcart" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="vlutrading3545Model.user" Width="1.5" PointX="3" PointY="6.75" IsExpanded="true" />
         <EntityTypeShape EntityType="vlutrading3545Model.user_personal_information" Width="1.5" PointX="5.25" PointY="20.375" IsExpanded="true" />
         <AssociationConnector Association="vlutrading3545Model.FK_Comment_item" ManuallyRouted="false" />

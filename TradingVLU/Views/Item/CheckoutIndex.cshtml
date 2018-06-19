@@ -192,7 +192,8 @@
                     </td>
                 </tr>
             }
-            <tr><td>Total: </td><td id="totalPrice" colspan="2">@String.Format("{0:c}", ViewBag.CartTotalPrice)</td></tr>
+            @*<tr><td>Total: </td><td id="totalPrice" colspan="2">@ViewBag.CartTotalPrice</td></tr>*@
+            @*<tr><td>Total: </td><td id="totalPrice" colspan="2"> @ViewBag.CartTotalPrices </td></tr>*@
         </table>
         <div class="button">
             @Html.ActionLink("Clear Cart", "ClearCart", "item", null, new { @class = "btn btn-default" })
