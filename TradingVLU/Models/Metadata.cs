@@ -13,7 +13,7 @@ namespace TradingVLU.Models
         [Required(ErrorMessage = "Fullname must not be null")]
         [DataType(DataType.Text)]
         [Display(Name = "Username")]
-        [RegularExpression(@"^[0-9a-zA-Z''-'\s]{1,40}$",ErrorMessage = "special characters are not allowed.")]
+        [RegularExpression("[a-zA-Z][a-zA-Z0-9]{5,15}", ErrorMessage = "First character must be a character, special character is not allowed. Length 6-16 characters")]
         [StringLength(100, MinimumLength = 6,ErrorMessage = "The Username must be at least 6 characters.")]
         public string username { get; set; }
 
@@ -38,6 +38,7 @@ namespace TradingVLU.Models
 
         [Required(ErrorMessage = "Name must not be null")]
         [Display(Name = "Name")]
+        [RegularExpression("^([a-zA-Z_ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ]+\\s)*[a-zA-Z_ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ]+$", ErrorMessage = "It must contains only characters and one space between each one")]
         [StringLength(100, MinimumLength = 6, ErrorMessage = "The Name must be at least 6 characters.")]
         public string name { get; set; }
 

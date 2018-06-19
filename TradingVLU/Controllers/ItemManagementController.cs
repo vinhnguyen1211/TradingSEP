@@ -114,7 +114,7 @@ namespace TradingVLU.Controllers
 
         }
         [HttpPost, ValidateInput(false)]
-        public ActionResult add(String name, String description, int quantity, int price, int status, HttpPostedFileBase index_image,
+        public ActionResult add(string name, string description, int quantity, int price, string phone, HttpPostedFileBase index_image,
                                 IEnumerable<HttpPostedFileBase> detail_images)
         {
 
@@ -185,7 +185,7 @@ namespace TradingVLU.Controllers
                     description = description,
                     quantity = quantity,
                     price = price,
-                    status = status,
+                    phone_contact = phone,
                     index_image = index_img,
                     seller_id = user.id,
                     create_by = user.name,
