@@ -651,6 +651,8 @@
     <Content Include="Views\Item\CheckoutIndex.cshtml" />
     <Content Include="Views\Item\OrderSuccess.cshtml" />
     <Content Include="Views\Item\confirmorderlist.cshtml" />
+    <Content Include="Views\Item\checkoldorder.cshtml" />
+    <Content Include="Views\Item\CheckDetailOrder.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

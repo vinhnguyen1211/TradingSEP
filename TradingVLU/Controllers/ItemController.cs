@@ -334,5 +334,44 @@ namespace TradingVLU.Controllers
 
         //}
 
+        
+        public ActionResult checkoldorder()
+        {
+            if (Session["userID"] != null)
+            {
+                int userID = int.Parse(Session["userID"].ToString());
+                using (vlutrading3545Entities db = new vlutrading3545Entities())
+                {
+                    db.Configuration.LazyLoadingEnabled = false;
+                    var model = db.orders.Where(x => x.buyerid == userID).ToList();
+                    return View(model);
+                }
+            }
+            else
+            {
+                return RedirectToAction("Login", "User");
+            }
+        }
+
+        [Route("CheckDetailOrder/{orid:int:min(1)}")]
+        public ActionResult CheckDetailOrder(string orid)
+        {
+            if (Session["userID"] != null)
+            {
+                int userID = int.Parse(Session["userID"].ToString());
+                int OrderID = int.Parse(orid);
+                using (vlutrading3545Entities db = new vlutrading3545Entities())
+                {
+                    db.Configuration.LazyLoadingEnabled = false;
+                    var model = db.order_detail.Where(x => x.orderid == OrderID).ToList();
+                    return View(model);
+                }
+            }
+            else
+            {
+                return RedirectToAction("Login", "User");
+            }
+        }
+
     }
 }

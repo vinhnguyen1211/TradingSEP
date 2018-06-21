@@ -16,6 +16,21 @@ namespace TradingVLU.Controllers
 
         public ActionResult index()
         {
+            if (Session["userID"] != null)
+            {
+                vlutrading3545Entities db = new vlutrading3545Entities();
+                int userID = int.Parse(Session["userID"].ToString());
+                List<tempshoppingcart> tempcart = db.tempshoppingcarts.Where(x => x.buyer_id == userID).ToList();
+                ViewBag.Cart = tempcart;
+                ViewBag.CartUnits = tempcart.Count();
+                decimal? temp = tempcart.Sum(c => c.quantity * c.price);
+                decimal myDecimal = temp ?? 0;
+                ViewBag.CartTotalPrice = myDecimal;
+            }
+            else
+            {
+
+            }
             return View();
         }
 
@@ -64,7 +79,7 @@ namespace TradingVLU.Controllers
                     db.SaveChanges();
                     message = "success";
                 }
-                catch(Exception ex)
+                catch(Exception )
                 {
                     message = "failed";
                 }
@@ -105,7 +120,7 @@ namespace TradingVLU.Controllers
                     db.SaveChanges();
                     message = "success";
                 }
-                catch (Exception ex)
+                catch (Exception )
                 {
                     message = "failed";
                 }
@@ -205,7 +220,7 @@ namespace TradingVLU.Controllers
                     
                     db.SaveChanges();
                 }
-                catch (Exception e)
+                catch (Exception )
                 {
                     ViewBag.ErrorMessage = "Error occurred while create new item. Contact Admin for details";
                     return View();
