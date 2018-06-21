@@ -34,6 +34,7 @@ namespace TradingVLU.Models
         [Required(ErrorMessage = "Email must not be null")]
         [DataType(DataType.EmailAddress)]
         [Display(Name = "Email")]
+        [RegularExpression("^([\\w-\\.]+@(?!(g|G)(m|M)(a|A)(i|I)(l|L))(?!(y|Y)(a|A)(h|H)(o|O)((o|O)))(?!(h|H)(o|O)(t|T)(m|M)(a|A)(i|I)(l|L))(?!(o|O)(u|U)(t|T)(l|L)(o|O)(o|O)(k|K))(?!(r|R)(e|E)(d|D)(i|I)(f|F)(f|F)(m|M)(a|A)(i|I)(l|L))([\\w-]+\\.)+[\\w-]{2,6})?$", ErrorMessage = "It must contains only @vanlanguni.vn or @vanlanguni.edu.vn and not just all number")]
         public string email { get; set; }
 
         [Required(ErrorMessage = "Name must not be null")]
@@ -49,6 +50,7 @@ namespace TradingVLU.Models
 
         [Required(ErrorMessage = "Answer must not be null")]
         [Display(Name = "Answer")]
+        [RegularExpression("[a-zA-Z][a-zA-Z0-9]{5,15}", ErrorMessage = "The Answer is not just number")]
         [StringLength(100, MinimumLength = 6, ErrorMessage = "The Answer must be at least 6 characters.")]
         public string answer_security_question { get; set; }
 
