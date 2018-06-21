@@ -186,6 +186,7 @@ namespace TradingVLU.Controllers
                     quantity = quantity,
                     price = price,
                     phone_contact = phone,
+                    status =1,
                     index_image = index_img,
                     seller_id = user.id,
                     create_by = user.name,
