@@ -27,24 +27,45 @@
             <div class="product product-details clearfix">
                 <div class="col-md-6">
                     <div id="product-main-view">
-                        <div class="product-view">
-                            <img src="~/Content/img/items/index_img/@detailItem.index_image" alt="detail_image">
-                        </div>
-                        <div class="product-view">
-                            <img src="~/Content/img/items/detail_img/@detailItem.detail_image1" alt="detail_image">
-                        </div>
-                        <div class="product-view">
-                            <img src="~/Content/img/items/detail_img/@detailItem.detail_image2" alt="detail_image">
-                        </div>
-                        <div class="product-view">
-                            <img src="~/Content/img/items/detail_img/@detailItem.detail_image3" alt="detail_image">
-                        </div>
-                        <div class="product-view">
-                            <img src="~/Content/img/items/detail_img/@detailItem.detail_image4" alt="detail_image">
-                        </div>
-                        <div class="product-view">
-                            <img src="~/Content/img/items/detail_img/@detailItem.detail_image5" alt="detail_image">
-                        </div>
+                        @{
+                            if (!detailItem.index_image.IsEmpty())
+                            {
+                                <div class="product-view">
+                                    <img src="~/Content/img/items/index_img/@detailItem.index_image" alt="detail_image">
+                                </div>
+                            }
+                            if (!detailItem.detail_image1.IsEmpty())
+                            {
+                                <div class="product-view">
+                                    <img src="~/Content/img/items/detail_img/@detailItem.detail_image1" alt="detail_image">
+                                </div>
+                            }
+                            if (!detailItem.detail_image2.IsEmpty())
+                            {
+                                <div class="product-view">
+                                    <img src="~/Content/img/items/detail_img/@detailItem.detail_image2" alt="detail_image">
+                                </div>
+                            }
+                            if (!detailItem.detail_image3.IsEmpty())
+                            {
+                                <div class="product-view">
+                                    <img src="~/Content/img/items/detail_img/@detailItem.detail_image3" alt="detail_image">
+                                </div>
+                            }
+                            if (!detailItem.detail_image4.IsEmpty())
+                            {
+                                <div class="product-view">
+                                    <img src="~/Content/img/items/detail_img/@detailItem.detail_image4" alt="detail_image">
+                                </div>
+                            }
+                            if (!detailItem.detail_image5.IsEmpty())
+                            {
+                                <div class="product-view">
+                                    <img src="~/Content/img/items/detail_img/@detailItem.detail_image5" alt="detail_image">
+                                </div>
+                            }
+
+                        }
 
                     </div>
                     <div id="product-view">
