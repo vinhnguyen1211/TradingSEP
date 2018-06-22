@@ -376,5 +376,18 @@ namespace TradingVLU.Controllers
             Session["changeMessage"] = "true";
             Response.Redirect("~/User/createnew");
         }
+
+        [HttpPost]
+        public ActionResult updateName(user user)
+        {
+            int userID = int.Parse(Session["userID"].ToString());
+            var xUser = db.users.FirstOrDefault(x => x.id == userID);
+            xUser.name = user.name;
+            db.Entry(xUser).State = EntityState.Modified;
+            db.SaveChanges();
+            ViewBag.SuccessMessage = "User's name succesfully changed";
+            return RedirectToAction("account_settings","User");
+        }
+
     }
 }

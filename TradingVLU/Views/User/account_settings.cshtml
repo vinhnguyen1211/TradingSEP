@@ -12,7 +12,7 @@
         <div class="col-md-3">
             <ul class="nav nav-pills nav-stacked admin-menu">
                 <li class="active"><a href="" data-target-id="profile"><i class="fa fa-user-o"></i> Profile</a></li>
-                <li><a href="" data-target-id="settings"><i class="fa fa-cog"></i> Settings</a></li>
+                @*<li><a href="" data-target-id="settings"><i class="fa fa-cog"></i> Settings</a></li>*@
                 <li><a href="" data-target-id="logout"><i class="fa fa-sign-out"></i> Logout</a></li>
             </ul>
         </div>
@@ -22,7 +22,18 @@
                     <h3 class="panel-title">Name</h3>
                 </div>
                 <div class="panel-body">
-                    @user_detail.name
+                    @user_detail.name -
+                    <span id="formEditName">
+                        @using (Html.BeginForm("updateName", "User", FormMethod.Post, new { role = "form" }))
+                        {
+                            <input id="inputNewName" class="form-check-inline" type="text" name="name" maxlength="100" placeholder="Enter new name" autocomplete="off" />
+                            <span><button id="btnSaveName" class="btn btn-primary" type="submit" disabled="disabled">Update</button></span>
+                            <span><a id="cancelEditName" class="btn btn-danger">Cancel</a></span>
+                        }
+                    </span>
+                    <span id="openFormEdit">
+                        <button id="editName" class="btn btn-info">Edit</button>
+                    </span>
                 </div>
             </div>
             <div class="panel panel-info" style="margin: 1em;">
@@ -35,10 +46,10 @@
             </div>
             <div class="panel panel-info" style="margin: 1em;">
                 <div class="panel-heading">
-                    <h3 class="panel-title">Last Password Change</h3>
+                    <h3 class="panel-title">Password</h3>
                 </div>
                 <div class="panel-body">
-                    4 days Ago
+                    <a href="~/user/ChangePassword" class="btn btn-primary" role="button"> Change Password</a>
                 </div>
             </div>
         </div>
@@ -91,6 +102,35 @@
 
 @section _script_bottom{
     <script>
+        $('#formEditName').hide();
+
+        $('#openFormEdit').on('click', () => {
+            $('#formEditName').show(300);
+            $('#openFormEdit').hide(200);
+        });
+
+        $('#btnSaveName').on('click', () => {
+            $('#formEditName').hide(200);
+            $('#openFormEdit').show(300);
+        });
+
+        $('#cancelEditName').on('click', () => {
+            $('#formEditName').hide(200);
+            $('#openFormEdit').show(300);
+        });
+
+        $('#inputNewName').on('input', () => {
+            const value = $('#inputNewName').val().trim().length;
+            const text = $('#inputNewName').val().trim();
+            //const filter = /^[A-Za-z]+$/;
+            const filter = "^([a-zA-Z_ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ]+\\s)*[a-zA-Z_ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ]+$";
+            if (value >= 6 && text.match(filter)) {
+                $('#btnSaveName').removeAttr('disabled');
+            } else if (value < 6 || !text.match(filter)) {
+                $('#btnSaveName').attr('disabled', 'disabled');
+            }
+        });
+
         $(document).ready(function () {
             var navItems = $('.admin-menu li > a');
             var navListItems = $('.admin-menu li');
