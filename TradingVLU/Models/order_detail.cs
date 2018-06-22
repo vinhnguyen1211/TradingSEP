@@ -14,12 +14,16 @@ namespace TradingVLU.Models
     
     public partial class order_detail
     {
-        public int orderID { get; set; }
+        public int orderid { get; set; }
         public int item_id { get; set; }
         public Nullable<int> quantity { get; set; }
         public Nullable<decimal> totalprice { get; set; }
+        public Nullable<int> item_status { get; set; }
+        public Nullable<System.DateTime> item_orderdate { get; set; }
+        public string item_name { get; set; }
+        public string buyer_name { get; set; }
     
         public virtual item item { get; set; }
-        public virtual Order Order { get; set; }
+        public virtual order order { get; set; }
     }
 }

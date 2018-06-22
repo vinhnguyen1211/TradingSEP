@@ -12,6 +12,20 @@ namespace TradingVLU.Controllers
         [Route]
         public ActionResult index()
         {
+            if (Session["userID"] != null)
+            {
+                int userID = int.Parse(Session["userID"].ToString());
+                List<tempshoppingcart> tempcart = db.tempshoppingcarts.Where(x => x.buyer_id == userID).ToList();
+                ViewBag.Cart = tempcart;
+                ViewBag.CartUnits = tempcart.Count();
+                decimal? temp = tempcart.Sum(c => c.quantity * c.price);
+                decimal myDecimal = temp ?? 0;
+                ViewBag.CartTotalPrice = myDecimal;
+            }
+            else
+            {
+
+            }
             return View();
         }
 

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
 using TradingVLU.Models;
@@ -16,6 +17,21 @@ namespace TradingVLU.Controllers
 
         public ActionResult index()
         {
+            if (Session["userID"] != null)
+            {
+                vlutrading3545Entities db = new vlutrading3545Entities();
+                int userID = int.Parse(Session["userID"].ToString());
+                List<tempshoppingcart> tempcart = db.tempshoppingcarts.Where(x => x.buyer_id == userID).ToList();
+                ViewBag.Cart = tempcart;
+                ViewBag.CartUnits = tempcart.Count();
+                decimal? temp = tempcart.Sum(c => c.quantity * c.price);
+                decimal myDecimal = temp ?? 0;
+                ViewBag.CartTotalPrice = myDecimal;
+            }
+            else
+            {
+
+            }
             return View();
         }
 
@@ -64,7 +80,7 @@ namespace TradingVLU.Controllers
                     db.SaveChanges();
                     message = "success";
                 }
-                catch(Exception ex)
+                catch(Exception )
                 {
                     message = "failed";
                 }
@@ -105,7 +121,7 @@ namespace TradingVLU.Controllers
                     db.SaveChanges();
                     message = "success";
                 }
-                catch (Exception ex)
+                catch (Exception )
                 {
                     message = "failed";
                 }
@@ -114,14 +130,33 @@ namespace TradingVLU.Controllers
 
         }
         [HttpPost, ValidateInput(false)]
-        public ActionResult add(String name, String description, int quantity, int price, int status, HttpPostedFileBase index_image,
+        public ActionResult add(string name, string description, int quantity, int price, string phone, HttpPostedFileBase index_image,
                                 IEnumerable<HttpPostedFileBase> detail_images)
         {
+
+            if (Session["userLogged"] == null)
+            {
+                return RedirectToAction("account_settings", "User");
+            }
+            
             using (vlutrading3545Entities db = new vlutrading3545Entities())
             {
                 //list status
                 var statusList = db.item_status.Select(x => new { x.id, x.status }).ToList();
                 ViewBag.statusList = statusList;
+                //validate: require length of item name >= 10 characters
+                if (name.Trim().Length < 10)
+                {
+                    ViewBag.ErrorMessage = "Name of item requires at least 10 characters";
+                    return View();
+                }
+                //validate : phone number
+                if (Regex.IsMatch(phone,("[a-zA-Z]{5,12}")))
+                {
+                    ViewBag.ErrorMessage = "invalid phone number";
+                    return View();
+                }
+                
                 //
                 string index_img = String.Empty;
                 if (index_image != null && index_image.ContentLength > 0)
@@ -165,6 +200,7 @@ namespace TradingVLU.Controllers
                     }
                 }
 
+                var user = Session["userLogged"] as TradingVLU.Models.user;
 
                 item item = new item
                 {
@@ -172,12 +208,13 @@ namespace TradingVLU.Controllers
                     description = description,
                     quantity = quantity,
                     price = price,
-                    status = status,
+                    phone_contact = phone,
+                    status =1,
                     index_image = index_img,
-                    seller_id = 1,
-                    create_by = "vinh",
+                    seller_id = user.id,
+                    create_by = user.name,
                     create_date = DateTime.Now,
-                    update_by = "vinh",
+                    update_by = user.name,
                     update_date = DateTime.Now,
                     detail_image1 = detail_img[0],
                     detail_image2 = detail_img[1],
@@ -192,7 +229,7 @@ namespace TradingVLU.Controllers
                     
                     db.SaveChanges();
                 }
-                catch (Exception e)
+                catch (Exception )
                 {
                     ViewBag.ErrorMessage = "Error occurred while create new item. Contact Admin for details";
                     return View();
@@ -229,9 +266,7 @@ namespace TradingVLU.Controllers
                 //}
             }
 
-
-
-
+            ViewBag.SuccessMessage = "Created new item successfully!";
             return View();
         }
 
@@ -261,54 +296,6 @@ namespace TradingVLU.Controllers
             }
         }
 
-        [Route("Order/{id:int:min(1)}")]
-        public ActionResult AddToCart(int id)
-        {
-            if (Session["userID"] != null)
-            {
-                addToCart(id);
-                //return RedirectToAction("Index");
-                return RedirectToAction("index", "item");
-            }
-            else
-            {
-                return RedirectToAction("Login", "User");
-            }
-
-        }
-
-        private void addToCart(int pId)
-        {
-            using (vlutrading3545Entities db = new vlutrading3545Entities())
-            {
-                // check if product is valid
-                item product = db.items.FirstOrDefault(p => p.id == pId);
-                if (product != null)
-                {
-                    // check if product already existed
-                    tempshoppingcart cart = db.tempshoppingcarts.FirstOrDefault(c => c.item_id == pId);
-                    if (cart != null)
-                    {
-                        cart.quantity++;
-                    }
-                    else
-                    {
-
-                        cart = new tempshoppingcart
-                        {
-                            item_name = product.item_name,
-                            item_id = product.id,
-                            price = product.price,
-                            quantity = 1
-                        };
-
-                        db.tempshoppingcarts.Add(cart);
-                    }
-                    //product.UnitsInStock--;
-                    db.SaveChanges();
-                }
-            }
-        }
     }
 }
             

@@ -16,9 +16,24 @@ namespace TradingVLU.Controllers
     public class UserController : Controller
     {
         vlutrading3545Entities db = new vlutrading3545Entities();
+
         // GET: User
         public ActionResult Index()
         {
+            if (Session["userID"] != null)
+            {
+                int userID = int.Parse(Session["userID"].ToString());
+                List<tempshoppingcart> tempcart = db.tempshoppingcarts.Where(x => x.buyer_id == userID).ToList();
+                ViewBag.Cart = tempcart;
+                ViewBag.CartUnits = tempcart.Count();
+                decimal? temp = tempcart.Sum(c => c.quantity * c.price);
+                decimal myDecimal = temp ?? 0;
+                ViewBag.CartTotalPrice = myDecimal;
+            }
+            else
+            {
+
+            }
             return View();
         }
 
@@ -80,7 +95,7 @@ namespace TradingVLU.Controllers
                     }
                     else
                     {
-                        string ip_login = "";
+                        string ip_login = String.Empty;
                         if(Request.UserHostAddress != null)
                         {
                             ip_login = Request.UserHostAddress;
@@ -107,7 +122,7 @@ namespace TradingVLU.Controllers
                             db.users.Add(usr);
                             db.SaveChanges();
                         }
-                        catch (Exception e)
+                        catch (Exception )
                         {
                             ViewBag.DuplicateMessage = "Error occurred while register. Contact Admin for details";
                             return View();
@@ -141,40 +156,31 @@ namespace TradingVLU.Controllers
         {
             using(vlutrading3545Entities db = new vlutrading3545Entities())
             {
-                if(db.users.Any(x => x.username == userLogin.username))
+                if (db.users.Any(x => x.username == userLogin.username))
                 {
                     var user = db.users.FirstOrDefault(x => x.username == userLogin.username);
-                    if(user.password == hashPwd(userLogin.password) && user.is_active== 1)
+                    if(user.password == hashPwd(userLogin.password))
                     {
+                        if(user.is_active != 1)
+                        {
+                            ViewBag.DuplicateMessage = "Your account has not been activated yet. \nContact Admin for details";
+                            return View();
+                        }
                         Session["userLogged"] = user;
                         Session["username"] = user.username;
                         Session["userID"] = user.id;
-                        Session["Role"] = user.role;
                         updateLastLoginTimeAndIp();
                         ViewBag.SuccessMessage = "Successful Logged";
                         ViewBag.LoggedStatus = true;
-                        if (Convert.ToInt32(Session["Role"]) == 2 )
-                            return Redirect("http://localhost:50166/Admin/User");
-                        if (Convert.ToInt32(Session["Role"]) == 1002)
-                            return Redirect("http://localhost:50166/manageitem/approve");
-
-                        //else if (Convert.ToInt32(Session["Role"]) == 1)
-                        //    return RedirectToAction("Index", "Home");
-
+                        if (user.role == 2 )
+                            return RedirectToAction("Index", "User", new { Area="Admin" });
+                        if (user.role == 1002)
+                            return RedirectToAction("approve", "ItemManagement");
                     }
-                    else if (user.password == hashPwd(userLogin.password) && user.is_active == 0)
-                    {
-                        ViewBag.DuplicateMessage = "Your Account Isn't Active!";
-                    }
-                    else if (user.password != hashPwd(userLogin.password))
-                    {
-                        ViewBag.DuplicateMessage = "Login failed!";
-                    }
-                    
                 }
                 else
                 {
-                    ViewBag.DuplicateMessage = "Login failed!";
+                    ViewBag.DuplicateMessage = "Incorrect username or password";
                 }
             }
             if(Session["userLogged"] != null)
@@ -235,11 +241,11 @@ namespace TradingVLU.Controllers
                 
                 return RedirectToAction("login", "User");
             }
-            var user = Session["userLogged"] as TradingVLU.Models.user;
+            else {
 
             using(vlutrading3545Entities db = new vlutrading3545Entities())
             {
-
+                var user = Session["userLogged"] as TradingVLU.Models.user;
                 ViewBag.user_question = db.users.Join(db.security_question, 
                                             usr => user.id_security_question, 
                                             ques => ques.id, 
@@ -256,6 +262,7 @@ namespace TradingVLU.Controllers
 
 
             return View();
+            }
         }
 
         [NonAction]
@@ -285,7 +292,7 @@ namespace TradingVLU.Controllers
             var user = Session["userLogged"] as TradingVLU.Models.user;
             if (user != null)
             {
-                string ip_logout = "default";
+                string ip_logout = String.Empty;
                 if (Request.UserHostAddress != null)
                 {
                     ip_logout = Request.UserHostAddress;
