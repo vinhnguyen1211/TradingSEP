@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
 using TradingVLU.Models;
@@ -146,9 +147,16 @@ namespace TradingVLU.Controllers
                 //validate: require length of item name >= 10 characters
                 if (name.Trim().Length < 10)
                 {
-                    ViewBag.ErrorMessage = "Name of item requires at lease 10 characters";
+                    ViewBag.ErrorMessage = "Name of item requires at least 10 characters";
                     return View();
                 }
+                //validate : phone number
+                if (Regex.IsMatch(phone,("[a-zA-Z]{5,12}")))
+                {
+                    ViewBag.ErrorMessage = "invalid phone number";
+                    return View();
+                }
+                
                 //
                 string index_img = String.Empty;
                 if (index_image != null && index_image.ContentLength > 0)
