@@ -177,6 +177,10 @@ namespace TradingVLU.Controllers
                         if (user.role == 1002)
                             return RedirectToAction("approve", "ItemManagement");
                     }
+                    else
+                    {
+                        ViewBag.DuplicateMessage = "Incorrect username or password";
+                    }
                 }
                 else
                 {
