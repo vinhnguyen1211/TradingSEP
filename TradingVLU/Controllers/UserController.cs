@@ -163,7 +163,7 @@ namespace TradingVLU.Controllers
                     {
                         if(user.is_active != 1)
                         {
-                            ViewBag.DuplicateMessage = "Your account has not been activated yet. \nContact Admin for details";
+                            ViewBag.DuplicateMessage = "Your Account will be Activated within 24h !";
                             return View();
                         }
                         Session["userLogged"] = user;
