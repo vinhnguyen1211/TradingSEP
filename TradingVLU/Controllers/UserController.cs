@@ -128,7 +128,7 @@ namespace TradingVLU.Controllers
                             return View();
                             throw;
                         }
-                        ViewBag.SuccessMessage = "Successful.Your account will be actived in 24h";
+                        ViewBag.SuccessMessage = "Successful.Your account will be activated in 24h";
                         ModelState.Clear();
                         return View();
                     }
@@ -170,7 +170,7 @@ namespace TradingVLU.Controllers
                         Session["username"] = user.username;
                         Session["userID"] = user.id;
                         updateLastLoginTimeAndIp();
-                        ViewBag.SuccessMessage = "Successful Logged";
+                        ViewBag.SuccessMessage = "Logged-in successfully";
                         ViewBag.LoggedStatus = true;
                         if (user.role == 2 )
                             return RedirectToAction("Index", "User", new { Area="Admin" });

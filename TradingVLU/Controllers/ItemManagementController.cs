@@ -150,12 +150,7 @@ namespace TradingVLU.Controllers
                     ViewBag.ErrorMessage = "Name of item requires at least 10 characters";
                     return View();
                 }
-                //validate : phone number
-                if (Regex.IsMatch(phone,("[a-zA-Z]{5,12}")))
-                {
-                    ViewBag.ErrorMessage = "invalid phone number";
-                    return View();
-                }
+               
                 
                 //
                 string index_img = String.Empty;

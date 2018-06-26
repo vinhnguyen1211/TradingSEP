@@ -83,7 +83,7 @@
                         <div class="header-logo">
                             <a class="logo" href="@Url.Action("index", "Home")">
 
-                                
+
                                 <img src="~/Content/img/VLU-Trading-Logo2.png" alt="">
                             </a>
                         </div>
@@ -112,61 +112,61 @@
                                     </div>
                                     @{
 
-                                        if (@userLogged != null)
-                                        {
+                                    if (@userLogged != null)
+                                    {
 
-                                            <strong style="font-size: 1.1em;">@Html.Raw(userLogged.name) <i class="fa fa-caret-down"></i></strong>
-                                        }
-                                        else
-                                        {
-                                            <strong class="text-uppercase"> My Account <text>&nbsp;&nbsp;&nbsp;</text><i class="fa fa-caret-down"> </i></strong>
-                                        }
+                                        <strong style="font-size: 1.1em;">@Html.Raw(userLogged.name) <i class="fa fa-caret-down"></i></strong>
+                                }
+                                else
+                                {
+                                    <strong class="text-uppercase"> My Account <text>&nbsp;&nbsp;&nbsp;</text><i class="fa fa-caret-down"> </i></strong>
+                            }
                                     }
 
                                 </div>
                                 @{
-                                    if (userLogged == null)
-                                    {
-                                        <a href="@Url.Action("login", "User")" class="text-uppercase">Login</a> @Html.Raw("/") <a href="@Url.Action("register", "User")" class="text-uppercase">Register</a>
-                                    }
-                                    else
-                                    {
-                                        <a href="@Url.Action("logout", "User")"><i class="fa fa-sign-out"></i> Logout</a>
-                                    }
+                                if (userLogged == null)
+                                {
+                                    <a href="@Url.Action("login", "User")" class="text-uppercase">Login</a> @Html.Raw("/") <a href="@Url.Action("register", "User")" class="text-uppercase">Register</a>
+                            }
+                            else
+                            {
+                                <a href="@Url.Action("logout", "User")"><i class="fa fa-sign-out"></i> Logout</a>
+                        }
                                 }
                                 <ul class="custom-menu">
                                     @{
-                                        if (@userLogged != null)
-                                        {
+                                    if (@userLogged != null)
+                                    {
 
-                                            <li><a href="#"><i class="fa fa-user-o"></i> @Html.Raw(userLogged.name)</a></li>
-                                            <li><a href="@Url.Action("myItems", "ItemManagement")?status=0"><i class="fa fa-heart-o"></i>Checkout My Post</a></li>
-                                            <li><a href="~/Item/confirmorderlist"><i class="fa fa-heart-o"></i> My Order</a></li>
-                                             <li><a href="~/Item/checkoldorder"><i class="fa fa-check"></i> Check My Order</a></li>
-                                            <li><a href="@Url.Action("list", "Item")"><i class="fa fa-check"></i>My Items</a></li>
-                                            <li><a href="@Url.Action("account_settings", "User")"><i class="fa fa-cog"></i> Settings</a></li>
-                                            <li><a href="@Url.Action("ChangePassword", "User")"><i class="fa fa-cog"></i> Change Password</a></li>
-                                            <li><a href="@Url.Action("add", "ItemManagement")"><i class="fa fa-cog"></i> Post Item </a></li>
-                                            <li><a href="@Url.Action("logout", "User")"><i class="fa fa-sign-out"></i> Logout</a></li>
-                                        }
-                                        else
-                                        {
-                                            <li><a href="#"><i class="fa fa-user-o"></i> My Account</a></li>
-                                            <li><a href="@Url.Action("login", "User")"><i class="fa fa-unlock-alt"></i> Login</a></li>
-                                            <li><a href="@Url.Action("register", "User")"><i class="fa fa-user-plus"></i> Create An Account</a></li>
-                                        }
+                                        <li><a href="#"><i class="fa fa-user-o"></i> @Html.Raw(userLogged.name)</a></li>
+                                        <li><a href="@Url.Action("myItems", "ItemManagement")?status=0"><i class="fa fa-heart-o"></i>Checkout My Post</a></li>
+                                        <li><a href="~/Item/confirmorderlist"><i class="fa fa-heart-o"></i> My Order</a></li>
+                                        <li><a href="~/Item/checkoldorder"><i class="fa fa-check"></i> Check My Order</a></li>
+                                        <li><a href="@Url.Action("list", "Item")"><i class="fa fa-check"></i>My Items</a></li>
+                                        <li><a href="@Url.Action("account_settings", "User")"><i class="fa fa-cog"></i> Settings</a></li>
+                                        <li><a href="@Url.Action("ChangePassword", "User")"><i class="fa fa-cog"></i> Change Password</a></li>
+                                        <li><a href="@Url.Action("add", "ItemManagement")"><i class="fa fa-cog"></i> Post Item </a></li>
+                                        <li><a href="@Url.Action("logout", "User")"><i class="fa fa-sign-out"></i> Logout</a></li>
+                                }
+                                else
+                                {
+                                    <li><a href="#"><i class="fa fa-user-o"></i> My Account</a></li>
+                                    <li><a href="@Url.Action("login", "User")"><i class="fa fa-unlock-alt"></i> Login</a></li>
+                                    <li><a href="@Url.Action("register", "User")"><i class="fa fa-user-plus"></i> Create An Account</a></li>
+                            }
                                     }
 
 
                                 </ul>
                             </li>
                             <!-- /Account -->
-                           <!-- Cart -->
+                            <!-- Cart -->
                             <li class="header-cart dropdown default-dropdown">
                                 <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
                                     @{
-                                        if (@userLogged != null)
-                                        {
+                                    if (@userLogged != null)
+                                    {
                                         <div class="header-btns-icon">
                                             <i class="fa fa-shopping-cart"></i>
                                             <span class="qty"> @ViewBag.CartUnits </span>
@@ -284,9 +284,9 @@
                             <h3 class="footer-header">My Account</h3>
                             <ul class="list-links">
                                 @*<li><a href="#">My Account</a></li>
-                                    <li><a href="#">My Wishlist</a></li>
-                                    <li><a href="#">Compare</a></li>
-                                    <li><a href="#">Checkout</a></li>*@
+                                <li><a href="#">My Wishlist</a></li>
+                                <li><a href="#">Compare</a></li>
+                                <li><a href="#">Checkout</a></li>*@
                                 <li><a href="@Url.Action("login","User")">Login</a></li>
                             </ul>
                         </div>
@@ -302,8 +302,8 @@
                             <ul class="list-links">
                                 <li><a href="@Url.Action("about","Home")">About Us</a></li>
                                 @*<li><a href="#">Shiping & Return</a></li>
-                                    <li><a href="#">Shiping Guide</a></li>
-                                    <li><a href="#">FAQ</a></li>*@
+                                <li><a href="#">Shiping Guide</a></li>
+                                <li><a href="#">FAQ</a></li>*@
                             </ul>
                         </div>
                     </div>
@@ -350,6 +350,58 @@
         <script src="~/Content/js/nouislider.min.js"></script>
         <script src="~/Content/js/jquery.zoom.min.js"></script>
         <script src="~/Content/js/main.js"></script>
+
+
+        <script>
+            $('#inputWarning').hide();
+           
+
+            $('#reviewArea').on('input', () => {
+                var totalText = $('#reviewArea').val().trim();
+                if (totalText.length < 10) {
+                    $('#inputWarning').show(100);
+                    $('#submitReview').attr('disabled', 'disabled');
+                } else {
+                    $('#inputWarning').hide(100);
+                    $('#submitReview').removeAttr('disabled', 'disabled');
+                }
+
+            })
+
+            $('.validatePassword').on({
+                keydown: function (e) {
+                    if (e.which === 32)
+                        return false;
+                },
+                change: function () {
+                    this.value = this.value.replace(/\s/g, "");
+                }
+            });
+
+            $('.validatePhoneNumber').on({
+                keydown: function (e) {
+                    if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||
+                        // Allow: Ctrl/cmd+A
+                        (e.keyCode == 65 && (e.ctrlKey === true || e.metaKey === true)) ||
+                        // Allow: Ctrl/cmd+C
+                        (e.keyCode == 67 && (e.ctrlKey === true || e.metaKey === true)) ||
+                        // Allow: Ctrl/cmd+X
+                        (e.keyCode == 88 && (e.ctrlKey === true || e.metaKey === true)) ||
+                        // Allow: home, end, left, right
+                        (e.keyCode >= 35 && e.keyCode <= 39)) {
+                        // let it happen, don't do anything
+                        return;
+                    }
+                    // Ensure that it is a number and stop the keypress
+                    if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+                        e.preventDefault();
+                    }
+                },
+                change: function () {
+                    this.value = this.value.replace(/\s/g, "");
+                }
+            });
+        </script>
 
         @RenderSection("_script_bottom", required: false)
     </body>

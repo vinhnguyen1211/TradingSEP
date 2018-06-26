@@ -110,6 +110,7 @@ namespace TradingVLU.Controllers
                     nCom.name_comment = name;
                     db.comments.Add(nCom);
                     db.SaveChanges();
+
                 }
                 return RedirectToAction("detail", "Item", new { id = ID });
             }

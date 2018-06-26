@@ -213,7 +213,8 @@
                                         <form class="review-form" action="~/Item/Comments" method="post">
                                             <div class="form-group">
                                                 <input type="text" value="@detailItem.id" hidden name="masp" />
-                                                <textarea class="input" placeholder="Your review" name="cmt"></textarea>
+                                                <font color="#FF0000"> <p id="inputWarning"> Comment at least 10 characters and not blank <p> </font>
+                                                <textarea id="reviewArea" class="input" placeholder="Your review" name="cmt"></textarea>
                                             </div>
                                             @*<div class="form-group">
                     <div class="input-rating">
@@ -227,7 +228,7 @@
                         </div>
                     </div>
                 </div>*@
-                                            <button class="primary-btn">Submit</button>
+                                            <button id="submitReview" disabled="disabled" class="primary-btn">Submit</button>
                                         </form>
                                     </div>
                                 </div>
@@ -248,3 +249,4 @@
 </div>
 <!-- /section -->
 <!-- section -->
+
