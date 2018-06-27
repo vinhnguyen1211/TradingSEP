@@ -8,7 +8,7 @@
 
 <style>
     .content {
-        min-height: 600px;
+        min-height: 800px;
     }
 
     .card img {
@@ -19,8 +19,8 @@
     }
 
     .card {
-        width: 180px;
-        height: 280px;
+        width: 200px;
+        height: 450px;
         margin-bottom: 10px;
         border-radius: 5px 5px 0 0;
     }
@@ -39,13 +39,64 @@
     .list-items {
         margin-top: 100px;
     }
+    .cart-page {
+        width: 100%;
+        margin: 20px 0;
+        font-weight: bold;
+        color: #2f2f2f;
+    }
+
+        .cart-page th {
+            transition: .3s;
+            -webkit-transition: .3s
+        }
+
+            .cart-page th:hover {
+                background: rgba(45, 187, 155, 0.5);
+            }
+
+        .cart-page, .cart-page th, .cart-page td {
+            border: 1px solid #2dbb9b;
+            border-collapse: collapse;
+            text-align: center;
+            padding: 10px;
+        }
+
+            .cart-page .quantity {
+                vertical-align: middle;
+                background: #2dbb9b;
+                color: #fff;
+                font-weight: bold;
+                width: 30px;
+                height: 20px;
+                display: inline-block;
+                border-radius: 15px;
+                margin: 0 10px;
+            }
+
+            .cart-page .remove {
+                font-size: .7em;
+                text-transform: uppercase;
+                color: #ff6a00;
+                border: 1px solid #ff6a00;
+                padding: 3.5px 10px;
+                transition: .3s;
+                -webkit-transition: .3s;
+                border-radius: 15px;
+            }
+
+                .cart-page .remove:hover {
+                    background: #ff6a00;
+                    color: #fff;
+                }
+
 </style>
 <div class="container content">
     <h2 class="title">Checkout My Post</h2>
     <form action="@Url.Action("myItems", "ItemManagement")" method="get" id="form-select" style="font-size:14px">
         <select name="status" id="select-status">
             @{ 
-                String[] a = { "Waiting for approval", "Approved", "Rejected"};
+                String[] a = { "Waiting for approval", "Approved", "Rejected","Sold Out"};
                 int status = ViewBag.status;
                 for (int i = 0; i < a.Length; i++)
                 {
@@ -59,8 +110,7 @@
                     }
 
                 }
-             }
-            
+             }            
         </select>
     </form>
     <div class="row list-items">
@@ -76,8 +126,19 @@
                         <p class="card-text">@item.description</p>
                         <p class="card-text">@item.quantity</p>
                         <p class="card-text">@item.price</p>
-                        @*<a href="#" class="btn btn-success btn-approve">Approve</a>
-                        <a href="#" class="btn btn-danger btn-reject">Reject</a>*@
+                    </div>
+
+                    <div class="cart-page">
+                            <form action="~/item/ChangeStatusToSoldOut/@item.id">
+                                <button class="remove" type="submit">Sold Out</button>
+                            </form>
+
+                        @*<a href="@Url.Action("edit", "ItemManagement",new {id = item.id})"><i class="fa fa-cog"></i> Post Item </a>*@
+                        <a href="@Url.Action("edit", "ItemManagement",new {id = item.id})" class="btn primary-btn"> Edit</a>
+                        @*<form action="~/ItemManagement/edit/@item.id">
+                            <button class="active" type="submit">Edit</button>
+                        </form>*@
+
                     </div>
                 </div>
             </div>
