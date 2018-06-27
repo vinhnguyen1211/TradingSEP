@@ -11,7 +11,7 @@ namespace TradingVLU.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.Web;
     public partial class item
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -20,7 +20,13 @@ namespace TradingVLU.Models
             this.comments = new HashSet<comment>();
             this.order_detail = new HashSet<order_detail>();
         }
-    
+        public HttpPostedFileBase avatar { get; set; }
+        public HttpPostedFileBase pic01 { get; set; }
+        public HttpPostedFileBase pic02 { get; set; }
+        public HttpPostedFileBase pic03 { get; set; }
+        public HttpPostedFileBase pic04 { get; set; }
+        public HttpPostedFileBase pic05 { get; set; }
+
         public int id { get; set; }
         public string item_name { get; set; }
         public string description { get; set; }
@@ -49,5 +55,6 @@ namespace TradingVLU.Models
         public virtual user user1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<order_detail> order_detail { get; set; }
+
     }
 }

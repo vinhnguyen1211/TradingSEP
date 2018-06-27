@@ -265,33 +265,173 @@ namespace TradingVLU.Controllers
             return View();
         }
 
+        //[HttpGet]
+        //public ActionResult EditItem(int id)
+        //{
+        //    using (vlutrading3545Entities db = new vlutrading3545Entities())
+        //    {
+        //        var Data = db.items.FirstOrDefault(x => x.id == id);
+        //        return View(Data);
+        //    }
+        //}
+
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult EditItem(int id, item its)
+        //{
+        //    using (vlutrading3545Entities db = new vlutrading3545Entities())
+        //    {
+        //        var Data = db.items.FirstOrDefault(x => x.id == id);
+        //        Data.item_name = its.item_name;
+        //        Data.description = its.description;
+        //        Data.quantity = its.quantity;
+        //        Data.status = its.status;
+        //        db.SaveChanges();
+        //        return RedirectToAction("Sale_ProjectsList");
+        //    }
+        //}
+
         [HttpGet]
-        public ActionResult EditItem(int id)
+        public ActionResult edit(int id)
         {
             using (vlutrading3545Entities db = new vlutrading3545Entities())
             {
-                var Data = db.items.FirstOrDefault(x => x.id == id);
-                return View(Data);
+                //ViewBag.StatusSelect = db.item_status.Select(h => new SelectListItem { Value = h.id.ToString(), Text = h.status });
+                var item = db.items.FirstOrDefault(x => x.id == id);
+                ViewBag.DetailItem = item;
+                return View(item);
             }
         }
-
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult EditItem(int id, item its)
+        public ActionResult edit(int id, item nitem)
+        //, HttpPostedFileBase index_image, HttpPostedFileBase detail_image1, HttpPostedFileBase detail_image2, HttpPostedFileBase detail_image3, HttpPostedFileBase detail_image4, HttpPostedFileBase detail_image5
         {
-            using (vlutrading3545Entities db = new vlutrading3545Entities())
+            vlutrading3545Entities db = new vlutrading3545Entities();
+            int userID = int.Parse(Session["userID"].ToString());
+            var username = db.users.FirstOrDefault(x => x.id == userID).name;
+            var data = db.items.FirstOrDefault(x => x.id == nitem.id);
+
+            data.price = nitem.price;
+            data.item_name = nitem.item_name;
+            data.phone_contact = nitem.phone_contact;
+            data.quantity = nitem.quantity;
+            data.update_by = username;
+            if (nitem.avatar != null)
             {
-                var Data = db.items.FirstOrDefault(x => x.id == id);
-                Data.item_name = its.item_name;
-                Data.description = its.description;
-                Data.quantity = its.quantity;
-                Data.status = its.status;
-                db.SaveChanges();
-                return RedirectToAction("Sale_ProjectsList");
+                data.index_image = Images(nitem);
             }
+           
+            if (nitem.pic01 != null)
+            {
+                data.detail_image1 = Images01(nitem);
+            }
+            if (nitem.pic02 != null)
+            {
+                data.detail_image2 = Images02(nitem);
+            }
+            if (nitem.pic03 != null)
+            {
+                data.detail_image3 = Images03(nitem);
+            }
+            if (nitem.pic04 != null)
+            {
+                data.detail_image4 = Images04(nitem);
+            }
+            if (nitem.pic05 != null)
+            {
+                data.detail_image5 = Images05(nitem);
+            }
+
+            db.SaveChanges();
+            return RedirectToAction("index", "Home");
+        }
+
+        public string Images(item p)
+        {
+            string s = "";
+            string filename;
+            string extension;
+            filename = Path.GetFileNameWithoutExtension(p.avatar.FileName);
+            extension = Path.GetExtension(p.avatar.FileName);
+            filename = filename + extension;
+            s = filename;
+            filename = Path.Combine(Server.MapPath("/Content/img/items/index_img/"), filename);
+            p.avatar.SaveAs(filename);
+            return s;
+        }
+
+        public string Images01(item p)
+        {
+            string s = "";
+            string filename;
+            string extension;
+            filename = Path.GetFileNameWithoutExtension(p.pic01.FileName);
+            extension = Path.GetExtension(p.pic01.FileName);
+            filename = filename + extension;
+            s = filename;
+            filename = Path.Combine(Server.MapPath("/Content/img/items/detail_img/"), filename);
+            p.pic01.SaveAs(filename);
+            return s;
+        }
+
+        public string Images02(item p)
+        {
+            string s = "";
+            string filename;
+            string extension;
+            filename = Path.GetFileNameWithoutExtension(p.pic02.FileName);
+            extension = Path.GetExtension(p.pic02.FileName);
+            filename = filename + extension;
+            s = filename;
+            filename = Path.Combine(Server.MapPath("/Content/img/items/detail_img/"), filename);
+            p.pic02.SaveAs(filename);
+            return s;
+        }
+
+        public string Images03(item p)
+        {
+            string s = "";
+            string filename;
+            string extension;
+            filename = Path.GetFileNameWithoutExtension(p.pic03.FileName);
+            extension = Path.GetExtension(p.pic03.FileName);
+            filename = filename + extension;
+            s = filename;
+            filename = Path.Combine(Server.MapPath("/Content/img/items/detail_img/"), filename);
+            p.pic03.SaveAs(filename);
+            return s;
+        }
+
+        public string Images04(item p)
+        {
+            string s = "";
+            string filename;
+            string extension;
+            filename = Path.GetFileNameWithoutExtension(p.pic04.FileName);
+            extension = Path.GetExtension(p.pic04.FileName);
+            filename = filename + extension;
+            s = filename;
+            filename = Path.Combine(Server.MapPath("/Content/img/items/detail_img/"), filename);
+            p.pic04.SaveAs(filename);
+            return s;
+        }
+
+        public string Images05(item p)
+        {
+            string s = "";
+            string filename;
+            string extension;
+            filename = Path.GetFileNameWithoutExtension(p.pic05.FileName);
+            extension = Path.GetExtension(p.pic05.FileName);
+            filename = filename + extension;
+            s = filename;
+            filename = Path.Combine(Server.MapPath("/Content/img/items/detail_img/"), filename);
+            p.pic05.SaveAs(filename);
+            return s;
         }
 
     }
 }
+
             
             
