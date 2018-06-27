@@ -50,7 +50,7 @@ namespace TradingVLU.Models
 
         [Required(ErrorMessage = "Answer must not be null")]
         [Display(Name = "Answer")]
-        [RegularExpression("[a-zA-Z][a-zA-Z0-9]{5,15}", ErrorMessage = "The Answer is not just number")]
+        //[RegularExpression("[a-zA-Z][a-zA-Z0-9]{5,15}", ErrorMessage = "The Answer is not just number")]
         [StringLength(100, MinimumLength = 6, ErrorMessage = "The Answer must be at least 6 characters.")]
         public string answer_security_question { get; set; }
 
