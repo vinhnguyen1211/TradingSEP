@@ -653,6 +653,7 @@
     <Content Include="Views\Item\confirmorderlist.cshtml" />
     <Content Include="Views\Item\checkoldorder.cshtml" />
     <Content Include="Views\Item\CheckDetailOrder.cshtml" />
+    <Content Include="Views\ItemManagement\edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

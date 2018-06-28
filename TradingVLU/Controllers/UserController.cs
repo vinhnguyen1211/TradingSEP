@@ -128,7 +128,7 @@ namespace TradingVLU.Controllers
                             return View();
                             throw;
                         }
-                        ViewBag.SuccessMessage = "Successful.Your account will be actived in 24h";
+                        ViewBag.SuccessMessage = "Successful.Your account will be activated in 24h";
                         ModelState.Clear();
                         return View();
                     }
@@ -163,19 +163,20 @@ namespace TradingVLU.Controllers
                     {
                         if(user.is_active != 1)
                         {
-                            ViewBag.DuplicateMessage = "Your account has not been activated yet. \nContact Admin for details";
+                            ViewBag.DuplicateMessage = "Your Account will be Activated within 24h !";
                             return View();
                         }
                         Session["userLogged"] = user;
                         Session["username"] = user.username;
                         Session["userID"] = user.id;
                         updateLastLoginTimeAndIp();
-                        ViewBag.SuccessMessage = "Successful Logged";
+                        ViewBag.SuccessMessage = "Logged-in successfully";
                         ViewBag.LoggedStatus = true;
                         if (user.role == 2 )
                             return RedirectToAction("Index", "User", new { Area="Admin" });
                         if (user.role == 1002)
                             return RedirectToAction("approve", "ItemManagement");
+                        else return RedirectToAction("index","Home");
                     }
                     else
                     {

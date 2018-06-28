@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
 using TradingVLU.Models;
@@ -60,25 +62,6 @@ namespace TradingVLU.Controllers
 
         }
 
-        [Route("edit/{id:int:min(1)}")]
-        [HttpGet]
-        public ActionResult edit(int id)
-        {
-            using (vlutrading3545Entities db = new vlutrading3545Entities())
-            {
-                //ViewBag.StatusSelect = db.item_status.Select(h => new SelectListItem { Value = h.id.ToString(), Text = h.status });
-                var item = db.items.FirstOrDefault(x => x.id == id);
-                return View(item);
-            }
-        }
-
-        [HttpPost]
-        public ActionResult edit(item nitem)
-        {
-            vlutrading3545Entities db = new vlutrading3545Entities();
-            var data = db.items.FirstOrDefault(x => x.id == nitem.id);
-            return View();
-        }
 
 
         [HttpGet]
@@ -109,6 +92,7 @@ namespace TradingVLU.Controllers
                     nCom.name_comment = name;
                     db.comments.Add(nCom);
                     db.SaveChanges();
+
                 }
                 return RedirectToAction("detail", "Item", new { id = ID });
             }
@@ -299,6 +283,21 @@ namespace TradingVLU.Controllers
             }
         }
 
+        [Route("ChangeStatusToSoldOut/{itemid:int:min(1)}")]
+        public ActionResult ChangeStatusToSoldOut(string itemid)
+        {
+            int ItemID = int.Parse(itemid);
+            using (vlutrading3545Entities db = new vlutrading3545Entities())
+            {
+                var model = db.items.FirstOrDefault(x => x.id == ItemID) ;
+                if (model.approve != 3)
+                {
+                    model.approve = 3;
+                }
+                db.SaveChanges();
+                return Redirect(Request.UrlReferrer.ToString());
+            }
+        }
 
         //private int x = (int)System.Web.HttpContext.Current.Session["userID"];
         // GET: Base
@@ -334,7 +333,7 @@ namespace TradingVLU.Controllers
 
         //}
 
-        
+
         public ActionResult checkoldorder()
         {
             if (Session["userID"] != null)
