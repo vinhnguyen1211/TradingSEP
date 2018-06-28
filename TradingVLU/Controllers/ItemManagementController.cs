@@ -312,6 +312,7 @@ namespace TradingVLU.Controllers
             var data = db.items.FirstOrDefault(x => x.id == nitem.id);
 
             data.price = nitem.price;
+            data.description = nitem.description;
             data.item_name = nitem.item_name;
             data.phone_contact = nitem.phone_contact;
             data.quantity = nitem.quantity;
@@ -343,7 +344,7 @@ namespace TradingVLU.Controllers
             }
 
             db.SaveChanges();
-            return RedirectToAction("index", "Home");
+            return RedirectToAction("myItems", "ItemManagement");
         }
 
         public string Images(item p)
