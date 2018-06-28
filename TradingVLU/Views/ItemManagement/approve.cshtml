@@ -4,7 +4,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     var itemList = Json.Decode(Json.Encode(ViewBag.itemList));
 }
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+@*<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">*@
 <style>
     .content {
         min-height: 600px;
@@ -16,18 +16,23 @@
         margin-top: 5px;
     }
     .card {
+        
         width: 180px;
         height: 280px;
-        margin-bottom: 10px;
+        margin: 20px;
+        margin-bottom: 150px;
         border-radius: 5px 5px 0 0;
         
+    }
+    .card-body{
+        margin-top: 10px;
     }
 
     .container .title {
         font-weight: bold;
-        font-size: 25px;
+        font-size: 30px;
         text-align: center;
-        margin-bottom: 20px;
+        margin-top: 20px;
     }.let-hide{
          display:none;
     }
@@ -48,13 +53,14 @@
                         <span class="let-hide item-id">@item.id</span>
                         <h5 class="card-title">@item.item_name</h5>
                         <p class="card-text">@item.description</p>
-                        @*<p class="card-text">@item.quantity</p>*@
-                        @*<p class="card-text">@item.price</p>*@
-                        <div style="text-align:right">
+                        <p class="card-text"><b>Phone:</b> @item.phone_contact</p>
+                        <p class="card-text"><b>Quantity:</b> @item.quantity</p>
+                        <p class="card-text"><b>Price:</b> @item.price</p>
+                        <div style="text-align:center; margin-top: 20px">
                             <a href="#" class="btn btn-success btn-approve">Approve</a>
                             <a href="#" class="btn btn-danger btn-reject">Reject</a>
                         </div>
-                        
+
                     </div>
                 </div>
             </div>

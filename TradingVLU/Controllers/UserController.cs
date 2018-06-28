@@ -236,7 +236,8 @@ namespace TradingVLU.Controllers
             updateLastLogoutTimeAndIp();
             Session["userLogged"] = null;
             ViewBag.Cart = null;
-            return Redirect(Request.UrlReferrer.ToString());
+            //return Redirect(Request.UrlReferrer.ToString());
+            return RedirectToAction("index", "Home");
         }
 
         [Route("~/user/settings")]

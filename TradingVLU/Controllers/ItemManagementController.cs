@@ -58,7 +58,7 @@ namespace TradingVLU.Controllers
         {
             using (vlutrading3545Entities db = new vlutrading3545Entities())
             {
-                var itemList = db.items.Where(x => x.approve == 0).Select(x => new { x.id, x.item_name, x.price, x.index_image,x.description }).ToList();
+                var itemList = db.items.Where(x => x.approve == 0).Select(x => new { x.id, x.item_name, x.price, x.index_image,x.description, x.quantity, x.phone_contact }).ToList();
 
                 ViewBag.itemList = itemList;
             }
@@ -94,7 +94,8 @@ namespace TradingVLU.Controllers
         {
             using (vlutrading3545Entities db = new vlutrading3545Entities())
             {
-                var itemList = db.items.Where(x => x.approve == status).Select(x => new { x.id, x.item_name, x.price, x.index_image, x.description }).ToList();
+                int user_id = (int)Session["userID"];
+                var itemList = db.items.Where(x => x.approve == status ).Where(x => x.seller_id == user_id).Select(x => new { x.id, x.item_name, x.price, x.index_image, x.description,x.quantity, x.phone_contact }).ToList();
 
                 ViewBag.itemList = itemList;
                 ViewBag.status = status;
