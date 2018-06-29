@@ -136,25 +136,28 @@
                                 }
                                 <ul class="custom-menu">
                                     @{
-                                    if (@userLogged != null)
-                                    {
+        if (@userLogged != null)
+        {
 
-                                        <li><a href="#"><i class="fa fa-user-o"></i> @Html.Raw(userLogged.name)</a></li>
-                                        <li><a href="@Url.Action("myItems", "ItemManagement")?status=0"><i class="fa fa-heart-o"></i>Checkout My Post</a></li>
-                                        <li><a href="~/Item/confirmorderlist"><i class="fa fa-heart-o"></i> My Order</a></li>
-                                        <li><a href="~/Item/checkoldorder"><i class="fa fa-check"></i> Check My Order</a></li>
-                                        <li><a href="@Url.Action("list", "Item")"><i class="fa fa-check"></i>My Items</a></li>
-                                        <li><a href="@Url.Action("account_settings", "User")"><i class="fa fa-cog"></i> Settings</a></li>
-                                        <li><a href="@Url.Action("ChangePassword", "User")"><i class="fa fa-cog"></i> Change Password</a></li>
-                                        <li><a href="@Url.Action("add", "ItemManagement")"><i class="fa fa-cog"></i> Post Item </a></li>
-                                        <li><a href="@Url.Action("logout", "User")"><i class="fa fa-sign-out"></i> Logout</a></li>
-                                }
-                                else
-                                {
-                                    <li><a href="#"><i class="fa fa-user-o"></i> My Account</a></li>
-                                    <li><a href="@Url.Action("login", "User")"><i class="fa fa-unlock-alt"></i> Login</a></li>
-                                    <li><a href="@Url.Action("register", "User")"><i class="fa fa-user-plus"></i> Create An Account</a></li>
-                            }
+                                <li><a href="@Url.Action("account_settings", "User")"><i class="fa fa-user-o"></i> @Html.Raw(userLogged.name)</a></li>
+                                <li><a href="@Url.Action("myItems", "ItemManagement")?status=0"><i class="fa fa-newspaper-o"></i>Checkout My Post</a></li>
+                                <li><a href="~/Item/confirmorderlist"><i class="fa fa-reorder"></i>Checkout My Order</a></li>
+                                <li><a href="~/Item/checkoldorder"><i class="fa fa-shopping-cart"></i>My Cart</a></li>
+                                <li><a href="@Url.Action("approve", "ItemManagement")"><i class="fa fa-check"></i>Approve The Post</a></li>
+                                @*<li><a href="./Admin/User"><i class="fa fa-cog"></i>Manage Account</a></li>*@
+                                @*<li><a href="@Url.Action("list", "Item")"><i class="fa fa-check"></i>My Items</a></li>*@
+                                @*<li><a href="@Url.Action("ChangePassword", "User")"><i class="fa fa-cog"></i> Change Password</a></li>*@
+                                <li><a href="@Url.Action("add", "ItemManagement")"><i class="fa fa-edit"></i> Post Item </a></li>
+                                @*<li><a href="@Url.Action("logout", "User")"><i class="fa fa-sign-out"></i> Logout</a></li>*@
+                                <li><a href="@Url.Action("account_settings", "User")"><i class="fa fa-cog"></i> Settings</a></li>
+
+}
+else
+{
+                                <li><a href="#"><i class="fa fa-user-o"></i> My Account</a></li>
+                                <li><a href="@Url.Action("login", "User")"><i class="fa fa-unlock-alt"></i> Login</a></li>
+                                <li><a href="@Url.Action("register", "User")"><i class="fa fa-user-plus"></i> Create An Account</a></li>
+}
                                     }
 
 

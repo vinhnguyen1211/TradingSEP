@@ -12,6 +12,7 @@
 <link rel="stylesheet" href="~/Content/css/new_item.css" />
 
 <div class="container">
+    <h1 style="margin-top:50px; margin-bottom: 50px; text-align:center">Post Item</h1>
     <form action="/manageitem/add" enctype="multipart/form-data" method="post">
         <div class="form-group" style="font-size:1.5em; text-align: center;">
             <div>
@@ -28,7 +29,7 @@
                 <label for="name" class="cols-sm-2 control-label">Item Name</label>
                 <div class="cols-sm-2">
                     <div class="input-group">
-                        <span class="input-group-addon"><i class="fa fa-diamond" aria-hidden="true"></i></span>
+                        <span class="input-group-addon"><i class="fa fa-user-o" aria-hidden="true"></i></span>
                         <input type="text" class="form-control" name="name" id="name" placeholder="Enter your Name" required />
                     </div>
                 </div>
@@ -38,7 +39,7 @@
         <div class="form-group">
             <label for="email" class="cols-sm-2 control-label">Description</label>
             <div class="cols-sm-10">
-                <textarea class="form-control editor" id="" name="description" required>Enter text here...</textarea>
+                <textarea class="form-control editor" id="" name="description" placeholder="Enter text here..." required></textarea>
             </div>
 
         </div>
