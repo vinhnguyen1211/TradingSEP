@@ -172,16 +172,16 @@
     <table class="cart-page">
         <thead>
             <tr>
-                <th>Tên Món Hàng</th>
-                <th>Ngày Đặt Hàng</th>
-                <th>Trạng Thái</th>
+                <th>Item</th>
+                <th>Order Date</th>
+                <th>Status</th>
             </tr>
         </thead>
         <tbody>
             @foreach (var item in Model)
             {
                 <tr>
-                    <<td>
+                    <td>
                         <span class="p-name">@item.item_name</span> 
                     </td>
                     <td>

@@ -12,7 +12,8 @@
 <link rel="stylesheet" href="~/Content/css/new_item.css" />
 
 <div class="container">
-    <form action="~/manageitem/add" enctype="multipart/form-data" method="post">
+    <h1 style="margin-top:50px; margin-bottom: 50px; text-align:center">Post Item</h1>
+    <form action="/manageitem/add" enctype="multipart/form-data" method="post">
         <div class="form-group" style="font-size:1.5em; text-align: center;">
             <div>
                 <span class="label label-success">@ViewBag.SuccessMessage</span>
@@ -28,7 +29,7 @@
                 <label for="name" class="cols-sm-2 control-label">Item Name</label>
                 <div class="cols-sm-2">
                     <div class="input-group">
-                        <span class="input-group-addon"><i class="fa fa-diamond" aria-hidden="true"></i></span>
+                        <span class="input-group-addon"><i class="fa fa-user-o" aria-hidden="true"></i></span>
                         <input type="text" class="form-control" name="name" id="name" placeholder="Enter your Name" required />
                     </div>
                 </div>
