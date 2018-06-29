@@ -312,6 +312,7 @@ namespace TradingVLU.Controllers
             var data = db.items.FirstOrDefault(x => x.id == nitem.id);
 
             data.price = nitem.price;
+            data.description = nitem.description;
             data.item_name = nitem.item_name;
             data.description = nitem.description;
             data.phone_contact = nitem.phone_contact;
