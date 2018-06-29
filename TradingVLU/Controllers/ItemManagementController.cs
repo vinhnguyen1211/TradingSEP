@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
 using TradingVLU.Models;
@@ -303,9 +302,9 @@ namespace TradingVLU.Controllers
                 return View(item);
             }
         }
+
         [HttpPost]
-        public ActionResult edit(int id, item nitem)
-        //, HttpPostedFileBase index_image, HttpPostedFileBase detail_image1, HttpPostedFileBase detail_image2, HttpPostedFileBase detail_image3, HttpPostedFileBase detail_image4, HttpPostedFileBase detail_image5
+        public ActionResult edit(int id, item nitem, HttpPostedFileBase avatar, HttpPostedFileBase pic01 , HttpPostedFileBase pic02 , HttpPostedFileBase pic03, HttpPostedFileBase pic04 , HttpPostedFileBase pic05)
         {
             vlutrading3545Entities db = new vlutrading3545Entities();
             int userID = int.Parse(Session["userID"].ToString());
@@ -318,119 +317,190 @@ namespace TradingVLU.Controllers
             data.phone_contact = nitem.phone_contact;
             data.quantity = nitem.quantity;
             data.update_by = username;
-            if (nitem.avatar != null)
+
+            string avatar_temp = null;
+            if (avatar != null && avatar.ContentLength > 0)
             {
-                data.index_image = Images(nitem);
+                var fileName = Guid.NewGuid() + Path.GetExtension(avatar.FileName);
+                string RootFolder = @Server.MapPath("~/Content/img/items/index_img/");
+                string path = Path.Combine(RootFolder, fileName);
+                avatar_temp = fileName;
+                avatar.SaveAs(path);
             }
-           
-            if (nitem.pic01 != null)
+            if (avatar_temp != null)
             {
-                data.detail_image1 = Images01(nitem);
+                data.index_image = avatar_temp;
             }
-            if (nitem.pic02 != null)
+
+            string pic01_temp = null;
+            if (pic01 != null && pic01.ContentLength > 0)
             {
-                data.detail_image2 = Images02(nitem);
+                var fileName = Guid.NewGuid() + Path.GetExtension(pic01.FileName);
+                string RootFolder = @Server.MapPath("~/Content/img/items/detail_img/");
+                string path = Path.Combine(RootFolder, fileName);
+                pic01_temp = fileName;
+                pic01.SaveAs(path);
             }
-            if (nitem.pic03 != null)
+            if (pic01_temp != null)
             {
-                data.detail_image3 = Images03(nitem);
+                data.detail_image1 = pic01_temp;
             }
-            if (nitem.pic04 != null)
+
+
+            string pic02_temp = null;
+            if (pic02 != null && pic02.ContentLength > 0)
             {
-                data.detail_image4 = Images04(nitem);
+                var fileName = Guid.NewGuid() + Path.GetExtension(pic02.FileName);
+                string RootFolder = @Server.MapPath("~/Content/img/items/detail_img/");
+                string path = Path.Combine(RootFolder, fileName);
+                pic02_temp = fileName;
+                pic02.SaveAs(path);
             }
-            if (nitem.pic05 != null)
+            if (pic02_temp != null)
             {
-                data.detail_image5 = Images05(nitem);
+                data.detail_image2 = pic02_temp;
+            }
+
+            string pic03_temp = null;
+            if (pic03 != null && pic03.ContentLength > 0)
+            {
+                var fileName = Guid.NewGuid() + Path.GetExtension(pic03.FileName);
+                string RootFolder = @Server.MapPath("~/Content/img/items/detail_img/");
+                string path = Path.Combine(RootFolder, fileName);
+                pic03_temp = fileName;
+                pic03.SaveAs(path);
+            }
+            if (pic03_temp != null)
+            {
+                data.detail_image3 = pic03_temp;
+            }
+
+            string pic04_temp = null;
+            if (pic04 != null && pic04.ContentLength > 0)
+            {
+                var fileName = Guid.NewGuid() + Path.GetExtension(pic04.FileName);
+                string RootFolder = @Server.MapPath("~/Content/img/items/detail_img/");
+                string path = Path.Combine(RootFolder, fileName);
+                pic04_temp = fileName;
+                pic04.SaveAs(path);
+            }
+            if (pic04_temp != null)
+            {
+                data.detail_image4 = pic04_temp;
+            }
+
+            string pic05_temp = null;
+            if (pic05 != null && pic05.ContentLength > 0)
+            {
+                var fileName = Guid.NewGuid() + Path.GetExtension(pic05.FileName);
+                string RootFolder = @Server.MapPath("~/Content/img/items/detail_img/");
+                string path = Path.Combine(RootFolder, fileName);
+                pic05_temp = fileName;
+                pic05.SaveAs(path);
+            }
+            if (pic05_temp != null)
+            {
+                data.detail_image5 = pic05_temp;
             }
 
             db.SaveChanges();
             return RedirectToAction("myItems", "ItemManagement");
         }
 
-        public string Images(item p)
-        {
-            string s = "";
-            string filename;
-            string extension;
-            filename = Path.GetFileNameWithoutExtension(p.avatar.FileName);
-            extension = Path.GetExtension(p.avatar.FileName);
-            filename = filename + extension;
-            s = filename;
-            filename = Path.Combine(Server.MapPath("/Content/img/items/index_img/"), filename);
-            p.avatar.SaveAs(filename);
-            return s;
-        }
+        //public string Images(item p)
+        //{
+        //    string s = "";
+        //    string filename;
+        //    string extension;
+        //    filename = Path.GetFileNameWithoutExtension(p.avatar.FileName);
+        //    extension = Path.GetExtension(p.avatar.FileName);
+        //    filename = filename + extension;
+        //    s = filename;
+        //    filename = Path.Combine(Server.MapPath("/Content/img/items/index_img/"), filename);
+        //    p.avatar.SaveAs(filename);
+        //    return s;
+        //}
 
-        public string Images01(item p)
-        {
-            string s = "";
-            string filename;
-            string extension;
-            filename = Path.GetFileNameWithoutExtension(p.pic01.FileName);
-            extension = Path.GetExtension(p.pic01.FileName);
-            filename = filename + extension;
-            s = filename;
-            filename = Path.Combine(Server.MapPath("/Content/img/items/detail_img/"), filename);
-            p.pic01.SaveAs(filename);
-            return s;
-        }
+        //if (index_image != null && index_image.ContentLength > 0)
+        //        {
+        //var fileName = Guid.NewGuid() + Path.GetExtension(index_image.FileName);
+        //string RootFolder = @Server.MapPath("~/Content/img/items/index_img/");
+        //string path = Path.Combine(RootFolder, fileName);
+        //index_img = fileName;
+        //            index_image.SaveAs(path);
+        //        }
 
-        public string Images02(item p)
-        {
-            string s = "";
-            string filename;
-            string extension;
-            filename = Path.GetFileNameWithoutExtension(p.pic02.FileName);
-            extension = Path.GetExtension(p.pic02.FileName);
-            filename = filename + extension;
-            s = filename;
-            filename = Path.Combine(Server.MapPath("/Content/img/items/detail_img/"), filename);
-            p.pic02.SaveAs(filename);
-            return s;
-        }
 
-        public string Images03(item p)
-        {
-            string s = "";
-            string filename;
-            string extension;
-            filename = Path.GetFileNameWithoutExtension(p.pic03.FileName);
-            extension = Path.GetExtension(p.pic03.FileName);
-            filename = filename + extension;
-            s = filename;
-            filename = Path.Combine(Server.MapPath("/Content/img/items/detail_img/"), filename);
-            p.pic03.SaveAs(filename);
-            return s;
-        }
+    //public string Images01(item p)
+    //    {
+    //        string s = "";
+    //        string filename;
+    //        string extension;
+    //        filename = Path.GetFileNameWithoutExtension(p.pic01.FileName);
+    //        extension = Path.GetExtension(p.pic01.FileName);
+    //        filename = filename + extension;
+    //        s = filename;
+    //        filename = Path.Combine(Server.MapPath("/Content/img/items/detail_img/"), filename);
+    //        p.pic01.SaveAs(filename);
+    //        return s;
+    //    }
 
-        public string Images04(item p)
-        {
-            string s = "";
-            string filename;
-            string extension;
-            filename = Path.GetFileNameWithoutExtension(p.pic04.FileName);
-            extension = Path.GetExtension(p.pic04.FileName);
-            filename = filename + extension;
-            s = filename;
-            filename = Path.Combine(Server.MapPath("/Content/img/items/detail_img/"), filename);
-            p.pic04.SaveAs(filename);
-            return s;
-        }
+    //    public string Images02(item p)
+    //    {
+    //        string s = "";
+    //        string filename;
+    //        string extension;
+    //        filename = Path.GetFileNameWithoutExtension(p.pic02.FileName);
+    //        extension = Path.GetExtension(p.pic02.FileName);
+    //        filename = filename + extension;
+    //        s = filename;
+    //        filename = Path.Combine(Server.MapPath("/Content/img/items/detail_img/"), filename);
+    //        p.pic02.SaveAs(filename);
+    //        return s;
+    //    }
 
-        public string Images05(item p)
-        {
-            string s = "";
-            string filename;
-            string extension;
-            filename = Path.GetFileNameWithoutExtension(p.pic05.FileName);
-            extension = Path.GetExtension(p.pic05.FileName);
-            filename = filename + extension;
-            s = filename;
-            filename = Path.Combine(Server.MapPath("/Content/img/items/detail_img/"), filename);
-            p.pic05.SaveAs(filename);
-            return s;
-        }
+    //    public string Images03(item p)
+    //    {
+    //        string s = "";
+    //        string filename;
+    //        string extension;
+    //        filename = Path.GetFileNameWithoutExtension(p.pic03.FileName);
+    //        extension = Path.GetExtension(p.pic03.FileName);
+    //        filename = filename + extension;
+    //        s = filename;
+    //        filename = Path.Combine(Server.MapPath("/Content/img/items/detail_img/"), filename);
+    //        p.pic03.SaveAs(filename);
+    //        return s;
+    //    }
+
+    //    public string Images04(item p)
+    //    {
+    //        string s = "";
+    //        string filename;
+    //        string extension;
+    //        filename = Path.GetFileNameWithoutExtension(p.pic04.FileName);
+    //        extension = Path.GetExtension(p.pic04.FileName);
+    //        filename = filename + extension;
+    //        s = filename;
+    //        filename = Path.Combine(Server.MapPath("/Content/img/items/detail_img/"), filename);
+    //        p.pic04.SaveAs(filename);
+    //        return s;
+    //    }
+
+        //    [NonAction]
+        //public string Images05(item p)
+        //{
+        //    string s = "";
+        //    string filename;
+        //    string extension;
+        //    filename = Path.GetFileNameWithoutExtension(p.pic05.FileName);
+        //    extension = Path.GetExtension(p.pic05.FileName);
+        //    filename = filename + extension;
+        //    s = filename;
+        //    filename = Path.Combine(Server.MapPath("/Content/img/items/detail_img/"), filename);
+        //    p.pic05.SaveAs(filename);
+        //    return s;
+        //}
 
     }
 }
