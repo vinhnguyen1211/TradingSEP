@@ -416,7 +416,7 @@
           <Property Name="detail_image3" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="detail_image4" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="detail_image5" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="price" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="price" Type="Decimal" Precision="19" Scale="4" ConcurrencyMode="None" />
           <Property Name="approve" Type="Int32" />
           <NavigationProperty Name="comments" Relationship="Self.FK_Comment_item" FromRole="item" ToRole="comment" />
           <NavigationProperty Name="item_status" Relationship="Self.FK_item_item_status" FromRole="item" ToRole="item_status" />
@@ -496,7 +496,7 @@
           <Property Name="item_id" Type="Int32" Nullable="false" />
           <Property Name="item_name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="quantity" Type="Int32" />
-          <Property Name="price" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="price" Type="Decimal" Precision="19" Scale="4" ConcurrencyMode="None" />
           <Property Name="buyer_id" Type="Int32" Nullable="false" />
           <Property Name="buyer_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
