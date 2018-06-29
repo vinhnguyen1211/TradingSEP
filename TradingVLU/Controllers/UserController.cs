@@ -173,10 +173,10 @@ namespace TradingVLU.Controllers
                         ViewBag.SuccessMessage = "Logged-in successfully";
                         ViewBag.LoggedStatus = true;
                         if (user.role == 2 )
-                            return RedirectToAction("Index", "User", new { Area="Admin" });
+                            return RedirectToAction("Index", "User", new { Area= "Admin" });
                         if (user.role == 1002)
                             return RedirectToAction("approve", "ItemManagement");
-                       // else return RedirectToAction("index","Home");
+                        else return RedirectToAction("index", "Home");
                     }
                     else
                     {
@@ -236,7 +236,6 @@ namespace TradingVLU.Controllers
             updateLastLogoutTimeAndIp();
             Session["userLogged"] = null;
             ViewBag.Cart = null;
-            //return Redirect(Request.UrlReferrer.ToString());
             return RedirectToAction("index", "Home");
         }
 

@@ -20,12 +20,12 @@ namespace TradingVLU.Models
             this.comments = new HashSet<comment>();
             this.order_detail = new HashSet<order_detail>();
         }
-        public HttpPostedFileBase avatar { get; set; }
-        public HttpPostedFileBase pic01 { get; set; }
-        public HttpPostedFileBase pic02 { get; set; }
-        public HttpPostedFileBase pic03 { get; set; }
-        public HttpPostedFileBase pic04 { get; set; }
-        public HttpPostedFileBase pic05 { get; set; }
+        //public HttpPostedFileBase avatar { get; set; }
+        //public HttpPostedFileBase pic01 { get; set; }
+        //public HttpPostedFileBase pic02 { get; set; }
+        //public HttpPostedFileBase pic03 { get; set; }
+        //public HttpPostedFileBase pic04 { get; set; }
+        //public HttpPostedFileBase pic05 { get; set; }
 
         public int id { get; set; }
         public string item_name { get; set; }

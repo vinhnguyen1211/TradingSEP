@@ -35,6 +35,11 @@ namespace TradingVLU.Areas.Admin.Controllers
                 status = result
             });
         }
+        public ActionResult logout()
+        {
+            Session["userLogged"] = null;
+            return RedirectToAction("index", "Home", new { area = "" });
+        }
 
     }
 }
