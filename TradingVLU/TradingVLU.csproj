@@ -348,6 +348,7 @@
     <Content Include="Asset\Slider\vendor\jquery\jquery.js" />
     <Content Include="Asset\Slider\vendor\jquery\jquery.min.js" />
     <Content Include="Content\css\ajax-loader.gif" />
+    <Content Include="Content\css\bootstrap.css" />
     <Content Include="Content\css\bootstrap.min.css" />
     <Content Include="Content\css\font-awesome.min.css" />
     <Content Include="Content\css\nouislider.min.css" />

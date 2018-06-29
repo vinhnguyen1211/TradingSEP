@@ -33,7 +33,7 @@
             @*@Html.LabelFor(model => model.description, htmlAttributes: new { @class = "control-label col-md-2" })*@
             <label class="control-label col-md-2">Description</label>
             <div class="col-md-5">
-                @Html.EditorFor(model => model.description, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.TextAreaFor(model => model.description, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.description, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -42,7 +42,7 @@
             @*@Html.LabelFor(model => model.quantity, htmlAttributes: new { @class = "control-label col-md-2" })*@
             <label class="control-label col-md-2">Quantity</label>
             <div class="col-md-5">
-                @Html.EditorFor(model => model.quantity, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.quantity, new { @cols = "100", @rows = "8", @style = "width:70%;" })
                 @Html.ValidationMessageFor(model => model.quantity, "", new { @class = "text-danger" })
             </div>
         </div>
