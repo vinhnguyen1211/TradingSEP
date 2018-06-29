@@ -176,7 +176,7 @@ namespace TradingVLU.Controllers
                             return RedirectToAction("Index", "User", new { Area="Admin" });
                         if (user.role == 1002)
                             return RedirectToAction("approve", "ItemManagement");
-                        else return RedirectToAction("index","Home");
+                       // else return RedirectToAction("index","Home");
                     }
                     else
                     {
