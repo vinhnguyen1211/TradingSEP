@@ -126,7 +126,7 @@
                         <p class="card-text">@item.description</p>
                         <p class="card-text"><b>Phone:</b> @item.phone_contact</p>
                         <p class="card-text"><b>Quantity:</b> @item.quantity</p>
-                        <p class="card-text"><b>Price:</b> @item.price</p>
+                        <p class="card-text"><b>Price:</b> @string.Format("{0:C}", item.price);</p>
                     </div>
 
                     <div class="cart-page" style="margin-top: 30px; border:groove">
