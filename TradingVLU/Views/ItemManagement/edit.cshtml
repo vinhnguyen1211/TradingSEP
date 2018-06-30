@@ -24,7 +24,8 @@
             @*@Html.LabelFor(model => model.item_name, htmlAttributes: new { @class = "control-label col-md-2" })*@
             <label class="control-label col-md-2">Item Name</label>
             <div class="col-md-5">
-                @Html.EditorFor(model => model.item_name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.item_name, new { htmlAttributes = new { @class = "abc" } })
+                
                 @Html.ValidationMessageFor(model => model.item_name, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -52,16 +53,16 @@
             @*@Html.LabelFor(model => model.price, htmlAttributes: new { @class = "control-label col-md-2" })*@
             <label class="control-label col-md-2">Price</label>
             <div class="col-md-5">
-                @Html.EditorFor(model => model.price, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.price, new { htmlAttributes = new { @class = "onlynumb" }, @cols = "100", @rows = "8", @style = "width:70%;" })
                 @Html.ValidationMessageFor(model => model.price, "", new { @class = "text-danger" })
             </div>
         </div>
 
-         <div class="form-group">
+        <div class="form-group">
             @*@Html.LabelFor(model => model.price, htmlAttributes: new { @class = "control-label col-md-2" })*@
             <label class="control-label col-md-2">Phone Contact</label>
             <div class="col-md-5">
-                @Html.EditorFor(model => model.phone_contact, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.phone_contact, new { htmlAttributes = new  { @class = "onlynum" } })
                 @*@Html.ValidationMessageFor(model => model.phone_contact, "", new { @class = "text-danger" })*@
             </div>
         </div>
@@ -124,7 +125,7 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input id="submitR"  type="submit" value="Save" class="btn btn-default" />
             </div>
         </div>
     </div>
@@ -191,7 +192,63 @@
             );
         });
 
-        $(function () {
+        //check numb
+        $('.onlynumb').on({
+            keydown: function (e) {
+                if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||
+                    // Allow: Ctrl/cmd+A
+                    (e.keyCode == 65 && (e.ctrlKey === true || e.metaKey === true)) ||
+                    // Allow: Ctrl/cmd+C
+                    (e.keyCode == 67 && (e.ctrlKey === true || e.metaKey === true)) ||
+                    // Allow: Ctrl/cmd+X
+                    (e.keyCode == 88 && (e.ctrlKey === true || e.metaKey === true)) ||
+                    // Allow: home, end, left, right
+                    (e.keyCode >= 35 && e.keyCode <= 39)) {
+                    // let it happen, don't do anything
+                    return;
+                }
+                // Ensure that it is a number and stop the keypress
+                if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+                    e.preventDefault();
+                }
+            },
+            change: function () {
+                this.value = this.value.replace(/\s/g, "");
+            }
+        });
+        //check num
+        $('.onlynum').on({
+            keydown: function (e) {
+                if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||
+                    // Allow: Ctrl/cmd+A
+                    (e.keyCode == 65 && (e.ctrlKey === true || e.metaKey === true)) ||
+                    // Allow: Ctrl/cmd+C
+                    (e.keyCode == 67 && (e.ctrlKey === true || e.metaKey === true)) ||
+                    // Allow: Ctrl/cmd+X
+                    (e.keyCode == 88 && (e.ctrlKey === true || e.metaKey === true)) ||
+                    // Allow: home, end, left, right
+                    (e.keyCode >= 35 && e.keyCode <= 39)) {
+                    // let it happen, don't do anything
+                    return;
+                }
+                // Ensure that it is a number and stop the keypress
+                if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+                    e.preventDefault();
+                }
+            },
+            change: function () {
+                this.value = this.value.replace(/\s/g, "");
+            }
+        });
+        //check name 
+        $("#abc").on("blur", function () {
+            if ($(this).val().match('^[a-zA-Z]{10,100}$')) {
+                alert("Valid name");
+            } else {
+                alert("That's not a name");
+            }
+        });
+
             // Create the close button
             var closebtn = $('<button/>', {
                 type: "button",
