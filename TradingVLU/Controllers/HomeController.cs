@@ -55,7 +55,7 @@ namespace TradingVLU.Controllers
         [Route("search")]
         public ActionResult Search(string text)
         {
-            var itemsz = db.items.Where(x => x.item_name.ToLower().Contains(text.ToLower())).ToList();
+            var itemsz = db.items.Where(x => x.item_name.ToLower().Contains(text.ToLower()) && x.approve == 1).ToList();
 
             if (itemsz.Count() > 0)
             {
