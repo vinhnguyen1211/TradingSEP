@@ -50,20 +50,22 @@
                 <div class="card item-box" style="width: 18rem; height: 300px">
                     <img class="card-img-top" src="~/Content/img/items/index_img/@item.index_image" alt="Card image cap">
                     <div class="card-body" style="height:220px">
-                        <span class="let-hide item-id">@item.id</span>
-                        <h4 class="card-title">@item.item_name</h4>
-                        <p class="card-text"><b>Seller: </b>@item.create_by</p>
-                        <p class="card-text">@item.description</p>
-                        <p class="card-text"><b>Phone:</b> @item.phone_contact</p>
-                        <p class="card-text"><b>Quantity:</b> @item.quantity</p>
-                        <p class="card-text"><b>Price:</b> @item.price</p>
-
+                        <div style="margin-bottom:20px; height: 220px">
+                            <span class="let-hide item-id">@item.id</span>
+                            <h4 class="card-title">@item.item_name</h4>
+                            <p class="card-text"><b>Seller: </b>@item.create_by</p>
+                            <p class="card-text">@item.description</p>
+                            <p class="card-text"><b>Phone:</b> @item.phone_contact</p>
+                            <p class="card-text"><b>Quantity:</b> @item.quantity</p>
+                            <p class="card-text"><b>Price:</b> @item.price</p>
+                        </div>
+                        <div style="text-align:center">
+                            <a href="#" class="btn btn-success btn-approve">Approve</a>
+                            <a href="#" class="btn btn-danger btn-reject">Reject</a>
+                        </div>
 
                     </div>
-                    <div style="text-align:center; margin-top: 20px">
-                        <a href="#" class="btn btn-success btn-approve">Approve</a>
-                        <a href="#" class="btn btn-danger btn-reject">Reject</a>
-                    </div>
+                    
                 </div>
             </div>
         }
