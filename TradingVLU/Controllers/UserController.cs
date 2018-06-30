@@ -209,7 +209,7 @@ namespace TradingVLU.Controllers
             {
                 int userID = int.Parse(Session["userID"].ToString());
                 var user = db.users.FirstOrDefault(x => x.id == userID);
-                if (user.password == hashPwd(model.Password))
+                if (user.password == hashPwd(model.Password) && ModelState.IsValid)
                 {
                     user.password = hashPwd(model.NewPassword);
                     db.Entry(user).State = EntityState.Modified;
@@ -218,7 +218,7 @@ namespace TradingVLU.Controllers
                 }
                 else
                 {
-                    ViewBag.DuplicateMessage = "Current Password is not match";
+                    ViewBag.DuplicateMessage = "Change Password Fail";
                 }
             }
             catch (Exception)
@@ -380,6 +380,7 @@ namespace TradingVLU.Controllers
             db.SaveChanges();
             Session["changeMessage"] = "true";
             Response.Redirect("~/User/createnew");
+            Response.Redirect("~/Home/Index");
         }
 
         [HttpPost]

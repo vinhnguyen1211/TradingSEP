@@ -35,6 +35,8 @@ namespace TradingVLU.Areas.Admin.Controllers
                 status = result
             });
         }
+
+        [HttpGet]
         public ActionResult logout()
         {
             Session["userLogged"] = null;
