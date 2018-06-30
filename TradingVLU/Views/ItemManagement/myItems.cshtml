@@ -92,7 +92,7 @@
 
 </style>
 <div class="container content">
-    <h2 class="title">Checkout My Post</h2>
+    <h1 class="title">Checkout My Post</h1>
     <form action="@Url.Action("myItems", "ItemManagement")" method="get" id="form-select" style="font-size:14px">
         <select name="status" id="select-status">
             @{ 
@@ -126,7 +126,7 @@
                         <p class="card-text">@item.description</p>
                         <p class="card-text"><b>Phone:</b> @item.phone_contact</p>
                         <p class="card-text"><b>Quantity:</b> @item.quantity</p>
-                        <p class="card-text"><b>Price:</b> @item.price</p>
+                        <p class="card-text"><b>Price:</b> @string.Format("{0:C}", item.price);</p>
                     </div>
 
                     <div class="cart-page" style="margin-top: 30px; border:groove">

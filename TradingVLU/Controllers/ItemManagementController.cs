@@ -57,7 +57,7 @@ namespace TradingVLU.Controllers
         {
             using (vlutrading3545Entities db = new vlutrading3545Entities())
             {
-                var itemList = db.items.Where(x => x.approve == 0).Select(x => new { x.id, x.item_name, x.price, x.index_image,x.description, x.quantity, x.phone_contact }).ToList();
+                var itemList = db.items.Where(x => x.approve == 0).Select(x => new { x.id, x.item_name, x.price, x.index_image,x.description, x.quantity, x.phone_contact, x.create_by }).ToList();
 
                 ViewBag.itemList = itemList;
             }
