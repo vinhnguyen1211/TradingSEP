@@ -176,7 +176,7 @@ legend {
 textarea {
     overflow: auto;
     min-height: 150px;
-    min-width: 690px;
+    min-width: 600px;
     border-radius: 5px;
 }
 optgroup {

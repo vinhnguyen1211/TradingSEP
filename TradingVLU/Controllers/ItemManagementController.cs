@@ -29,7 +29,9 @@ namespace TradingVLU.Controllers
             }
             else
             {
-
+                ViewBag.CartUnits = 0;
+                ViewBag.Cart = 0;
+                ViewBag.CartTotalPrice = 0;
             }
             return View();
         }
@@ -303,7 +305,7 @@ namespace TradingVLU.Controllers
             }
         }
 
-        [HttpPost]
+        [HttpPost, ValidateInput(false)]
         public ActionResult edit(int id, item nitem, HttpPostedFileBase avatar, HttpPostedFileBase pic01 , HttpPostedFileBase pic02 , HttpPostedFileBase pic03, HttpPostedFileBase pic04 , HttpPostedFileBase pic05)
         {
             vlutrading3545Entities db = new vlutrading3545Entities();
@@ -313,11 +315,15 @@ namespace TradingVLU.Controllers
 
             data.price = nitem.price;
             data.description = nitem.description;
-            data.item_name = nitem.item_name;
+            //if (nitem != null)
+            //{
+            //    data.item_name = nitem.item_name;
+            //}
             data.description = nitem.description;
             data.phone_contact = nitem.phone_contact;
             data.quantity = nitem.quantity;
             data.update_by = username;
+            data.approve = 0;
 
             string avatar_temp = null;
             if (avatar != null && avatar.ContentLength > 0)

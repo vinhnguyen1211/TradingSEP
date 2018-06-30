@@ -32,7 +32,9 @@ namespace TradingVLU.Controllers
             }
             else
             {
-
+                ViewBag.CartUnits = 0;
+                ViewBag.Cart = 0;
+                ViewBag.CartTotalPrice = 0;
             }
             return View();
         }
