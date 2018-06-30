@@ -123,7 +123,22 @@
                     <div class="card-body" style="margin-top:10px; height: 200px">
                         <span class="let-hide item-id">@item.id</span>
                         <h5 class="card-title">@item.item_name</h5>
-                        <p class="card-text">@item.description</p>
+                        <p class="card-text">
+                            @{ 
+
+                                int xLength = 0;
+                                if (item.description.Length < 500)
+                                {
+                                    xLength = (int)(item.description.Length * 0.1);
+                                }
+                                else
+                                {
+                                    xLength = (int)(item.description.Length * 0.01);
+                                }
+                                var text = item.description.Substring(0, xLength);
+                                }
+                            @text  ...
+                        </p>
                         <p class="card-text"><b>Phone:</b> @item.phone_contact</p>
                         <p class="card-text"><b>Quantity:</b> @item.quantity</p>
                         <p class="card-text"><b>Price:</b> @item.price</p>
