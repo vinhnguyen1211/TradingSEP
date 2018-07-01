@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.27130.2010
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TradingVLU", "TradingVLU\TradingVLU.csproj", "{6AF3AF31-0A63-4494-976C-86E737F01E8D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TradingVLU.Tests", "TradingVLU.Tests\TradingVLU.Tests.csproj", "{9488DE98-6029-4E5A-A4D5-FE3D2347524E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TradingVLU.UnitTests", "VLUTrading.UnitTests\TradingVLU.UnitTests.csproj", "{610F7F57-7A61-463F-B2E6-2861DF65ABDB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{6AF3AF31-0A63-4494-976C-86E737F01E8D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6AF3AF31-0A63-4494-976C-86E737F01E8D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6AF3AF31-0A63-4494-976C-86E737F01E8D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9488DE98-6029-4E5A-A4D5-FE3D2347524E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9488DE98-6029-4E5A-A4D5-FE3D2347524E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9488DE98-6029-4E5A-A4D5-FE3D2347524E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9488DE98-6029-4E5A-A4D5-FE3D2347524E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{610F7F57-7A61-463F-B2E6-2861DF65ABDB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{610F7F57-7A61-463F-B2E6-2861DF65ABDB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{610F7F57-7A61-463F-B2E6-2861DF65ABDB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{610F7F57-7A61-463F-B2E6-2861DF65ABDB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
