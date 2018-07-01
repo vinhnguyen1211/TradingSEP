@@ -43,5 +43,11 @@ namespace TradingVLU.Areas.Admin.Controllers
             return RedirectToAction("index", "Home", new { area = "" });
         }
 
+        [HttpGet]
+        public ActionResult setting()
+        {
+            return RedirectToAction("account_settings", "User", new { area = "" });
+        }
+
     }
 }
