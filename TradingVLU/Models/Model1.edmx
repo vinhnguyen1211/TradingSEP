@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="vlutrading3545Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="sep21t14Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="comment">
           <Key>
             <PropertyRef Name="id" />
@@ -278,14 +278,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Function Name="updateLastLogoutIpAddress" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="admin3545">
-          <Parameter Name="userId" Type="int" Mode="In" />
-          <Parameter Name="ip_address" Type="varchar" Mode="In" />
-        </Function>
-        <Function Name="updateLastLoginIpAddress" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="admin3545">
-          <Parameter Name="userId" Type="int" Mode="In" />
-          <Parameter Name="ip_address" Type="varchar" Mode="In" />
-        </Function>
         <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
         <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
@@ -317,7 +309,15 @@
           <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
-        <EntityContainer Name="vlutrading3545ModelStoreContainer">
+        <Function Name="updateLastLoginIpAddress" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userId" Type="int" Mode="In" />
+          <Parameter Name="ip_address" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="updateLastLogoutIpAddress" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userId" Type="int" Mode="In" />
+          <Parameter Name="ip_address" Type="varchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="sep21t14ModelStoreContainer">
           <EntitySet Name="comment" EntityType="Self.comment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="item" EntityType="Self.item" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="item_status" EntityType="Self.item_status" Schema="dbo" store:Type="Tables" />
@@ -377,7 +377,7 @@
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="vlutrading3545Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="sep21t14Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="comment">
           <Key>
             <PropertyRef Name="id" />
@@ -416,7 +416,7 @@
           <Property Name="detail_image3" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="detail_image4" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="detail_image5" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="price" Type="Decimal" Precision="19" Scale="4" ConcurrencyMode="None" />
+          <Property Name="price" Type="Decimal" Precision="19" Scale="4" />
           <Property Name="approve" Type="Int32" />
           <NavigationProperty Name="comments" Relationship="Self.FK_Comment_item" FromRole="item" ToRole="comment" />
           <NavigationProperty Name="item_status" Relationship="Self.FK_item_item_status" FromRole="item" ToRole="item_status" />
@@ -496,7 +496,7 @@
           <Property Name="item_id" Type="Int32" Nullable="false" />
           <Property Name="item_name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="quantity" Type="Int32" />
-          <Property Name="price" Type="Decimal" Precision="19" Scale="4" ConcurrencyMode="None" />
+          <Property Name="price" Type="Decimal" Precision="19" Scale="4" />
           <Property Name="buyer_id" Type="Int32" Nullable="false" />
           <Property Name="buyer_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
@@ -728,14 +728,6 @@
             <End Role="user" EntitySet="users" />
             <End Role="user_personal_information" EntitySet="user_personal_information" />
           </AssociationSet>
-          <FunctionImport Name="updateLastLogoutIpAddress">
-            <Parameter Name="userId" Mode="In" Type="Int32" />
-            <Parameter Name="ip_address" Mode="In" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="updateLastLoginIpAddress">
-            <Parameter Name="userId" Mode="In" Type="Int32" />
-            <Parameter Name="ip_address" Mode="In" Type="String" />
-          </FunctionImport>
           <FunctionImport Name="sp_alterdiagram">
             <Parameter Name="diagramname" Mode="In" Type="String" />
             <Parameter Name="owner_id" Mode="In" Type="Int32" />
@@ -752,11 +744,11 @@
             <Parameter Name="diagramname" Mode="In" Type="String" />
             <Parameter Name="owner_id" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(vlutrading3545Model.sp_helpdiagramdefinition_Result)">
+          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(sep21t14Model.sp_helpdiagramdefinition_Result)">
             <Parameter Name="diagramname" Mode="In" Type="String" />
             <Parameter Name="owner_id" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(vlutrading3545Model.sp_helpdiagrams_Result)">
+          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(sep21t14Model.sp_helpdiagrams_Result)">
             <Parameter Name="diagramname" Mode="In" Type="String" />
             <Parameter Name="owner_id" Mode="In" Type="Int32" />
           </FunctionImport>
@@ -766,6 +758,14 @@
             <Parameter Name="new_diagramname" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_upgraddiagrams" />
+          <FunctionImport Name="updateLastLoginIpAddress">
+            <Parameter Name="userId" Mode="In" Type="Int32" />
+            <Parameter Name="ip_address" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="updateLastLogoutIpAddress">
+            <Parameter Name="userId" Mode="In" Type="Int32" />
+            <Parameter Name="ip_address" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -783,9 +783,9 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="vlutrading3545ModelStoreContainer" CdmEntityContainer="vlutrading3545Entities">
+        <EntityContainerMapping StorageEntityContainer="sep21t14ModelStoreContainer" CdmEntityContainer="vlutrading3545Entities">
           <EntitySetMapping Name="comments">
-            <EntityTypeMapping TypeName="vlutrading3545Model.comment">
+            <EntityTypeMapping TypeName="sep21t14Model.comment">
               <MappingFragment StoreEntitySet="comment">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="id_item" ColumnName="id_item" />
@@ -800,7 +800,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="items">
-            <EntityTypeMapping TypeName="vlutrading3545Model.item">
+            <EntityTypeMapping TypeName="sep21t14Model.item">
               <MappingFragment StoreEntitySet="item">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="item_name" ColumnName="item_name" />
@@ -826,7 +826,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="item_status">
-            <EntityTypeMapping TypeName="vlutrading3545Model.item_status">
+            <EntityTypeMapping TypeName="sep21t14Model.item_status">
               <MappingFragment StoreEntitySet="item_status">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="status" ColumnName="status" />
@@ -840,7 +840,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="orders">
-            <EntityTypeMapping TypeName="vlutrading3545Model.order">
+            <EntityTypeMapping TypeName="sep21t14Model.order">
               <MappingFragment StoreEntitySet="order">
                 <ScalarProperty Name="orderid" ColumnName="orderid" />
                 <ScalarProperty Name="buyerid" ColumnName="buyerid" />
@@ -851,7 +851,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="order_detail">
-            <EntityTypeMapping TypeName="vlutrading3545Model.order_detail">
+            <EntityTypeMapping TypeName="sep21t14Model.order_detail">
               <MappingFragment StoreEntitySet="order_detail">
                 <ScalarProperty Name="orderid" ColumnName="orderid" />
                 <ScalarProperty Name="item_id" ColumnName="item_id" />
@@ -865,7 +865,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="roles">
-            <EntityTypeMapping TypeName="vlutrading3545Model.role">
+            <EntityTypeMapping TypeName="sep21t14Model.role">
               <MappingFragment StoreEntitySet="role">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="role_name" ColumnName="role_name" />
@@ -878,7 +878,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="security_question">
-            <EntityTypeMapping TypeName="vlutrading3545Model.security_question">
+            <EntityTypeMapping TypeName="sep21t14Model.security_question">
               <MappingFragment StoreEntitySet="security_question">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="question" ColumnName="question" />
@@ -887,7 +887,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tempshoppingcarts">
-            <EntityTypeMapping TypeName="vlutrading3545Model.tempshoppingcart">
+            <EntityTypeMapping TypeName="sep21t14Model.tempshoppingcart">
               <MappingFragment StoreEntitySet="tempshoppingcart">
                 <ScalarProperty Name="temporderid" ColumnName="temporderid" />
                 <ScalarProperty Name="item_id" ColumnName="item_id" />
@@ -900,7 +900,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="users">
-            <EntityTypeMapping TypeName="vlutrading3545Model.user">
+            <EntityTypeMapping TypeName="sep21t14Model.user">
               <MappingFragment StoreEntitySet="user">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="username" ColumnName="username" />
@@ -923,7 +923,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="user_personal_information">
-            <EntityTypeMapping TypeName="vlutrading3545Model.user_personal_information">
+            <EntityTypeMapping TypeName="sep21t14Model.user_personal_information">
               <MappingFragment StoreEntitySet="user_personal_information">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="id_user" ColumnName="id_user" />
@@ -934,22 +934,20 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="updateLastLogoutIpAddress" FunctionName="vlutrading3545Model.Store.updateLastLogoutIpAddress" />
-          <FunctionImportMapping FunctionImportName="updateLastLoginIpAddress" FunctionName="vlutrading3545Model.Store.updateLastLoginIpAddress" />
-          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="vlutrading3545Model.Store.sp_alterdiagram" />
-          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="vlutrading3545Model.Store.sp_creatediagram" />
-          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="vlutrading3545Model.Store.sp_dropdiagram" />
-          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="vlutrading3545Model.Store.sp_helpdiagramdefinition">
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="sep21t14Model.Store.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="sep21t14Model.Store.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="sep21t14Model.Store.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="sep21t14Model.Store.sp_helpdiagramdefinition">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="vlutrading3545Model.sp_helpdiagramdefinition_Result">
+              <ComplexTypeMapping TypeName="sep21t14Model.sp_helpdiagramdefinition_Result">
                 <ScalarProperty Name="version" ColumnName="version" />
                 <ScalarProperty Name="definition" ColumnName="definition" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="vlutrading3545Model.Store.sp_helpdiagrams">
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="sep21t14Model.Store.sp_helpdiagrams">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="vlutrading3545Model.sp_helpdiagrams_Result">
+              <ComplexTypeMapping TypeName="sep21t14Model.sp_helpdiagrams_Result">
                 <ScalarProperty Name="Database" ColumnName="Database" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
@@ -958,8 +956,10 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="vlutrading3545Model.Store.sp_renamediagram" />
-          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="vlutrading3545Model.Store.sp_upgraddiagrams" />
+          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="sep21t14Model.Store.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="sep21t14Model.Store.sp_upgraddiagrams" />
+          <FunctionImportMapping FunctionImportName="updateLastLoginIpAddress" FunctionName="sep21t14Model.Store.updateLastLoginIpAddress" />
+          <FunctionImportMapping FunctionImportName="updateLastLogoutIpAddress" FunctionName="sep21t14Model.Store.updateLastLogoutIpAddress" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

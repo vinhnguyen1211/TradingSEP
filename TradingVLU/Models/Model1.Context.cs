@@ -38,32 +38,6 @@ namespace TradingVLU.Models
         public virtual DbSet<user> users { get; set; }
         public virtual DbSet<user_personal_information> user_personal_information { get; set; }
     
-        public virtual int updateLastLogoutIpAddress(Nullable<int> userId, string ip_address)
-        {
-            var userIdParameter = userId.HasValue ?
-                new ObjectParameter("userId", userId) :
-                new ObjectParameter("userId", typeof(int));
-    
-            var ip_addressParameter = ip_address != null ?
-                new ObjectParameter("ip_address", ip_address) :
-                new ObjectParameter("ip_address", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("updateLastLogoutIpAddress", userIdParameter, ip_addressParameter);
-        }
-    
-        public virtual int updateLastLoginIpAddress(Nullable<int> userId, string ip_address)
-        {
-            var userIdParameter = userId.HasValue ?
-                new ObjectParameter("userId", userId) :
-                new ObjectParameter("userId", typeof(int));
-    
-            var ip_addressParameter = ip_address != null ?
-                new ObjectParameter("ip_address", ip_address) :
-                new ObjectParameter("ip_address", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("updateLastLoginIpAddress", userIdParameter, ip_addressParameter);
-        }
-    
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {
             var diagramnameParameter = diagramname != null ?
@@ -165,6 +139,32 @@ namespace TradingVLU.Models
         public virtual int sp_upgraddiagrams()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_upgraddiagrams");
+        }
+    
+        public virtual int updateLastLoginIpAddress(Nullable<int> userId, string ip_address)
+        {
+            var userIdParameter = userId.HasValue ?
+                new ObjectParameter("userId", userId) :
+                new ObjectParameter("userId", typeof(int));
+    
+            var ip_addressParameter = ip_address != null ?
+                new ObjectParameter("ip_address", ip_address) :
+                new ObjectParameter("ip_address", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("updateLastLoginIpAddress", userIdParameter, ip_addressParameter);
+        }
+    
+        public virtual int updateLastLogoutIpAddress(Nullable<int> userId, string ip_address)
+        {
+            var userIdParameter = userId.HasValue ?
+                new ObjectParameter("userId", userId) :
+                new ObjectParameter("userId", typeof(int));
+    
+            var ip_addressParameter = ip_address != null ?
+                new ObjectParameter("ip_address", ip_address) :
+                new ObjectParameter("ip_address", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("updateLastLogoutIpAddress", userIdParameter, ip_addressParameter);
         }
     }
 }
