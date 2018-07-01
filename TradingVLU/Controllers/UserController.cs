@@ -156,6 +156,11 @@ namespace TradingVLU.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult login(USERMetadata userLogin)
         {
+            if(String.IsNullOrEmpty(userLogin.username) || String.IsNullOrEmpty(userLogin.password))
+            {
+                ViewBag.DuplicateMessage = "Username or password must not be empyty!";
+                return View();
+            }
             using(vlutrading3545Entities db = new vlutrading3545Entities())
             {
                 if (db.users.Any(x => x.username == userLogin.username))
@@ -165,7 +170,7 @@ namespace TradingVLU.Controllers
                     {
                         if(user.is_active != 1)
                         {
-                            ViewBag.DuplicateMessage = "Your Account will be Activated within 24h !";
+                            ViewBag.DuplicateMessage = "Your Account will be Activated within 24h!";
                             return View();
                         }
                         Session["userLogged"] = user;
