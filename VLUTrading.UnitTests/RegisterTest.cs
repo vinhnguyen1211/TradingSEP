@@ -123,7 +123,7 @@ namespace VLUTrading.UnitTests
             }
         }
         [TestMethod]
-        public void ValidateLoginCredential_WithInValidPassword_ExpectInvalidPassword()
+        public void ValidateRegisterCredential_WithInValidPassword_ExpectInvalidPassword()
         {
             //Arrange
             using (vlutrading3545Entities db = new vlutrading3545Entities())
@@ -150,7 +150,7 @@ namespace VLUTrading.UnitTests
             }
         }
         [TestMethod]
-        public void ValidateLoginCredential_WithInValidName_ExpectInvalidName()
+        public void ValidateRegisterCredential_WithInValidName_ExpectInvalidName()
         {
             //Arrange
 
@@ -178,7 +178,7 @@ namespace VLUTrading.UnitTests
             }
         }
         [TestMethod]
-        public void ValidateLoginCredential_WithInValidAnswer_ExpectInvalidAnswer()
+        public void ValidateRegisterCredential_WithInValidAnswer_ExpectInvalidAnswer()
         {
             //Arrange
             using (vlutrading3545Entities db = new vlutrading3545Entities())
