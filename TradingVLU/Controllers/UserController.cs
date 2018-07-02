@@ -231,7 +231,7 @@ namespace TradingVLU.Controllers
             catch (Exception)
             {
                 ModelState.AddModelError("", "Error occured");
-                throw;
+               // throw;
             }
 
             return View(model);
